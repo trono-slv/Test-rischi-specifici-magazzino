@@ -3,147 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analisi dei Rischi Specifici nei Magazzini - Dott. Salvatore Trono</title>
+    <title>Analisi dei Rischi - Dott. Salvatore Trono</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .glassmorphism {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            transition: all 0.3s ease;
+        :root {
+            --bg-dark: #1a1a1a;
+            --bg-darker: #121212;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent: #4a6baf;
+            --glass-bg: rgba(30, 30, 30, 0.7);
         }
-        .glassmorphism:hover {
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg-dark: #f5f5f5;
+                --bg-darker: #e0e0e0;
+                --text-primary: #333333;
+                --text-secondary: #666666;
+                --accent: #2c3e50;
+                --glass-bg: rgba(255, 255, 255, 0.7);
+            }
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .section-spacer {
+            margin: 1rem 0;
+        }
+
+        .text-accent {
+            color: var(--accent);
+        }
+
+        .link-primary {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .link-primary:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .glass-card {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-100 font-sans">
-    <div class="container mx-auto px-4 py-8">
-        <header class="mb-8">
-            <h1 class="text-3xl font-bold text-center">Analisi dei Rischi Specifici nei Magazzini</h1>
-            <p class="text-center text-gray-600">Dott. Salvatore Trono</p>
+<body>
+    <div class="container mx-auto px-4 py-6">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl font-bold mb-2">Analisi dei Rischi Specifici</h1>
+            <p class="text-xl text-accent">Dott. Salvatore Trono</p>
         </header>
 
-        <main>
-            <section class="glassmorphism">
-                <h2 class="text-2xl font-bold mb-4">Dott. Salvatore Trono</h2>
-                <p class="mb-4">
-                    Laureato in Servizi Giuridici per l'Impresa, professionista specializzato in sicurezza nei luoghi di lavoro e formazione aziendale.
-                </p>
-                <p class="mb-4">
-                    Esperto nella redazione di Documenti di Valutazione dei Rischi (DVR) e nell'analisi dei rischi biomeccanici, chimici, biologici, ambientali e psicosociali specifici del settore logistico.
-                </p>
-                <p class="mb-4">
-                    Formatore qualificato ai sensi dell'Accordo Stato-Regioni 2011 per la sicurezza dei lavoratori.
-                </p>
-            </section>
-
-            <section class="glassmorphism">
-                <h2 class="text-2xl font-bold mb-4">⚠ Disclaimer Legale e Proprietà Intellettuale</h2>
-                <p class="mb-4">
-                    © 2025 Dott. Salvatore Trono – Tutti i diritti riservati.
-                </p>
-                <p class="mb-4">
-                    I contenuti presenti in questa piattaforma sono opera intellettuale originale del Dott. Salvatore Trono e sono protetti dalla normativa vigente in materia di diritto d'autore.
-                </p>
-                <p class="mb-4">
-                    È espressamente vietata la riproduzione, duplicazione, copia, diffusione, distribuzione, pubblicazione, trasmissione, vendita, cessione a terzi e qualsiasi forma di utilizzo, anche parziale, dei contenuti presenti in questa piattaforma, senza preventiva autorizzazione scritta dell'autore.
-                </p>
-            </section>
-
-            <button id="startAnalysis" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-8">
-                Inizia Analisi
-            </button>
-
-            <section id="analysisResults" class="glassmorphism mt-8 hidden">
-                <h2 class="text-2xl font-bold mb-4">Risultati dell'Analisi</h2>
-                <div id="resultsContent">
-                    <!-- I risultati dell'analisi verranno inseriti qui -->
+        <main class="space-y-4">
+            <section class="glass-card">
+                <h2 class="card-title text-2xl">Professione e Competenze</h2>
+                <div class="space-y-3">
+                    <p>Laureato in Servizi Giuridici per l'Impresa, specializzato in sicurezza nei luoghi di lavoro e formazione aziendale.</p>
+                    <p>Esperto nella redazione di Documenti di Valutazione dei Rischi (DVR) e nell'analisi dei rischi biomeccanici, chimici, biologici, ambientali e psicosociali specifici del settore logistico.</p>
+                    <p>Formatore qualificato ai sensi dell'Accordo Stato-Regioni 2011 per la sicurezza dei lavoratori.</p>
                 </div>
             </section>
 
-            <section class="glassmorphism mt-8">
-                <h2 class="text-2xl font-bold mb-4">Categorie di Rischio</h2>
-                <p class="mb-4">
-                    Seleziona una categoria per consultare i rischi specifici identificati per il ruolo di Magazziniere / Addetto alla Movimentazione Manuale dei Carichi.
-                </p>
+            <section class="glass-card">
+                <h2 class="card-title text-2xl">Risultati dell'Analisi</h2>
+                <div class="space-y-3">
+                    <p>Ecco i principali rischi identificati nei magazzini:</p>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Rischi biomeccanici elevati nella movimentazione manuale dei carichi</li>
+                        <li>Rischi traumatici dovuti a cadute e scivolamenti</li>
+                        <li>Rischi posturali legati a movimenti ripetitivi</li>
+                        <li>Rischi ambientali dovuti a sbalzi di temperatura</li>
+                        <li>Rischi psicosociali e da lavoro notturno (disturbi del sonno, stress)</li>
+                    </ul>
+                    <p>Si consiglia di implementare misure correttive per mitigare questi rischi.</p>
+                </div>
+            </section>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="glassmorphism p-4">
-                        <h3 class="text-xl font-bold mb-2">🦴 Rischi Biomeccanici e Muscoloscheletrici</h3>
-                        <p>Distorsioni, ernie discali, patologie articolari e muscolo-scheletriche da sovraccarico.</p>
-                    </div>
+            <section class="glass-card">
+                <h2 class="card-title text-2xl">Disclaimer Legale</h2>
+                <div class="space-y-3">
+                    <p>© 2025 Dott. Salvatore Trono – Tutti i diritti riservati.</p>
+                    <p>Le informazioni fornite in questo sito sono a scopo informativo e non costituiscono consulenza legale o professionale.</p>
+                    <p>Per una consulenza personalizzata, contattare il Dott. Salvatore Trono.</p>
+                </div>
+            </section>
 
-                    <div class="glassmorphism p-4">
-                        <h3 class="text-xl font-bold mb-2">⚠ Rischi Traumatici e da Incidenti</h3>
-                        <p>Cadute, scivolamenti, collisioni, ribaltamenti di carrelli elevatori, tagli e ferite.</p>
-                    </div>
-
-                    <div class="glassmorphism p-4">
-                        <h3 class="text-xl font-bold mb-2">🏋 Rischi Posturali e da Movimentazione</h3>
-                        <p>Movimenti ripetitivi, posture incongrue, sforzi eccessivi da MMC.</p>
-                    </div>
-
-                    <div class="glassmorphism p-4">
-                        <h3 class="text-xl font-bold mb-2">☣ Rischi Chimici e Biologici</h3>
-                        <p>Contatto, inalazione e ingestione di sostanze nocive, esposizione ad agenti patogeni.</p>
-                    </div>
-
-                    <div class="glassmorphism p-4">
-                        <h3 class="text-xl font-bold mb-2">🌡 Rischi Ambientali e Microclimatici</h3>
-                        <p>Incendio, stress termico, sbalzi di temperatura.</p>
-                    </div>
-
-                    <div class="glassmorphism p-4">
-                        <h3 class="text-xl font-bold mb-2">🧠 Rischi Psicosociali e da Lavoro Notturno</h3>
-                        <p>Disturbi del sonno, stress, sonnolenza, problemi gastrointestinali e metabolici.</p>
+            <section class="glass-card">
+                <h2 class="card-title text-2xl">Contatti</h2>
+                <div class="space-y-3">
+                    <p>Per ulteriori informazioni o per richiedere una consulenza:</p>
+                    <div class="flex flex-col space-y-2">
+                        <a href="mailto:info@example.com" class="link-primary">info@example.com</a>
+                        <a href="tel:+39123456789" class="link-primary">+39 123 456 789</a>
                     </div>
                 </div>
             </section>
         </main>
-
-        <footer class="mt-8 text-center text-gray-600">
-            <p>© 2025 Dott. Salvatore Trono – Tutti i diritti riservati</p>
-            <p>Riproduzione e divulgazione vietate senza autorizzazione scritta dell'autore</p>
-        </footer>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const startAnalysisButton = document.getElementById('startAnalysis');
-            const analysisResults = document.getElementById('analysisResults');
-            const resultsContent = document.getElementById('resultsContent');
-
-            startAnalysisButton.addEventListener('click', function() {
-                // Mostra la sezione dei risultati
-                analysisResults.classList.remove('hidden');
-
-                // Qui puoi aggiungere il codice per eseguire l'analisi e mostrare i risultati
-                resultsContent.innerHTML = `
-                    <p>Analisi in corso...</p>
-                    <p>Questa è una simulazione. I risultati verranno mostrati qui.</p>
-                `;
-
-                // Simulazione di un'analisi
-                setTimeout(function() {
-                    resultsContent.innerHTML = `
-                        <h3 class="text-xl font-bold mb-2">Risultati dell'Analisi</h3>
-                        <p>L'analisi dei rischi è stata completata con successo.</p>
-                        <p>Ecco i principali rischi identificati:</p>
-                        <ul class="list-disc pl-5">
-                            <li>Rischi biomeccanici elevati nella movimentazione manuale dei carichi</li>
-                            <li>Rischi traumatici dovuti a cadute e scivolamenti</li>
-                            <li>Rischi posturali legati a movimenti ripetitivi</li>
-                            <li>Rischi ambientali dovuti a sbalzi di temperatura</li>
-                        </ul>
-                        <p>Si consiglia di implementare misure correttive per mitigare questi rischi.</p>
-                    `;
-                }, 2000);
-            });
-        });
-    </script>
 </body>
 </html>
