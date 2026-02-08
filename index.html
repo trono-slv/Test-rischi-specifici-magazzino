@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analisi Rischi nel Magazzino | Dott. Salvatore Trono</title>
-    <meta name="description" content="Analisi Completa 52 Rischi Magazzino - Dott. Salvatore Trono Formatore Esperto Sicurezza Luoghi di Lavoro">
+    <title>Analisi Rischi Magazzino | Dott. Salvatore Trono</title>
+    <meta name="description" content="52 Rischi Magazzino Analizzati - Dott. Salvatore Trono Esperto Sicurezza">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -30,7 +30,7 @@
             <h1 class="text-3xl md:text-5xl font-black bg-gradient-to-r from-indigo-400 via-purple-400 to-blue-500 bg-clip-text text-transparent mb-4">
                 Dott. Salvatore Trono
             </h1>
-            <p class="text-2xl md:text-3xl text-indigo-300 font-semibold">Formatore - Esperto in Sicurezza sui Luoghi di Lavoro</p>
+            <p class="text-2xl md:text-3xl text-indigo-300 font-semibold">Formazione - Esperto Sicurezza Luoghi di Lavoro</p>
         </div>
     </div>
 </header>
@@ -39,221 +39,171 @@
 <section class="hero-gradient py-24 px-4">
     <div class="max-w-5xl mx-auto text-center">
         <h2 class="text-4xl md:text-6xl font-black text-white mb-8">Analisi Rischi nel Magazzino</h2>
-        <p class="text-xl md:text-2xl text-gray-200 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Valutazione Completa dei <strong class="text-3xl text-indigo-400">52 Rischi</strong> Specifici nei Magazzini Merci Generali<br>
-            <span class="text-indigo-300">D.Lgs. 81/2008 Art.28 - DVR Personalizzato</span>
-        </p>
-        <div class="glass inline-flex items-center px-12 py-6 rounded-3xl shadow-2xl text-2xl font-bold">
-            📊 <span class="ml-2">52 RISCHI ANALIZZATI</span>
+        <div class="bg-indigo-500/20 border-2 border-indigo-400 rounded-3xl p-8 max-w-4xl mx-auto mb-12">
+            <p class="text-xl md:text-2xl text-gray-100 leading-relaxed">
+                Valutazione Completa <strong class="text-3xl text-white">52 Rischi Specifici</strong> Magazzini Merci Generali
+            </p>
         </div>
     </div>
 </section>
 
 <!-- DISCLAIMER -->
-<section class="glass max-w-4xl mx-auto my-24 mx-6 p-10 rounded-3xl shadow-2xl">
-    <div class="border-l-4 border-amber-500 pl-6">
-        <h3 class="text-2xl font-bold text-amber-400 mb-4">⚠️ DISCLAIMER LEGALE</h3>
-        <p class="text-lg leading-relaxed text-gray-200">
-            Questo documento rappresenta un'analisi esemplificativa dei rischi nei magazzini merci generali ai sensi del D.Lgs. 81/2008. 
-            Non sostituisce la valutazione dei rischi specifica per ogni singola realtà aziendale che deve essere redatta da professionisti abilitati.
-            <strong>L'uso di questo documento è a rischio e responsabilità esclusiva dell'utilizzatore.</strong>
-        </p>
-    </div>
-</section>
-
-<!-- CATEGORIE RISCHI - PULSANTI ATTIVI -->
-<section class="py-20 px-4">
-    <div class="max-w-7xl mx-auto">
-        <h2 class="text-4xl font-black text-center mb-20 text-white">Struttura Categorie di Rischio</h2>
-        
-        <!-- PULSANTI CATEGORIE -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-20 max-w-4xl mx-auto">
-            <button onclick="showCategory('meccanici')" class="glass p-8 rounded-2xl text-center font-bold text-2xl group hover:bg-indigo-500/20 hover:border-indigo-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-transparent">
-                <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">🔧</div>
-                <div>1️⃣ Rischi Meccanici</div>
-                <div class="text-sm opacity-90 mt-2">(8 rischi)</div>
-                <div class="absolute inset-0 bg-indigo-500/20 scale-0 group-hover:scale-110 transition-transform origin-center duration-500 rounded-2xl"></div>
-            </button>
-            
-            <button onclick="showCategory('posturali')" class="glass p-8 rounded-2xl text-center font-bold text-2xl group hover:bg-amber-500/20 hover:border-amber-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-transparent">
-                <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">🦴</div>
-                <div>2️⃣ Rischi Posturali/MMC</div>
-                <div class="text-sm opacity-90 mt-2">(7 rischi)</div>
-                <div class="absolute inset-0 bg-amber-500/20 scale-0 group-hover:scale-110 transition-transform origin-center duration-500 rounded-2xl"></div>
-            </button>
-            
-            <button onclick="showCategory('chimici')" class="glass p-8 rounded-2xl text-center font-bold text-2xl group hover:bg-green-500/20 hover:border-green-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-transparent">
-                <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">☣️</div>
-                <div>3️⃣ Rischi Chimici/Biologici</div>
-                <div class="text-sm opacity-90 mt-2">(6 rischi)</div>
-                <div class="absolute inset-0 bg-green-500/20 scale-0 group-hover:scale-110 transition-transform origin-center duration-500 rounded-2xl"></div>
-            </button>
-            
-            <button onclick="showCategory('ambientali')" class="glass p-8 rounded-2xl text-center font-bold text-2xl group hover:bg-blue-500/20 hover:border-blue-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-transparent">
-                <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">🌪️</div>
-                <div>4️⃣ Rischi Ambientali</div>
-                <div class="text-sm opacity-90 mt-2">(6 rischi)</div>
-                <div class="absolute inset-0 bg-blue-500/20 scale-0 group-hover:scale-110 transition-transform origin-center duration-500 rounded-2xl"></div>
-            </button>
-            
-            <button onclick="showCategory('carrelli')" class="glass p-8 rounded-2xl text-center font-bold text-2xl group hover:bg-orange-500/20 hover:border-orange-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-transparent">
-                <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">🚜</div>
-                <div>5️⃣ Rischi Carrelli</div>
-                <div class="text-sm opacity-90 mt-2">(7 rischi)</div>
-                <div class="absolute inset-0 bg-orange-500/20 scale-0 group-hover:scale-110 transition-transform origin-center duration-500 rounded-2xl"></div>
-            </button>
-            
-            <button onclick="showCategory('incendio')" class="glass p-8 rounded-2xl text-center font-bold text-2xl group hover:bg-red-500/20 hover:border-red-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-transparent">
-                <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">🔥</div>
-                <div>6️⃣ Rischi Incendio</div>
-                <div class="text-sm opacity-90 mt-2">(6 rischi)</div>
-                <div class="absolute inset-0 bg-red-500/20 scale-0 group-hover:scale-110 transition-transform origin-center duration-500 rounded-2xl"></div>
-            </button>
-            
-            <button onclick="showCategory('microclima')" class="glass p-8 rounded-2xl text-center font-bold text-2xl group hover:bg-cyan-500/20 hover:border-cyan-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-transparent">
-                <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">🌡️</div>
-                <div>7️⃣ Microclima</div>
-                <div class="text-sm opacity-90 mt-2">(6 rischi)</div>
-                <div class="absolute inset-0 bg-cyan-500/20 scale-0 group-hover:scale-110 transition-transform origin-center duration-500 rounded-2xl"></div>
-            </button>
-            
-            <button onclick="showCategory('psicosociali')" class="glass p-8 rounded-2xl text-center font-bold text-2xl group hover:bg-purple-500/20 hover:border-purple-400 transition-all duration-300 hover:scale-105 hover:shadow-2xl border-2 border-transparent">
-                <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">🧠</div>
-                <div>8️⃣ Psicosociali/Notturno</div>
-                <div class="text-sm opacity-90 mt-2">(6 rischi)</div>
-                <div class="absolute inset-0 bg-purple-500/20 scale-0 group-hover:scale-110 transition-transform origin-center duration-500 rounded-2xl"></div>
-            </button>
+<section class="glass py-12 px-4 mb-16">
+    <div class="max-w-4xl mx-auto text-center">
+        <div class="bg-amber-500/10 border-2 border-amber-400/50 rounded-3xl p-8 mb-8">
+            <h3 class="text-2xl font-bold text-amber-400 mb-4">⚠️ DISCLAIMER LEGALE</h3>
+            <p class="text-lg text-amber-100 leading-relaxed">
+                Questo documento ha valore <strong>esclusivamente orientativo e formativo</strong>. Non sostituisce la valutazione dei rischi obbligatoria ex D.Lgs.81/2008 Art.28.<br>
+                <strong>Vietata diffusione/modifica senza autorizzazione espressa del Dott. Salvatore Trono.</strong>
+            </p>
         </div>
     </div>
 </section>
 
-<!-- CONTAINER RISCHI -->
-<main class="py-20 px-4 pb-32">
-    <div class="max-w-7xl mx-auto">
-        <h2 id="categoryTitle" class="text-4xl font-black text-center mb-16 text-white hidden"></h2>
-        <div id="risksContainer" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 hidden">
-            <!-- RISCHI GENERATI VIA JS -->
+<!-- CATEGORIE PULSANTI -->
+<section class="py-16 px-4" id="categories">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-black text-center mb-16 bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
+            CATEGORIE DI RISCHIO
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            <button onclick="showCategory('meccanici')" class="cat-btn glass p-6 rounded-2xl font-bold text-xl hover:bg-indigo-500/30 border-2 border-indigo-500/50 hover:border-indigo-400 hover:shadow-glow transition-all">1️⃣ Rischi Meccanici</button>
+            <button onclick="showCategory('posturali')" class="cat-btn glass p-6 rounded-2xl font-bold text-xl hover:bg-indigo-500/30 border-2 border-indigo-500/50 hover:border-indigo-400 hover:shadow-glow transition-all">2️⃣ Rischi Posturali/MMC</button>
+            <button onclick="showCategory('chimici')" class="cat-btn glass p-6 rounded-2xl font-bold text-xl hover:bg-indigo-500/30 border-2 border-indigo-500/50 hover:border-indigo-400 hover:shadow-glow transition-all">3️⃣ Rischi Chimici/Biologici</button>
+            <button onclick="showCategory('ambientali')" class="cat-btn glass p-6 rounded-2xl font-bold text-xl hover:bg-indigo-500/30 border-2 border-indigo-500/50 hover:border-indigo-400 hover:shadow-glow transition-all">4️⃣ Rischi Ambientali</button>
+            <button onclick="showCategory('carrelli')" class="cat-btn glass p-6 rounded-2xl font-bold text-xl hover:bg-indigo-500/30 border-2 border-indigo-500/50 hover:border-indigo-400 hover:shadow-glow transition-all">5️⃣ Rischi Carrelli</button>
+            <button onclick="showCategory('incendio')" class="cat-btn glass p-6 rounded-2xl font-bold text-xl hover:bg-indigo-500/30 border-2 border-indigo-500/50 hover:border-indigo-400 hover:shadow-glow transition-all">6️⃣ Rischi Incendio</button>
+            <button onclick="showCategory('microclima')" class="cat-btn glass p-6 rounded-2xl font-bold text-xl hover:bg-indigo-500/30 border-2 border-indigo-500/50 hover:border-indigo-400 hover:shadow-glow transition-all">7️⃣ Microclima</button>
+            <button onclick="showCategory('psicosociali')" class="cat-btn glass p-6 rounded-2xl font-bold text-xl hover:bg-indigo-500/30 border-2 border-indigo-500/50 hover:border-indigo-400 hover:shadow-glow transition-all">8️⃣ Psicosociali/Notturno</button>
         </div>
+    </div>
+</section>
+
+<!-- RISCHI CARDS -->
+<main class="py-24 px-4 pb-32" id="risks-container">
+    <div id="risks-content" class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 hidden">
+        <!-- CARDS CARICATE VIA JS -->
     </div>
 </main>
 
-<!-- FOOTER CREDITI -->
-<footer class="glass py-12 px-4 border-t-2 border-indigo-500/30">
-    <div class="max-w-7xl mx-auto text-center">
-        <p class="text-xl font-semibold text-indigo-300 mb-4">© 2024 Dott. Salvatore Trono</p>
-        <p class="text-gray-400">D.Lgs. 81/2008 | Analisi Rischi Magazzino Merci Generali</p>
-    </div>
-</footer>
-
-<!-- MOBILE TOOLBAR -->
-<div class="glass fixed bottom-6 left-6 right-6 md:hidden z-40 p-4 rounded-2xl shadow-2xl border border-indigo-500/30">
-    <div class="flex items-center justify-center space-x-4">
-        <button onclick="toggleTheme()" id="theme-btn" class="text-2xl p-3 rounded-xl hover:bg-gray-800 transition-all">🌙</button>
-        <button onclick="scrollToTop()" class="glass px-6 py-3 rounded-xl font-bold text-lg hover:bg-indigo-500/20 transition-all">⬆️ Torna su</button>
+<!-- TOOLBAR MOBILE -->
+<div class="fixed bottom-6 left-6 right-6 md:hidden z-40">
+    <div class="glass flex justify-between items-center p-4 rounded-3xl shadow-2xl">
+        <button onclick="scrollToTop()" class="p-3 bg-indigo-500 hover:bg-indigo-600 rounded-2xl text-xl">⬆️</button>
+        <button id="theme-btn" onclick="toggleTheme()" class="p-3 bg-gray-700 hover:bg-gray-600 rounded-2xl text-xl">☀️</button>
     </div>
 </div>
 
+<!-- FOOTER CREDITI -->
+<footer class="glass py-12 px-4 mt-32 border-t-2 border-indigo-500/30">
+    <div class="max-w-4xl mx-auto text-center">
+        <p class="text-xl font-bold text-indigo-400 mb-4">© 2024 Dott. Salvatore Trono - Tutti i diritti riservati</p>
+        <p class="text-lg text-gray-400">Documento conforme D.Lgs.81/2008 - Vietata riproduzione senza autorizzazione</p>
+    </div>
+</footer>
+
 <script>
+// DATABASE COMPLETO 52 RISCHI
 const RISCHI = {
     meccanici: [
-        {id:"1.1",title:"Schiacciamento da ribaltamento scaffali",r:8,p:3,d:24,cause:"Fissaggio inadeguato, sovraccarico, sisma",danni:"Morte, schiacciamento arti",prevenzione:"Controlli strutturali, ancoraggi, carichi max"},
-        {id:"1.2",title:"Caduta merci da altezza",r:7,p:4,d:28,cause:"Pallettizzazione instabile, pallet rotti",danni:"Trauma cranico, fratture",prevenzione:"Reti parapetti, pallet certificati"},
-        {id:"1.3",title:"Intrappolamento ascensore merci",r:6,p:2,d:12,cause:"Manutenzione assente, sovraccarico",danni:"Soffocamento, schiacciamento",prevenzione:"Verifiche semestrali, sensori"},
-        {id:"1.4",title:"Taglio da lamiere taglienti",r:5,p:5,d:25,cause:"Materiali senza protezione",danni:"Ferite gravi, tetano",prevenzione:"Guanti anticut, protezioni bordi"},
-        {id:"1.5",title:"Investimento pedoni-carrelli",r:8,p:4,d:32,cause:"Vie separate assenti",danni:"Schiacciamento, morte",prevenzione:"Corsie separate, specchi"},
-        {id:"1.6",title:"Schiacciamento porte automatiche",r:4,p:3,d:12,cause:"Fotocellule difettose",danni:"Fratture, contusioni",prevenzione:"Manutenzione trimestrale"},
-        {id:"1.7",title:"Caduta da scale portatili",r:6,p:4,d:24,cause:"Scale instabili, uso scorretto",danni:"Traumi colonna, fratture",prevenzione:"Formazione uso DPI"},
-        {id:"1.8",title:"Contusioni da collisioni carrelli",r:5,p:3,d:15,cause:"Velocità eccessiva",danni:"Fratture costali",prevenzione:"Limiti velocità, segnali"}
+        {id:'1.1', title:'Caduta carichi da scaffali', cause:'Instabilità carico, sovraccarico, posizionamento scorretto', danni:'Schiacciamento, traumi gravi, morte', prevenzione:'Controllo stabilità, DPI testa, formazione'},
+        {id:'1.2', title:'Schiacciamento da ribaltamento', cause:'Scaffali non fissati, urti carrelli', danni:'Fratture multiple, schiacciamento torace', prevenzione:'Fissaggio a muro, barriere protezione'},
+        {id:'1.3', title:'Investimento pedoni/carrelli', cause:'Vie non segregate, velocità eccessiva', danni:'Traumi cranio-encefalici, amputazioni', prevenzione:'Segnaletica, specchi convessi, formazione'},
+        {id:'1.4', title:'Caduta da scale portatili', cause:'Scale instabili, non ferme, uso scorretto', danni:'Fratture vertebrali, trauma cranico', prevenzione:'Controllo DPI, ancoraggio scale'},
+        {id:'1.5', title:'Intrappolamento macchinari', cause:'Zone pericolose non protette, manutenzione', danni:'Amputazioni, schiacciamento arti', prevenzione:'Dispositivi blocco, barriere fisiche'},
+        {id:'1.6', title:'Taglio/proiezione da imballaggi', cause:'Apertura scatole, nastro adesivo', danni:'Ferite lacero-contuse, lesioni oculari', prevenzione:'Tagliacarte sicuri, DPI occhi/mani'},
+        {id:'1.7', title:'Schiacciamento porte automatiche', cause:'Sensori difettosi, porte pesanti', danni:'Traumi cranio, fratture nasali', prevenzione:'Manutenzione periodica, segnaletica'},
+        {id:'1.8', title:'Caduta da transpallet manuali', cause:'Carichi sbilanciati, pavimenti irregolari', danni:'Fratture vertebrali, traumi addominali', prevenzione:'Formazione, carrelli stabili'}
     ],
     posturali: [
-        {id:"2.1",title:"Disturbi muscolo-scheletrici picking",r:7,p:5,d:35,cause:"Movimenti ripetitivi",danni:"Lombalgia cronica",prevenzione:"Postazioni ergonomiche"},
-        {id:"2.2",title:"Sollevamento carichi manuali",r:8,p:4,d:32,cause:"Pesi >25kg, posture scorrette",danni:"Ernia discale",prevenzione:"Carrelli solleva"},
-        {id:"2.3",title:"Movimenti ripetitivi imballaggio",r:6,p:5,d:30,cause:"Ritmo elevato",danni:"Tendiniti",prevenzione:"Rotazioni turni"},
-        {id:"2.4",title:"Postura viziata stoccaggio alto",r:7,p:4,d:28,cause:"Scaffali alti",danni:"Cervicalgie",prevenzione:"Piattaforme elevatrici"},
-        {id:"2.5",title:"MMC scarico/autocarro",r:8,p:3,d:24,cause:"Procedure assenti",danni:"Lombosciatalgia",prevenzione:"Teamlifting"},
-        {id:"2.6",title:"Postura forzata inventario",r:5,p:4,d:20,cause:"Gineprai bassi",danni:"Dolori dorsali",prevenzione:"Ausili ergonomici"},
-        {id:"2.7",title:"Vibrazioni WBV carrelli elevatori",r:6,p:3,d:18,cause:"Sospensioni usurate",danni:"Mal di schiena",prevenzione:"Manutenzione"}
+        {id:'2.1', title:'Movimentazione carichi pesanti', cause:'Sollevamento manuale, posture scorrette', danni:'Lombalgie croniche, ernie discali', prevenzione:'Ausili meccanici, formazione ergonomica'},
+        {id:'2.2', title:'Movimenti ripetitivi picking', cause:'Ritmo elevato, posture forzate', danni:'Tendiniti, sindrome tunnel carpale', prevenzione:'Rotazione mansioni, pause micro'},
+        {id:'2.3', title:'Posture viziate stoccaggio', cause:'Scaffali alti/bassi, spazi ristretti', danni:'Disturbi muscolo-scheletrici, cervicalgie', prevenzione:'Scaffalature ergonomiche, pedane'},
+        {id:'2.4', title:'Sforzi braccia sopra spalla', cause:'Scaffali alti, sistemazione merci', danni:'Spallalgie, lesioni tendinee', prevenzione:'Ausili sollevamento, altezza ergonomica'},
+        {id:'2.5', title:'Prolungata stazione eretta', cause:'Pavimenti duri, turni lunghi', danni:'Dolori lombari, vene varicose', prevenzione:'Pedane antisfatica, rotazione posture'},
+        {id:'2.6', title:'Flessioni ripetute raccolta', cause:'Merci a terra, picking basso', danni:'Ernie discali, lombosciatalgie', prevenzione:'Sistemi automatici, carrelli ergonomici'},
+        {id:'2.7', title:'Torsioni tronco picking', cause:'Posizionamento merci casuale', danni:'Traumi muscolari, ernie', prevenzione:'Organizzazione corsie, formazione'}
     ],
     chimici: [
-        {id:"3.1",title:"Inalazione polveri legno",r:6,p:4,d:24,cause:"Aspirazione assente",danni:"Malattie polmonari",prevenzione:"H10 aspiratori"},
-        {id:"3.2",title:"Contatto detergenti aggressivi",r:5,p:5,d:25,cause:"DPI assenti",danni:"Ustioni chimiche",prevenzione:"Guanti nitrile"},
-        {id:"3.3",title:"Esposizione gas scarico carrelli",r:7,p:3,d:21,cause:"Ventilazione scarsa",danni:"Intossicazione CO",prevenzione:"GPL certificati"},
-        {id:"3.4",title:"Polveri sottili imballaggi",r:4,p:4,d:16,cause:"Apertura big-bag",danni:"Irritazioni vie respiratorie",prevenzione:"Mascherine FFP2"},
-        {id:"3.5",title:"Contatto lubrificanti macchine",r:5,p:3,d:15,cause:"Manutenzioni senza DPI",danni:"Dermatiti",prevenzione:"Crema barriera"},
-        {id:"3.6",title:"Esposizione batteri muffe",r:4,p:3,d:12,cause:"Umidità >70%",danni:"Infezioni respiratorie",prevenzione:"Deumidificatori"}
+        {id:'3.1', title:'Inalazione polveri merci', cause:'Polveri fini, movimentazione sfusa', danni:'Malattie respiratorie, asma occupazionale', prevenzione:'Mascherine FFP2, aspirazione polveri'},
+        {id:'3.2', title:'Contatto detergenti aggressivi', cause:'Pulizia pavimenti/scaffali', danni:'Ustioni chimiche, dermatiti', prevenzione:'Guanti nitrile, diluizione prodotti'},
+        {id:'3.3', title:'Esposizione gas scarico carrelli', cause:'Ventilazione insufficiente, GPL', danni:'Intossicazione CO, mal di testa', prevenzione:'Ventilazione forzata, manutenzione'},
+        {id:'3.4', title:'Contatto lubrificanti oleosi', cause:'Manutenzione carrelli, macchinari', danni:'Dermatiti da contatto, cancro pelle', prevenzione:'Crema barriera, pulizia immediata'},
+        {id:'3.5', title:'Esposizione batteri muffe', cause:'Umidità magazzino, merci organiche', danni:'Infezioni respiratorie, allergie', prevenzione:'Deumidificatori, pulizia periodica'},
+        {id:'3.6', title:'Vapori solventi imballaggi', cause:'Apertura contenitori, vernici', danni:'Narcosi, danni neurologici', prevenzione:'Ventilazione, DPI respiratori'}
     ],
     ambientali: [
-        {id:"4.1",title:"Rumore carrelli elevatori",r:6,p:4,d:24,cause:"Livelli >85dB",danni:"Ipoacusia",prevenzione:"Cuffie antirumore"},
-        {id:"4.2",title:"Illuminamento insufficiente",r:5,p:5,d:25,cause:"Lampade guaste",danni:"Affaticamento visivo",prevenzione:"200lux min"},
-        {id:"4.3",title:"Polvere ambiente stoccaggio",r:4,p:4,d:16,cause:"Pulizia assente",danni:"Allergie respiratorie",prevenzione:"Scope industriali"},
-        {id:"4.4",title:"Vibrazioni pavimento",r:5,p:3,d:15,cause:"Carrelli pesanti",danni:"Dolori articolari",prevenzione:"Pavimentazione antivibra"},
-        {id:"4.5",title:"Radiazioni non ionizzanti",r:3,p:3,d:9,cause:"Saldature",danni:"Congiuntiviti",prevenzione:"Schermi protettivi"},
-        {id:"4.6",title:"Campi magnetici carrelli",r:3,p:2,d:6,cause:"Motori potenti",danni:"Disturbi neurologici",prevenzione:"Distanza sicurezza"}
+        {id:'4.1', title:'Illuminamento insufficiente', cause:'Lampade guaste, zone cieche', danni:'Affaticamento visivo, infortuni', prevenzione:'Manutenzione illuminazione, sensori'},
+        {id:'4.2', title:'Rumore carrelli elevatori', cause:'Motori GPL, manovre frequenti', danni:'Ipoacusia, stress', prevenzione:'Protezioni acustiche, manutenzione'},
+        {id:'4.3', title:'Vie di esodo ostruite', cause:'Merci male sistemate, cartoni', danni:'Intrappolamento incendio/evacuazione', prevenzione:'Segnaletica, ispezioni quotidiane'},
+        {id:'4.4', title:'Pavimenti scivolosi', cause:'Olio, acqua, imballaggi rotti', danni:'Cadute, fratture', prevenzione:'Segnaletica bagnato, pulizia immediata'},
+        {id:'4.5', title:'Sovraccarico elettrico', cause:'Multiprese, apparecchi multipli', danni:'Incendi elettrici, folgorazioni', prevenzione:'Quadri dedicati, manutenzione'},
+        {id:'4.6', title:'Ostacoli corsie pedonali', cause:'Merci abbandonate, pallet', danni:'Investimenti, cadute', prevenzione:'Discipline stoccaggio, ispezioni'}
     ],
     carrelli: [
-        {id:"5.1",title:"Capovolgimento carrello elevatore",r:9,p:3,d:27,cause:"Curve strette, sovraccarico",danni:"Morte operatore",prevenzione:"Formazione R.F.G."},
-        {id:"5.2",title:"Caduta carico transpalet",r:7,p:4,d:28,cause:"Frenate brusche",danni:"Schiacciamento pedoni",prevenzione:"Vie separate"},
-        {id:"5.3",title:"Investimento pedoni",r:8,p:4,d:32,cause:"Visibilità scarsa",danni:"Fratture gravi",prevenzione:"Allarmi retro"},
-        {id:"5.4",title:"Incidente cambio batterie",r:6,p:3,d:18,cause:"Acido solforico",danni:"Ustioni chimiche",prevenzione:"DPI acidi"},
-        {id:"5.5",title:"Ribaltamento transpallet",r:7,p:3,d:21,cause:"Pavimento irregolare",danni:"Contusioni multiple",prevenzione:"Carrelli 4 ruote"},
-        {id:"5.6",title:"Schiacciamento dita forche",r:6,p:4,d:24,cause:"Movimenti inconsulti",danni:"Amputazioni",prevenzione:"Sensori pinch"},
-        {id:"5.7",title:"Rottura catena sollevamento",r:8,p:2,d:16,cause:"Manutenzione assente",danni:"Caduta carico",prevenzione:"Verifiche mensili"}
+        {id:'5.1', title:'Ribaltamento carrelli elevatori', cause:'Curve strette, carico alto', danni:'Schiacciamento operatore, morte', prevenzione:'Formazione R.F.G., stabilità carico'},
+        {id:'5.2', title:'Collisione carrelli-pedoni', cause:'Vie non segregate, velocità', danni:'Traumi gravi, fratture', prevenzione:'Bande gialle, specchi, clacson'},
+        {id:'5.3', title:'Caduta carico da forche', cause:'Carico instabile, forche sporche', danni:'Schiacciamento pedoni, traumi', prevenzione:'Controllo carico, reti protezione'},
+        {id:'5.4', title:'Schiacciamento pedana', cause:'Discesa forche su piedi', danni:'Amputazione dita, fratture', prevenzione:'Formazione, scarpe sicurezza'},
+        {id:'5.5', title:'Fumigazione GPL interna', cause:'Ventilazione scarsa, manutenzione', danni:'Intossicazione CO letale', prevenzione:'Rilevatori CO, manutenzione serbatoi'},
+        {id:'5.6', title:'Scivolamento forche pavimento', cause:'Pavimento bagnato, gomme lisce', danni:'Perdita controllo, collisioni', prevenzione:'Gomme antiscivolo, pulizia pavimento'},
+        {id:'5.7', title:'Incendio serbatoio GPL', cause:'Perdite gas, scintille', danni:'Ustioni gravi, esplosione', prevenzione:'Controllo tenuta, estintori specifici'}
     ],
     incendio: [
-        {id:"6.1",title:"Incendio materiali combustibili",r:8,p:4,d:32,cause:"Fumo accensione",danni:"Ustioni gravi",prevenzione:"Divieti fumo"},
-        {id:"6.2",title:"Corto circuito quadri elettrici",r:7,p:3,d:21,cause:"Sovraccarichi",danni:"Intossicazione fumo",prevenzione:"Differenziali RCD"},
-        {id:"6.3",title:"Incendio carrelli GPL",r:9,p:2,d:18,cause:"Perdite gas",danni:"Esplosione",prevenzione:"Controlli quotidiani"},
-        {id:"6.4",title:"Autoincendio imballaggi",r:6,p:3,d:18,cause:"Effetto camino",danni:"Propagazione rapida",prevenzione:"Settori antincendio"},
-        {id:"6.5",title:"Surriscaldamento batterie",r:5,p:4,d:20,cause:"Ricarica errata",danni:"Esplosione",prevenzione:"Ventilazione caricabatterie"},
-        {id:"6.6",title:"Incendio rifiuti cartone",r:6,p:4,d:24,cause:"Deposito promiscuo",danni:"Fumo tossico",prevenzione:"Contenitori ignifughi"}
+        {id:'6.1', title:'Autocombustione materiali polverosi', cause:'Polveri combustibili, umidità', danni:'Incendio rapido, esplosioni', prevenzione:'Pulizia aspirazione, stoccaggio separato'},
+        {id:'6.2', title:'Corto circuito quadri elettrici', cause:'Sovraccarico, polvere', danni:'Incendio esteso, fumo tossico', prevenzione:'Manutenzione termica, protezioni IP'},
+        {id:'6.3', title:'Fumo sigaretta aree merci', cause:'Fumatori non autorizzati', danni:'Ignizione materiali infiammabili', prevenzione:'Divieto assoluto, estintori, videosorveglianza'},
+        {id:'6.4', title:'Surriscaldamento batterie carrelli', cause:'Carica difettosa, cortocircuiti', danni:'Incendio batterie, acido', prevenzione:'Caricatori dedicati, ventilazione'},
+        {id:'6.5', title:'Imballaggi combustibili accatastati', cause:'Cartoni, plastica vicino fonti calore', danni:'Fuoco rapido propagazione', prevenzione:'Distanze sicurezza, sprinkler'},
+        {id:'6.6', title:'Saldatura manutenzione senza norme', cause:'Lavori caldo non autorizzati', danni:'Ignizione materiali vicini', prevenzione:'Autorizzazioni, estintori, segnaletica'}
     ],
     microclima: [
-        {id:"7.1",title:"Caldo disagevole estate",r:5,p:5,d:25,cause:"Ventilazione scarsa",danni:"Colpi calore",prevenzione:"Ventilatori industriali"},
-        {id:"7.2",title:"Freddo inverno celle frigo",r:6,p:4,d:24,cause:"T<8°C",danni:"Ipotermia",prevenzione:"Abbigliamento termico"},
-        {id:"7.3",title:"Umidità elevata >80%",r:4,p:4,d:16,cause:"Infiltrazioni",danni:"Malattie respiratorie",prevenzione:"Deumidificatori"},
-        {id:"7.4",title:"Umidità bassa <30%",r:3,p:4,d:12,cause:"Riscaldamento",danni:"Irritazioni mucose",prevenzione:"Umidificatori"},
-        {id:"7.5",title:"Correnti d'aria forte",r:4,p:3,d:12,cause:"Portoni aperti",danni:"Raffreddore cronico",prevenzione:"Tende industriali"},
-        {id:"7.6",title:"Ventilazione insufficiente",r:5,p:4,d:20,cause:"VMC assente",danni:"Mal di testa",prevenzione:"Ricambio aria 6h"}
+        {id:'7.1', title:'Temperature estreme estive', cause:'No climatizzazione, porte aperte', danni:'Colpi calore, disidratazione', prevenzione:'Ventilatori, acqua potabile, pause ombra'},
+        {id:'7.2', title:'Umidità elevata merci igroscopiche', cause:'No deumidificatori, infiltrazioni', danni:'Affaticamento, reumatismi', prevenzione:'Deumidificatori, impermeabilizzazione'},
+        {id:'7.3', title:'Correnti d\'aria porte frequenti', cause:'Traffico intenso portoni', danni:'Raffreddamento localizzato, cervicalgie', prevenzione:'Portoni rapidi, tende termiche'},
+        {id:'7.4', title:'Polvere sospesa aria stagnante', cause:'No ricambio aria, movimentazione', danni:'Irritazioni vie respiratorie', prevenzione:'Ventilazione forzata, filtri HEPA'},
+        {id:'7.5', title:'Freddo inverno zone esterne', cause:'Operazioni carico/scarico', danni:'Congelamenti, scivolamenti ghiaccio', prevenzione:'Abbigliamento termico, sale antighiaccio'},
+        {id:'7.6', title:'Ventilazione insufficiente CO2', cause:'Alto numero persone, no aerazione', danni:'Mal di testa, nausea, cali concentrazione', prevenzione:'Estrattori aria, sensori CO2'}
     ],
     psicosociali: [
-        {id:"8.1",title:"Stress da turni notturni",r:6,p:4,d:24,cause:"Orari 24/7",danni:"Disturbi sonno",prevenzione:"Rotazioni turni"},
-        {id:"8.2",title:"Mobbing gerarchico",r:5,p:4,d:20,cause:"Capo autoritario",danni:"Burnout",prevenzione:"RLS attivi"},
-        {id:"8.3",title:"Ansia da produttività",r:6,p:5,d:30,cause:"Target elevati",danni:"Depressione",prevenzione:"Pausa 15min/h"},
-        {id:"8.4",title:"Isolamento lavorativo",r:4,p:4,d:16,cause:"Turni solitari",danni:"Disturbi ansiosi",prevenzione:"Comunicazione radio"},
-        {id:"8.5",title:"Conflitti interpersonali",r:5,p:3,d:15,cause:"Spazi ristretti",danni:"Assenteismo",prevenzione:"Formazione team"},
-        {id:"8.6",title:"Paura infortuni gravi",r:7,p:3,d:21,cause:"Incidenti passati",danni:"Fobie lavorative",prevenzione:"Analisi incidenti"}
+        {id:'8.1', title:'Stress turni notturni', cause:'Ritmo circadiano alterato, buio', danni:'Errori, incidenti, depressione', prevenzione:'Illuminazione circadiana, rotazione turni'},
+        {id:'8.2', title:'Ansia solitudine notturna', cause:'Personale ridotto, emergenze', danni:'Panico, ritardi soccorsi', prevenzione:'Radiotrasmittenti, ronde sicurezza'},
+        {id:'8.3', title:'Monotonia picking ripetitivo', cause:'Compiti identici ore', danni:'Distrazione, errori picking', prevenzione:'Rotazione mansioni, gamification'},
+        {id:'8.4', title:'Conflitti gerarchici supervisori', cause:'Pressione produttività, straordinari', danni:'Assenteismo, mobbing', prevenzione:'Comunicazione aperta, formazione management'},
+        {id:'8.5', title:'Paura furti/rapine notturne', cause:'Zona isolata, valori magazzino', danni:'Ansia cronica, PTSD', prevenzione:'Videosorveglianza, guardie giurate'},
+        {id:'8.6', title:'Burnout picchi stagionali', cause:'Ordini natalizi, carichi eccessivi', danni:'Errori, infortuni, dimissioni', prevenzione:'Pianificazione organico, supporto psicologico'}
     ]
 };
 
+// FUNZIONI
 function showCategory(cat) {
-    const container = document.getElementById('risksContainer');
-    const title = document.getElementById('categoryTitle');
-    
-    title.textContent = `📋 ${cat.toUpperCase()} - ${RISCHI[cat].length} Rischi`;
-    title.classList.remove('hidden');
-    
+    const container = document.getElementById('risks-content');
     container.innerHTML = RISCHI[cat].map(risk => `
-        <div class="risk-card glass p-8 rounded-3xl hover:shadow-2xl border-2 border-gray-700 hover:border-indigo-500/50">
+        <article class="risk-card glass p-8 rounded-3xl hover:shadow-2xl border-2 border-gray-700 hover:border-indigo-500/50 col-span-1">
             <div class="flex items-start space-x-4 mb-6">
-                <div class="flex flex-col items-center w-16 p-3 bg-indigo-500/20 rounded-2xl font-bold text-indigo-400">
+                <div class="flex flex-col items-center w-16 p-4 bg-indigo-500/20 rounded-2xl font-bold text-indigo-400 shrink-0">
                     <div class="text-2xl">${risk.id.slice(0,2)}</div>
-                    <div class="text-xs">${risk.id}</div>
+                    <div class="text-xs font-bold">${risk.id}</div>
                 </div>
-                <div class="flex-1">
-                    <h3 class="text-2xl font-bold mb-4 group-hover:text-indigo-400 transition-colors">${risk.title}</h3>
-                    <div class="grid grid-cols-3 gap-3 mb-6">
-                        <div class="bg-red-900/50 text-red-300 px-4 py-2 rounded-xl font-bold text-center border border-red-500/30">R:<br>${risk.r}</div>
-                        <div class="bg-yellow-900/50 text-yellow-300 px-4 py-2 rounded-xl font-bold text-center border border-yellow-500/30">P:<br>${risk.p}</div>
-                        <div class="bg-green-900/50 text-green-300 px-4 py-2 rounded-xl font-bold text-center border border-green-500/30">D:<br>${risk.d}</div>
-                    </div>
-                    <div class="grid md:grid-cols-3 gap-4 text-sm leading-tight">
-                        <div><strong>🚨 CAUSE:</strong><br class="md:hidden">${risk.cause}</div>
-                        <div><strong>💥 DANNI:</strong><br class="md:hidden">${risk.danni}</div>
-                        <div><strong>🛡️ PREVENZIONE:</strong><br class="md:hidden">${risk.prevenzione}</div>
+                <div class="flex-1 min-w-0">
+                    <h3 class="text-2xl font-black mb-6 text-white leading-tight">${risk.title}</h3>
+                    <div class="space-y-4 text-lg leading-relaxed">
+                        <div class="p-4 bg-red-900/30 border-l-4 border-red-400 rounded-r-xl">
+                            <strong class="text-red-300 block mb-2">🚨 CAUSE PRINCIPALI:</strong>
+                            <span class="text-red-100">${risk.cause}</span>
+                        </div>
+                        <div class="p-4 bg-orange-900/30 border-l-4 border-orange-400 rounded-r-xl">
+                            <strong class="text-orange-300 block mb-2">💥 DANNI POSSIBILI:</strong>
+                            <span class="text-orange-100">${risk.danni}</span>
+                        </div>
+                        <div class="p-4 bg-green-900/30 border-l-4 border-green-400 rounded-r-xl">
+                            <strong class="text-green-300 block mb-2">🛡️ PREVENZIONE:</strong>
+                            <span class="text-green-100">${risk.prevenzione}</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </article>
     `).join('');
     
     container.classList.remove('hidden');
@@ -270,9 +220,10 @@ function scrollToTop() {
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-// INIT
+// INIT DARK MODE
 document.addEventListener('DOMContentLoaded', () => {
-    toggleTheme(); // Force dark mode
+    document.documentElement.classList.add('dark');
+    document.getElementById('theme-btn').textContent = '☀️';
 });
 </script>
 </body>
