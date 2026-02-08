@@ -3,416 +3,585 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚛 DVR Magazziniere Completo | Dott. Ing. Nicola Trono</title>
-    <meta name="description" content="DVR Completo Magazziniere D.Lgs. 81/2008 - 52 Rischi Analizzati con Matrice R/P/D, Cause INAIL, Danni, Prevenzione/Protezione Normativa.">
+    <title>🚛 DVR Magazziniere Completo 52 Rischi | Dott. Salvatore Trono</title>
+    <meta name="description" content="Dott. Salvatore Trono - Laureato Scienze dei Servizi Giuridici. DVR Completo 52 Rischi Magazzino D.Lgs. 81/2008 con Matrice R/P/D, INAIL, Normative complete.">
+    <meta name="author" content="Dott. Salvatore Trono">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
-            theme: { extend: { fontFamily: { sans: ['Inter', 'sans-serif'] } } }
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    animation: { 'fade-in-up': 'fadeInUp 0.8s ease-out forwards' },
+                    colors: {
+                        primary: { 50: '#eff6ff', 500: '#3b82f6', 900: '#1e3a8a' }
+                    }
+                }
+            }
         }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/marked@4.0.0/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { font-family: 'Inter', sans-serif; }
-        .glass { backdrop-filter: blur(20px); background: rgba(31,41,55,0.95); border: 1px solid rgba(75,85,99,0.3); }
-        .gradient-bg { background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #1e293b 100%); }
-        .shadow-pro { box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; }
-        .risk-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border-left: 4px solid transparent; }
-        .risk-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); border-left-color: #3b82f6; }
+        .glass-panel { 
+            backdrop-filter: blur(20px); 
+            background: rgba(17, 24, 39, 0.95); 
+            border: 1px solid rgba(51, 65, 85, 0.5); 
+        }
+        .gradient-hero { 
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #1e1b4b 100%); 
+        }
+        .shadow-pro { 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6); 
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .risk-card { 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            border-left: 4px solid transparent; 
+        }
+        .risk-card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); 
+            border-left-color: #3b82f6; 
+        }
         .matrix-crit { background: linear-gradient(135deg, #dc2626, #b91c1c); }
-        .matrix-alta { background: linear-gradient(135deg, #ef4444, #dc2626); }
-        .matrix-media { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .matrix-alta { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .matrix-media { background: linear-gradient(135deg, #eab308, #ca8a04); }
         .matrix-bassa { background: linear-gradient(135deg, #10b981, #059669); }
-        .btn-primary { background: linear-gradient(135deg, #3b82f6, #1d4ed8); transition: all 0.3s ease; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(59,130,246,0.4); }
-        .mobile-toolbar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; }
-        @media (min-width: 768px) { .mobile-toolbar { display: none; } }
+        @media (max-width: 768px) {
+            .mobile-toolbar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; }
+        }
     </style>
 </head>
-<body class="gradient-bg min-h-screen text-white overflow-x-hidden">
-    
-    <!-- 🔝 HEADER PROFESSIONALE -->
-    <header class="glass sticky top-0 z-40 shadow-pro">
+<body class="bg-gradient-hero min-h-screen text-white">
+    <!-- HEADER PROFESSIONALE -->
+    <header class="glass-panel sticky top-0 z-50 shadow-pro border-b-2 border-indigo-500/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row justify-between items-center py-6">
-                <div class="text-center lg:text-left mb-6 lg:mb-0">
-                    <div class="flex items-center justify-center lg:justify-start mb-2">
-                        <div class="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg mr-4">
-                            <span class="text-2xl font-bold">🚛</span>
-                        </div>
-                        <div>
-                            <h1 class="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-white to-slate-200 bg-clip-text text-transparent">
-                                DVR Magazziniere Completo
-                            </h1>
-                            <p class="text-cyan-400 font-semibold text-lg">Dott. Ing. Nicola Trono</p>
-                        </div>
+            <div class="flex flex-col md:flex-row justify-between items-center py-4 md:py-6">
+                <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                    <div class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg">
+                        <span class="text-xl font-bold">🚛</span>
                     </div>
-                    <p class="text-sm text-slate-400 mt-1">D.Lgs. 81/2008 - 52 Rischi Analizzati Livello 4</p>
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-black bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+                            DVR Magazziniere
+                        </h1>
+                        <p class="text-sm md:text-base text-indigo-300 font-medium">
+                            Dott. Salvatore Trono - Laureato Scienze dei Servizi Giuridici
+                        </p>
+                    </div>
                 </div>
-                <div class="flex flex-wrap gap-3 justify-center lg:justify-end">
-                    <button onclick="showTest()" class="btn-primary px-6 py-2 rounded-xl font-semibold text-sm shadow-lg">📝 Test Quiz</button>
-                    <button onclick="exportPDF()" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 px-6 py-2 rounded-xl font-semibold text-sm shadow-lg">📄 PDF</button>
-                    <button onclick="toggleTheme()" class="glass px-6 py-2 rounded-xl font-semibold text-sm hover:bg-slate-700">🌙 Tema</button>
-                </div>
-            </div>
-            
-            <!-- ⚠️ DISCLAIMER LEGALE -->
-            <div class="bg-red-500/20 border border-red-500/50 rounded-2xl p-4 mb-6 backdrop-blur-sm">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 text-xs">
-                    <span class="font-bold text-red-300 px-2 py-1 bg-red-500/20 rounded-lg">⚠️ DISCLAIMER LEGALE</span>
-                    <span>Documento originale © Dott. Ing. Nicola Trono 2024. Vietata diffusione/uso senza autorizzazione scritta. Non sostituisce RSPP nominato. Verificare normative locali.</span>
+                <div class="flex items-center space-x-2 md:space-x-4">
+                    <button onclick="toggleTheme()" aria-label="Toggle tema" class="p-2 rounded-xl glass-panel hover:bg-gray-700 transition-all">
+                        <span class="dark:hidden">🌙</span>
+                        <span class="dark:inline">☀️</span>
+                    </button>
+                    <button onclick="exportPDF()" aria-label="Esporta PDF" class="px-6 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all">
+                        📄 PDF Completo
+                    </button>
                 </div>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 lg:pb-12">
-        <!-- 📋 NAVIGAZIONE LIVELLO 2 CATEGORIE -->
-        <section id="categoriesNav" class="mb-12">
-            <h2 class="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                Analisi Rischi Magazzino - 52 Rischi Classificati
-            </h2>
-            <div id="categoriesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12"></div>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <!-- PRESENTAZIONE E DISCLAIMER -->
+        <section class="text-center mb-16 animate-fadeInUp">
+            <div class="glass-panel p-8 md:p-12 rounded-3xl shadow-pro max-w-4xl mx-auto mb-12">
+                <h2 class="text-4xl md:text-5xl font-black mb-6 bg-gradient-to-r from-white via-blue-100 to-indigo-200 bg-clip-text text-transparent">
+                    Analisi Completa 52 Rischi Magazzino
+                </h2>
+                <p class="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed">
+                    Valutazione dei Rischi Aziendali D.Lgs. 81/2008<br>
+                    <span class="text-indigo-300 font-semibold">Magazzino Merci Generali - Laureato SPP Dott. Salvatore Trono</span>
+                </p>
+            </div>
+
+            <!-- DISCLAIMER LEGALE -->
+            <section class="glass-panel p-6 md:p-8 rounded-2xl shadow-pro mb-12 max-w-4xl mx-auto">
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 bg-amber-500/20 border-4 border-amber-500 rounded-3xl flex items-center justify-center mx-auto mb-4">
+                        ⚠️
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-amber-300">DISCLAIMER LEGALE</h3>
+                </div>
+                <div class="text-sm md:text-base text-gray-300 space-y-3 leading-relaxed">
+                    <p>Il presente DVR è uno <strong>strumento di supporto tecnico</strong> per la valutazione preliminare dei rischi.</p>
+                    <p><strong>Non sostituisce la valutazione specifica aziendale</strong> obbligatoria ai sensi dell'art. 28 D.Lgs. 81/2008 da parte del Servizio di Prevenzione e Protezione (SPP).</p>
+                    <p><strong>Dott. Salvatore Trono declina ogni responsabilità</strong> per applicazioni scorrette, omissioni di analisi site-specific o mancata personalizzazione.</p>
+                    <p class="font-semibold text-amber-200">Il datore di lavoro deve verificare e integrare con sopralluogo tecnico.</p>
+                </div>
+            </section>
         </section>
 
-        <!-- 🎯 RISCHI LIVELLO 3 -->
-        <section id="risksContainer" class="space-y-6 hidden">
-            <div class="text-center">
-                <h3 id="currentCategoryTitle" class="text-2xl lg:text-3xl font-bold mb-4 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent"></h3>
-                <p id="risksCount" class="text-slate-400 text-lg"></p>
+        <!-- CATEGORIE RISCHI (8 ESATTE) -->
+        <div id="categories-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16"></div>
+
+        <!-- TEST INTERATTIVO -->
+        <section id="test-section" class="glass-panel p-8 md:p-12 rounded-3xl shadow-pro hidden mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-black mb-4">🧠 Test Conoscenze DVR Magazzino</h2>
+                <p class="text-xl text-gray-300">20 domande - 70% per PASSARE - Certificato scaricabile</p>
+                <div class="flex justify-center space-x-4 mt-6">
+                    <button onclick="startTest()" class="px-8 py-3 bg-green-500 hover:bg-green-600 rounded-xl font-semibold shadow-lg">🚀 Inizia Test</button>
+                    <button onclick="closeTest()" class="px-8 py-3 bg-gray-600 hover:bg-gray-700 rounded-xl font-semibold shadow-lg">❌ Chiudi</button>
+                </div>
             </div>
-            <div id="risksGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="quiz-container"></div>
+        </section>
+
+        <!-- RISULTATI TEST -->
+        <section id="results-section" class="glass-panel p-8 md:p-12 rounded-3xl shadow-pro hidden">
+            <div class="text-center">
+                <div id="results-badge" class="inline-block p-8 rounded-3xl mb-8 shadow-2xl"></div>
+                <h2 id="results-title" class="text-3xl font-black mb-4"></h2>
+                <p id="results-score" class="text-5xl font-black mb-8"></p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="exportCertificate()" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 rounded-2xl font-bold shadow-xl text-lg">🏆 CERTIFICATO PDF</button>
+                    <button onclick="closeTest()" class="px-8 py-4 bg-gray-600 hover:bg-gray-700 rounded-2xl font-bold shadow-lg text-lg">🔄 Nuovo Test</button>
+                </div>
+            </div>
         </section>
     </main>
 
-    <!-- 📱 TOOLBAR MOBILE -->
-    <div class="mobile-toolbar glass border-t border-slate-700 py-3 px-4">
+    <!-- MOBILE TOOLBAR -->
+    <div class="md:hidden mobile-toolbar glass-panel p-4 border-t-2 border-indigo-500/50">
         <div class="flex justify-around items-center">
-            <button onclick="navigateToCategory(1)" class="flex flex-col items-center p-2 text-xs font-medium text-slate-400 hover:text-cyan-400">
-                <span class="text-xl mb-1">🔧</span> Meccanici
+            <button onclick="startTest()" class="flex flex-col items-center space-y-1 p-2 rounded-xl hover:bg-gray-700" aria-label="Test">
+                <span class="text-xl">🧠</span>
+                <span class="text-xs font-medium">TEST</span>
             </button>
-            <button onclick="navigateToCategory(2)" class="flex flex-col items-center p-2 text-xs font-medium text-slate-400 hover:text-cyan-400">
-                <span class="text-xl mb-1">🦴</span> Posturali
+            <button onclick="exportPDF()" class="flex flex-col items-center space-y-1 p-2 rounded-xl hover:bg-gray-700" aria-label="PDF">
+                <span class="text-xl">📄</span>
+                <span class="text-xs font-medium">PDF</span>
             </button>
-            <button onclick="showTest()" class="flex flex-col items-center p-2 text-xs font-medium text-slate-400 hover:text-emerald-400">
-                <span class="text-xl mb-1">📝</span> Test
-            </button>
-            <button onclick="navigateToCategory(5)" class="flex flex-col items-center p-2 text-xs font-medium text-slate-400 hover:text-orange-400">
-                <span class="text-xl mb-1">🚜</span> Carrelli
-            </button>
-            <button onclick="exportPDF()" class="flex flex-col items-center p-2 text-xs font-medium text-slate-400 hover:text-emerald-400">
-                <span class="text-xl mb-1">📄</span> PDF
+            <button onclick="scrollToTop()" class="flex flex-col items-center space-y-1 p-2 rounded-xl hover:bg-gray-700" aria-label="Home">
+                <span class="text-xl">🏠</span>
+                <span class="text-xs font-medium">HOME</span>
             </button>
         </div>
     </div>
 
-    <!-- 🧩 MODAL DETTAGLIO RISCHIO LIVELLO 4 -->
-    <div id="detailModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="glass max-w-4xl max-h-[90vh] w-full rounded-3xl shadow-2xl overflow-y-auto animate-fadeInUp">
-            <div class="sticky top-0 glass backdrop-blur-sm rounded-t-3xl p-6 border-b border-slate-700 z-10">
-                <div class="flex justify-between items-center">
-                    <h3 id="modalTitle" class="text-2xl font-bold"></h3>
-                    <button onclick="closeModal()" class="text-2xl hover:text-red-400">×</button>
-                </div>
-            </div>
-            <div id="modalContent" class="p-8 space-y-6 text-sm leading-relaxed"></div>
+    <!-- FOOTER -->
+    <footer class="glass-panel mt-24 p-8 md:p-12 text-center border-t-2 border-indigo-500/50">
+        <div class="max-w-4xl mx-auto">
+            <p class="text-lg font-semibold mb-4 text-indigo-300">© 2024 Dott. Salvatore Trono</p>
+            <p class="text-sm text-gray-400 mb-4">Laureato in Scienze dei Servizi Giuridici | Consulente SPP D.Lgs. 81/2008</p>
+            <p class="text-xs text-gray-500">Riferimenti normativi: D.Lgs. 81/2008, UNI EN ISO 45001, INAIL DVR Magazzini</p>
         </div>
-    </div>
+    </footer>
 
-    <!-- 📝 MODAL TEST SIMULAZIONE -->
-    <div id="testModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="glass max-w-3xl w-full rounded-3xl shadow-2xl overflow-hidden animate-fadeInUp">
-            <div class="bg-gradient-to-r from-emerald-500 to-teal-600 p-6">
-                <h3 class="text-2xl font-bold text-white">📝 Test DVR Magazziniere - 100 Domande</h3>
-            </div>
-            <div class="p-6 max-h-96 overflow-y-auto">
-                <p class="text-slate-300 mb-4">Simulazione Quiz Certificazione Competenze - 30min</p>
-                <div class="space-y-4">
-                    <div class="bg-slate-800/50 p-4 rounded-xl">
-                        <p><strong>Esempio Q1:</strong> Quale DPI per vapori solventi?</p>
-                        <label class="flex items-center mt-2">
-                            <input type="radio" class="mr-2 w-4 h-4 text-cyan-500"> FFP3 filtrante vapori organici ✅
-                        </label>
-                    </div>
-                    <!-- 99 domande aggiuntive implementabili -->
-                </div>
-            </div>
-            <div class="p-6 border-t border-slate-700 bg-slate-900/50">
-                <div class="flex gap-3">
-                    <button onclick="closeTest()" class="flex-1 bg-slate-700 hover:bg-slate-600 py-3 px-6 rounded-xl font-semibold">❌ Chiudi</button>
-                    <button class="flex-1 btn-primary py-3 px-6 rounded-xl font-semibold">✅ Inizia Test</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 🗄️ DATABASE 52 RISCHI COMPLETI -->
     <script>
-        const RISCHI_DATABASE = {
+        // === DATABASE COMPLETO 52 RISCHI ===
+        const RISKS_DB = {
             1: {
                 title: "🔧 RISCHI MECCANICI", count: 8,
                 risks: [
-                    {id:"M1", title:"Schiacciamento tra merci", matrix:"CRITICA", r:5,p:4,d:5, cause:"Scaffali sovraccarichi >800kg/ml", danno:"Fratture costali multiple, trauma addominale (INAIL 45gg)", prevenzione:"Sistemi anti-ribaltamento UNI EN 15635", protezione:"Casco classe B EN 397 + paraschienale", normativa:"D.Lgs.81/08 Titolo IV Cap.I"},
-                    {id:"M2", title:"Taglio nastri metallici", matrix:"ALTA", r:4,p:5,d:4, cause:"Lame cutter non protette", danno:"Ferita sezionante tendini", prevenzione:"Cutter automatici retrattili", protezione:"Guanti anti-taglio livello 5 EN 388", normativa:"D.Lgs.81/08 Allegato V"},
-                    {id:"M3", title:"Intrappolamento nastri trasportatori", matrix:"ALTA", r:4,p:4,d:5, cause:"Protezioni mancanti rulli", danno:"Amputazione dita/mano", prevenzione:"Dispositivi E-stop + paracorda EN 60204", protezione:"Guanti anti-abrasione", normativa:"UNI EN ISO 13857"},
-                    {id:"M4", title:"Proiezione frammenti imballo", matrix:"MEDIA", r:3,p:4,d:4, cause:"Apertura casse legno chiodate", danno:"Lesione oculare", prevenzione:"Pinze estrattori chiodi", protezione:"Occhiali classe F EN 166", normativa:"D.Lgs.81/08 Titolo III"},
-                    {id:"M5", title:"Pizzicamento rulli transpallet", matrix:"MEDIA", r:3,p:4,d:3, cause:"Manovra manuale forzata", danno:"Contusione falangi", prevenzione:"Impugnature ergonomiche", protezione:"Guanti basic EN 388", normativa:"UNI EN 1005-3"},
-                    {id:"M6", title:"Schiacciamento porte sezionali", matrix:"ALTA", r:4,p:3,d:4, cause:"Fermo meccanico assente", danno:"Trauma cranico", prevenzione:"Fotocellule sicurezza doppio fascio", protezione:"Casco classe A", normativa:"UNI EN 13241-1"},
-                    {id:"M7", title:"Caduta attrezzi da quota", matrix:"MEDIA", r:3,p:4,d:4, cause:"Pinze non agganciate", danno:"Ferita contusa cranio", prevenzione:"Porta-attrezzi magnetico", protezione:"Casco classe B", normativa:"UNI EN 397"},
-                    {id:"M8", title:"Urto spigoli scaffali", matrix:"BASSA", r:2,p:5,d:3, cause:"Passaggi stretti <80cm", danno:"Contusioni multiple", prevenzione:"Angolari protettivi gomma", protezione:"Gilet antiriflesso", normativa:"UNI EN 14122-2"}
+                    {id:"RM1", title:"Schiacciamento transpallet", matrix:"CRITICA", r:5,p:5,d:5, cause:"Carico instabile >1500kg", danno:"Amputazione INAIL 180gg", prevenzione:"Formazione R.F.", protezione:"Scarpe S3 SRC", normativa:"D.Lgs.81/08 Tit.VI"},
+                    {id:"RM2", title:"Taglio nastri metallici", matrix:"ALTA", r:4,p:5,d:4, cause:"Lame non protette", danno:"Sezione digitale T5", prevenzione:"Porta-lame automatica", protezione:"Guanti cut5 5.14", normativa:"UNI EN 388"},
+                    {id:"RM3", title:"Caduta da scale magazzino", matrix:"CRITICA", r:5,p:4,d:5, cause:"Scala non EN131", danno:"Frattura vertebrale", prevenzione:"Piattaforme fisse", protezione:"Imbracatura 140kg", normativa:"D.Lgs.81/08 Tit.IV"},
+                    {id:"RM4", title:"Intrappolamento nastri trasportatori", matrix:"ALTA", r:4,p:4,d:5, cause:"No protezioni fisse", danno:"Schiacciamento torace", prevenzione:"Barriere IP67", protezione:"--, normativa:"UNI EN 620"},
+                    {id:"RM5", title:"Proiezione imballaggi rotti", matrix:"MEDIA", r:3,p:5,d:4, cause:"Legno scheggiato", danno:"Perforazione occhio", prevenzione:"Occhiali panoramica", protezione:"Polizza RC", normativa:"D.Lgs.81/08 Tit.III"},
+                    {id:"RM6", title:"Schiacciamento porte sezionali", matrix:"MEDIA", r:3,p:4,d:4, cause:"Cavi usurati", danno:"Trauma cranico", prevenzione:"Fotocellule 2 vie", protezione:"Casco classe B", normativa:"UNI EN 13241"},
+                    {id:"RM7", title:"Contusioni picking manuale", matrix:"BASSA", r:2,p:5,d:3, cause:"Scaffali alti 6m", danno:"Distorsione polso", prevenzione:"Carrelli retrattili", protezione:"Ginocchiere", normativa:"ISO 11228-2"},
+                    {id:"RM8", title:"Vibrazioni transpallet", matrix:"MEDIA", r:3,p:3,d:4, cause:"Pavimento irregolare", danno:"Sindrome mano vibraz.", prevenzione:"Transpallet gommati", protezione:"Guanti antivibrazione", normativa:"D.Lgs.81/08 Tit.VIII"}
                 ]
             },
             2: {
-                title: "🦴 RISCHI POSTURALI/MMC", count: 7,
+                title: "🧍‍♂️ RISCHI POSTURALI/MMC", count: 7,
                 risks: [
-                    {id:"P1", title:"Sollevamento manuale carichi", matrix:"ALTA", r:4,p:5,d:5, cause:">25kg manuale h>1m (ISO 11228)", danno:"Lombalgia cronica, ernia discale L4-L5", prevenzione:"Carrelli sollevatori idraulici portata 500kg", protezione:"Corsetto lombare rigido", normativa:"D.Lgs.81/08 Titolo VI Cap.I"},
-                    {id:"P2", title:"Movimenti ripetitivi picking", matrix:"MEDIA", r:3,p:5,d:4, cause:">30.000 cicli/giorno picking", danno:"Tendinopatia d'Abate", prevenzione:"Rotazione mansioni 2h, picking voce ergonomico", protezione:"Polso tutore", normativa:"ISO 11228-3"},
-                    {id:"P3", title:"Postura flessa prolungata", matrix:"ALTA", r:4,p:4,d:4, cause:"Ripiani bassi <60cm", danno:"Cervicalgia cronica", prevenzione:"Scaffali regolabili altezza gomito", protezione:"Sostegno cervicale", normativa:"UNI EN 1005-2"},
-                    {id:"P4", title:"Torsioni tronco picking", matrix:"MEDIA", r:3,p:5,d:4, cause:"Passaggio laterale pallet", danno:"Lombosciatalgia", prevenzione:"Picking frontale ottimizzato", protezione:"Fascia lombare elastica", normativa:"OCRA metodo ISO 11228"},
-                    {id:"P5", title:"Stazionamento prolungato", matrix:"MEDIA", r:3,p:4,d:3, cause:">4h senza pedana", danno:"Varici, edemi plantari", prevenzione:"Pedane antistanchezza 15mm", protezione:"Calzature SD", normativa:"ISO 11226"},
-                    {id:"P6", title:"Sollevamento sopra spalla", matrix:"ALTA", r:4,p:3,d:4, cause:"Ripiani alti >180cm", danno:"Spalla dolorosa cronica", prevenzione:"Autoportanti telescopici", protezione:"Sostegno spalla", normativa:"NIOSH Lifting Equation"},
-                    {id:"P7", title:"Vibrazioni mano-braccio transpallet", matrix:"BASSA", r:2,p:4,d:4, cause:">2.5m/s² manuale", danno:"Sindrome mano-vibrazione", prevenzione:"Maniglie antivibrazione", protezione:"Guanti antivibrazione EN ISO 10819", normativa:"D.Lgs.81/08 Titolo VIII Cap.III"}
+                    {id:"RP1", title:"Sollevamento carichi >25kg", matrix:"CRITICA", r:5,p:5,d:5, cause:"No muletti <1,8m", danno:"Ernia L4-L5 180gg INAIL", prevenzione:"Formazione ISO 11228", protezione:"Corsetto lombare", normativa:"D.Lgs.81/08 Tit.VI"},
+                    {id:"RP2", title:"Ripetute flessioni tronco 8h", matrix:"ALTA", r:4,p:5,d:4, cause:"Picking da terra", danno:"Lombosciatalgia cronica", prevenzione:"Scaffali ergonomici 0,8m", protezione:"Scarpe ammortizzate", normativa:"UNI EN 1005-2"},
+                    {id:"RP3", title:"Sollevamenti sopra spalla", matrix:"ALTA", r:4,p:4,d:4, cause:"Scaffali alti 2,2m", danno:"Tendinopatia cuffia rot.", prevenzione:"Pedane regolabili", protezione:"Bracciali elastici", normativa:"NIOSH lifting eq."},
+                    {id:"RP4", title:"Movimenti asimmetrici torsione", matrix:"MEDIA", r:3,p:5,d:4, cause:"Corsie strette 1,2m", danno:"Pubalgia", prevenzione:"Specchi convessi angoli", protezione:"--, normativa:"OCRA metodo"},
+                    {id:"RP5", title:"Permanenza in piedi 8h", matrix:"MEDIA", r:3,p:4,d:3, cause:"No stazioni sedute", danno:"Varici flebiti", prevenzione:"Tappeti antistanchezza", protezione:"Calze 15-20mmHg", normativa:"ISO 11226"},
+                    {id:"RP6", title:"Microtraumi ripetuti picking", matrix:"ALTA", r:4,p:4,d:4, cause:"1000 cicli/giorno", danno:"Sindrome tunnel carpale", prevenzione:"Utensili ergonomici", protezione:"Polso rigido", normativa:"OCRA checklist"},
+                    {id:"RP7", title:"Sforzo braccia sopra spalla", matrix:"MEDIA", r:3,p:4,d:4, cause:"Comandi plafoniere", danno:"Epicondilite", prevenzione:"Comandi a parete 1,6m", protezione:"Bracciale tennis elbow", normativa:"RULA metodo"}
                 ]
             },
             3: {
-                title: "☣️ RISCHI CHIMICI/BIOLOGICI", count: 6,
+                title: "☣️ RISCHI CHIMICI/BIOLOGICI", count: 7,
                 risks: [
-                    {id:"CB1", title:"Inalazione vapori solventi", matrix:"ALTA", r:4,p:4,d:5, cause:"Vernici, detergenti acetone/toluene", danno:"Vertigini, danno epatico/renale (INAIL 35gg)", prevenzione:"Hood aspirazione 0.5m/s (UNI EN 12975)", protezione:"Mascherina FFP3 filtrante vapori organici", normativa:"D.Lgs.81/08 Tit.XI Cap.I"},
-                    {id:"CB2", title:"Contatto pelle detergenti", matrix:"MEDIA", r:3,p:4,d:4, cause:"Candeggina, acidi pulitivi senza guanti", danno:"Dermatiti, ustioni chimiche", prevenzione:"Schede dati sicurezza (SDS), diluizione 1:10", protezione:"Guanti nitrile 15mil EN 374", normativa:"Reg. CE 1907/2006 REACH"},
-                    {id:"CB3", title:"Polveri legno/resina", matrix:"ALTA", r:4,p:3,d:5, cause:"Segatura imballaggi legno, levigatura casse", danno:"Rinite allergica, asma occupazionale", prevenzione:"Aspirazione polveri classe H (UNI EN 60335)", protezione:"Mascherina FFP2 polveri fini", normativa:"D.Lgs.81/08 Allegato XLVI"},
-                    {id:"CB4", title:"Gas refrigeranti R134a", matrix:"MEDIA", r:3,p:3,d:4, cause:"Perdita celle frigo", danno:"Asfissia locale, aritmie", prevenzione:"Rilevatori gas 500ppm", protezione:"Autorespiratore EN 137", normativa:"D.Lgs.81/08 Titolo XI Cap.III"},
-                    {id:"CB5", title:"Agenti biologici classe 2", matrix:"BASSA", r:2,p:3,d:4, cause:"Roditori escrementi, gabbie merci", danno:"Hantavirus, leptospirosi", prevenzione:"Derattizzazione mensile UNI EN 16636", protezione:"Combinazione Tyvek categoria III", normativa:"D.Lgs.81/08 Tit.X Cap.I"},
-                    {id:"CB6", title:"Rumore >85dB picking", matrix:"MEDIA", r:4,p:4,d:3, cause:"Carrelli elevatori, muletti", danno:"IPOACUSI permanente", prevenzione:"Mappa acustica, barriere fonoassorbenti", protezione:"Cuffie antirumore SNR 33dB", normativa:"D.Lgs.81/08 Titolo VIII"}
+                    {id:"RC1", title:"Polveri legno duro IARC2B", matrix:"ALTA", r:4,p:4,d:4, cause:"Taglio pannelli truciolari", danno:"Adenocarcinoma nasale", prevenzione:"Aspirazione 2m/s", protezione:"FFP3 + occhiali", normativa:"D.Lgs.81/08 Tit.IX"},
+                    {id:"RC2", title:"Gas scarico carrelli GPL", matrix:"MEDIA", r:3,p:5,d:4, cause:"Ventilazione <6 ricambi/h", danno:"CO intossicazione acuta", prevenzione:"Rivelatori CO 30ppm", protezione:"Semimaschera A1", normativa:"D.Lgs.50/2024"},
+                    {id:"RC3", title:"Impregnanti formaldeide H330", matrix:"CRITICA", r:5,p:4,d:5, cause:"Pallets UMIFIBRE", danno:"Carcinogeno confermato", prevenzione:"Manipolazione guanti", protezione:"FFP2 + nitrile", normativa:"REACH 1907/06"},
+                    {id:"RC4", title:"Batteri legionella celle frigo", matrix:"ALTA", r:4,p:3,d:5, cause:"Condensatori non puliti", danno:"Polmonite legionellosi", prevenzione:"Trattamento biocida", protezione:"FFP2", normativa:"Linee guida ISS"},
+                    {id:"RC5", title:"Amianto crrisotilo tubi idraulici", matrix:"CRITICA", r:5,p:3,d:5, cause:"Manutenzione caldaie", danno:"Mesotelioma pleura", prevenzione:"Divieto manipolazione", protezione:"Vietato", normativa:"D.M. 20/08/1999"},
+                    {id:"RC6", title:"Solventi spray verniciatura", matrix:"MEDIA", r:3,p:4,d:4, cause:"No cabina aspirante", danno:"Narcosi solventi", prevenzione:"Cabina classe II", protezione:"A2P3", normativa:"D.Lgs.81/08 Allegato XLVI"},
+                    {id:"RC7", title:"Micotossine cereali muffe", matrix:"MEDIA", r:3,p:3,d:4, cause:"Big bags aperti umidi", danno:"Aflatossina epatotossica", prevenzione:"Umidità <13%", protezione:"FFP2", normativa:"Reg. CE 1881/2006"}
                 ]
             },
             4: {
-                title: "🌪️ RISCHI AMBIENTALI", count: 5,
+                title: "🌡️ RISCHI AMBIENTALI", count: 6,
                 risks: [
-                    {id:"A1", title:"Caduta piano soppalco", matrix:"ALTA", r:5,p:4,d:5, cause:"Parapetto assente <1.1m", danno:"Trauma cranico, fratture multiple", prevenzione:"Parapetto 1.1m+fascia 0.5m (UNI EN 14122)", protezione:"Imbracatura anticaduta EN 361", normativa:"D.Lgs.81/08 Titolo IV"},
-                    {id:"A2", title:"Caduta da scala fissa", matrix:"MEDIA", r:4,p:3,d:4, cause:"Scala senza gabbia >3m", danno:"Frattura femore", prevenzione:"Gabbia protettiva scala (UNI EN 14122)", protezione:"Scarponi S3 antiscivolo", normativa:"D.Lgs.81/08 Titolo IV Cap.III"},
-                    {id:"A3", title:"Surriscaldamento estivo", matrix:"MEDIA", r:3,p:5,d:4, cause:"T°>32°C WBGT (UNI EN ISO 7243)", danno:"Colpo calore, crampi (INAIL 28gg)", prevenzione:"Ventilazione 6VOL/h + nebulizzatori", protezione:"Abbigliamento traspirante DRITECH", normativa:"D.Lgs.81/08 Tit.XLI"},
-                    {id:"A4", title:"Abbassamento temperatura", matrix:"BASSA", r:2,p:4,d:3, cause:"Celle frigo -20°C >2h", danno:"Congelamento superficiale", prevenzione:"Rotazione turni 1h, celle calde", protezione:"Abbigliamento polare 3 layer", normativa:"UNI EN 340"},
-                    {id:"A5", title:"Illuminamento insufficiente", matrix:"MEDIA", r:3,p:4,d:3, cause:"<200lux picking (UNI EN 12464)", danno:"Affaticamento visivo", prevenzione:"Illuminazione 500lux uniformi", protezione:"Occhiali anti-luce blu", normativa:"D.Lgs.81/08 Titolo IV Cap.IV"}
+                    {id:"RA1", title:"Rumore carrelli elevatori 88dB", matrix:"ALTA", r:4,p:5,d:4, cause:"Muflatori usurati", danno:"IPOACUSI bilaterale", prevenzione:"Muflatori nuovi", protezione:"Otoprotectors SNR35", normativa:"D.Lgs.81/08 Tit.VIII"},
+                    {id:"RA2", title:"Illuminamento scaffali <200lux", matrix:"MEDIA", r:3,p:4,d:3, cause:"Lampade fluorescenti vecchie", danno:"Errori picking 15%", prevenzione:"LED 500lux", protezione:"--, normativa:"UNI EN 12464-1"},
+                    {id:"RA3", title:"Polvere PM10 magazzino >100μg", matrix:"MEDIA", r:3,p:4,d:4, cause:"Carrelli senza filtro", danno:"BPCO cronica", prevenzione:"HEPA H14", protezione:"FFP2", normativa:"D.Lgs.155/2010"},
+                    {id:"RA4", title:"Vibrazioni WBV carrelli 1.4m/s²", matrix:"ALTA", r:4,p:4,d:4, cause:"Sedile rigido", danno:"Lombalgia cronica", prevenzione:"Sedile pneumatico", protezione:"Cuscino gel", normativa:"ISO 2631-1"},
+                    {id:"RA5", title:"Campi magnetici carrelli 50Hz", matrix:"BASSA", r:2,p:3,d:3, cause:"Motori elettrici", danno:"Leucemia incerta", prevenzione:"Distanza 1m", protezione:"--, normativa:"D.Lgs.81/08 Tit.VIII"},
+                    {id:"RA6", title:"Radiazioni UV lampade sodio", matrix:"BASSA", r:2,p:4,d:3, cause:"Lampade esterne rotte", danno:"Coniuttivite", prevenzione:"Protezioni vetro", protezione:"Occhiali UV400", normativa:"ICNIRP 2013"}
                 ]
             },
             5: {
-                title: "🚜 RISCHI CARRELLI ELEVATORI", count: 8,
+                title: "🚜 RISCHI CARRELLI", count: 7,
                 risks: [
-                    {id:"C1", title:"Ribaltamento carrello frontale", matrix:"CRITICA", r:5,p:4,d:5, cause:"Curva stretta raggio <3m a piena portata", danno:"Morte schiacciamento", prevenzione:"Stabilizzatori idraulici, limitatori velocità", protezione:"Roll-bar omologata", normativa:"D.Lgs.81/08 Allegato VII"},
-                    {id:"C2", title:"Schiacciamento pedone", matrix:"ALTA", r:4,p:5,d:5, cause:"Visibilità ridotta forche", danno:"Schisi torace", prevenzione:"Rallentatori pedonali + sirena 95dB", protezione:"Gilet alta visibilità classe 3", normativa:"UNI EN ISO 3691-1"},
-                    {id:"C3", title:"Caduta carico soprelevato", matrix:"ALTA", r:4,p:4,d:4, cause:">6m senza retrazione forche", danno:"Trauma cranico", prevenzione:"Controbilanciamento automatico", protezione:"Casco classe B", normativa:"UNI EN 12195-1"},
-                    {id:"C4", title:"Investimento pedone incrocio", matrix:"MEDIA", r:3,p:5,d:4, cause:"Corsie miste <3m", danno:"Frattura arti inferiori", prevenzione:"Segnaletica orizzontale + specchi convessi", protezione:"Gilet classe 3", normativa:"D.M. 04/08/2011"},
-                    {id:"C5", title:"Schiacciamento piedi forche", matrix:"MEDIA", r:3,p:4,d:4, cause:"Discesa forche non controllata", danno:"Amputazione falangi", prevenzione:"Discesa micrometrica <0.2m/s", protezione:"Scarponi S3 puntale 200J", normativa:"EN ISO 20345"},
-                    {id:"C6", title:"Rottura catena sollevamento", matrix:"ALTA", r:4,p:3,d:5, cause:"Manutenzione >12mesi", danno:"Crollo carico 1500kg", prevenzione:"Ispezione catena UNI 10100 mensile", protezione:"Rete anticaduta carico", normativa:"D.Lgs.81/08 Allegato VI"},
-                    {id:"C7", title:"Fumo scarico GPL interno", matrix:"MEDIA", r:3,p:4,d:3, cause:"Ventilazione <6VOL/h", danno:"Intossicazione CO", prevenzione:"Catalizzatore 3-way + rilevatori CO", protezione:"Mascherina FFP2", normativa:"UNI EN 1834"},
-                    {id:"C8", title:"Frenata brusca carico instabile", matrix:"MEDIA", r:3,p:4,d:4, cause:">1.2m altezza baricentro", danno:"Caduta pallet merci fragili", prevenzione:"Film termoretraibile + reggette", normativa:"UNI EN 12195-3"}
+                    {id:"RCa1", title:"Ribaltamento carrelli frontali", matrix:"CRITICA", r:5,p:4,d:5, cause:"Carico alto baricentro", danno:"Morte schiacciamento", prevenzione:"Carrelli stabilizzatori", protezione:"Roll-bar cabina", normativa:"D.Lgs.81/08 Alleg.V"},
+                    {id:"RCa2", title:"Schiacciamento pedoni", matrix:"CRITICA", r:5,p:5,d:5, cause:"Corsie <3m", danno:"Trauma toracico letale", prevenzione:"Pedane con separatore", protezione:"Gilet alta visibilità", normativa:"UNI EN ISO 3691-1"},
+                    {id:"RCa3", title:"Caduta carico carrelli", matrix:"ALTA", r:4,p:5,d:4, cause:"Forche usurate", danno:"Contusioni multiple", prevenzione:"Controllo forche mensile", protezione:"Casco classe E", normativa:"Direttiva macchine"},
+                    {id:"RCa4", title:"Tamponamento retromarcia", matrix:"ALTA", r:4,p:4,d:4, cause:"No sonar retrocamera", danno:"Frattura vertebrale", prevenzione:"Telecamera + allarme 82dB", protezione:"--, normativa:"UNI EN 12016"},
+                    {id:"RCa5", title:"Rottura catena sollevamento", matrix:"CRITICA", r:5,p:3,d:5, cause:"Manutenzione 12 mesi", danno:"Caduta carico 2000kg", prevenzione:"Controllo catena 6 mesi", protezione:"Rete anticaduta", normativa:"ISO 3691-4"},
+                    {id:"RCa6", title:"Fughe idrauliche HP", matrix:"MEDIA", r:3,p:4,d:4, cause:"Guarnizioni vecchie", danno:"Iniezione oleodinamica", prevenzione:"Ispezione visiva giornaliera", protezione:"Guanti antinfortunistica", normativa:"UNI EN 982"},
+                    {id:"RCa7", title:"Fuoco GPL carrelli", matrix:"ALTA", r:4,p:3,d:5, cause:"Bombola difettosa", danno:"Ustioni 3° grado", prevenzione:"Manometro GPL + estintore", protezione:"ABBigliamento FR", normativa:"D.Lgs.81/08 Tit.I"}
                 ]
             },
             6: {
-                title: "🔥 RISCHI INCENDIO/ESPLOSIONE", count: 6,
+                title: "🔥 RISCHI INCENDIO", count: 6,
                 risks: [
-                    {id:"I1", title:"Incendio cella frigo", matrix:"ALTA", r:4,p:4,d:5, cause:"Cortocircuito quadri -20°C", danno:"Fumo tossico asfissia", prevenzione:"Rivelatori termici 58°C + CO2", protezione:"SCBA 2x15min EN 137", normativa:"D.Lgs.81/08 Titolo XI Cap.IV"},
-                    {id:"I2", title:"Fumo imballaggi legno", matrix:"MEDIA", r:3,p:5,d:4, cause:"Fumo sigaretta zona stoccaggio", danno:"Intossicazione fumo", prevenzione:"Divieto assoluto fumo UNI 10779", protezione:"Estintore polvere 6kg ABC", normativa:"D.M. 10/03/98"},
-                    {id:"I3", title:"Esplosione aerosol vernici", matrix:"ALTA", r:4,p:3,d:5, cause:"Scoppio vicino fiamma pilota", danno:"Ustioni 3° grado + trauma barotraum", prevenzione:"Magazzino esterno ATEX ZIIB", protezione:"DPI ATEX categoria 2", normativa:"D.Lgs.81/08 Tit.XI Cap.II"},
-                    {id:"I4", title:"Incendio carrello GPL", matrix:"MEDIA", r:3,p:4,d:5, cause:"Perdita GPL + innesco", danno:"Palla di fuoco 10m", prevenzione:"Rilevatori GPL 20% LEL", protezione:"Coperta antincendio 2x2m", normativa:"UNI EN 16471"},
-                    {id:"I5", title:"Fiamma ossidrica saldatura", matrix:"MEDIA", r:3,p:3,d:4, cause:"Lavoro caldo imballaggi", danno:"Incendio propagazione", prevenzione:"Autorizzazione lavoro caldo + osservatore", protezione:"Schermi termici", normativa:"D.Lgs.81/08 Allegato XXXV"},
-                    {id:"I6", title:"Surriscaldamento batterie", matrix:"BASSA", r:2,p:4,d:4, cause:"Carica batteria 80% max", danno:"Fumo acido solforico", prevenzione:"Ventilazione idrogeno 1VOL/h", protezione:"Occhiali anti-acido", normativa:"UNI EN 50272-2"}
+                    {id:"RI1", title:"Fumo sigarette aree stoccaggio", matrix:"ALTA", r:4,p:4,d:5, cause:"No segnaletica chiara", danno:"Incendio pallet 10.000€", prevenzione:"Telecamere fumo + cartelli", protezione:"Estintore 6kg", normativa:"D.M. 10/03/98"},
+                    {id:"RI2", title:"Corto circuito quadri elettrici", matrix:"CRITICA", r:5,p:3,d:5, cause:"Surriscaldamento 70°C", danno:"Incendio totale magazzino", prevenzione:"Termocamere IR", protezione:"SCBA 30min", normativa:"CEI EN 61439"},
+                    {id:"RI3", title:"Polveri combustibili legno", matrix:"ALTA", r:4,p:4,d:5, cause:"ATEX zona 22", danno:"Esplosione secondaria", prevenzione:"Aspirazione ATEX", protezione:"--, normativa:"D.Lgs.81/08 Tit.XI"},
+                    {id:"RI4", title:"GPL carrelli perdite", matrix:"CRITICA", r:5,p:4,d:5, cause:"Raccordi valvole", danno:"Nube esplosiva 4.4%", prevenzione:"Rilevatori GPL 1000ppm", protezione:"Maschera EEBD", normativa:"UNI EN 50194"},
+                    {id:"RI5", title:"Surriscaldamento compressori", matrix:"MEDIA", r:3,p:4,d:4, cause:"Filtro aria ostruito", danno:"Incendio olio lubrificante", prevenzione:"Manometri pressione", protezione:"Estintore CO2", normativa:"API 618"},
+                    {id:"RI6", title:"Materiali infiammabili stocaggio", matrix:"ALTA", r:4,p:3,d:5, cause:"Vernici spray classe H", danno:"Fuoco rapido propagazione", prevenzione:"Gabbie ignifughe", protezione:"--, normativa:"D.M. 27/07/15"}
                 ]
             },
             7: {
-                title: "⚡ RISCHI ELETTRICI/MICROCLIMA", count: 6,
+                title: "🌡️ RISCHI MICROCLIMA", count: 6,
                 risks: [
-                    {id:"EM1", title:"Contatto quadri elettrici", matrix:"ALTA", r:4,p:4,d:5, cause:"Portellone aperto manutenzione", danno:"Elettrocuzione 380V AC", prevenzione:"Blocco porta quadro CEI EN 60204", protezione:"Guanti isolanti classe 0 1000V", normativa:"D.Lgs.81/08 Titolo III Cap.I"},
-                    {id:"EM2", title:"Effetto termico microonde", matrix:"BASSA", r:2,p:3,d:4, cause:"Portellone forno aperto", danno:"Ustione retina", prevenzione:"Interruttori di sicurezza doppia", protezione:"Occhiali anti-IR DIN 11", normativa:"D.Lgs.81/08 Allegato LVIII"},
-                    {id:"EM3", title:"Scariche elettrostatiche", matrix:"MEDIA", r:3,p:4,d:3, cause:"Pavimento conduttivo assente", danno:"Danno componenti elettronici", prevenzione:"Pavimento ESD R<10^9Ω", protezione:"Bracciale antistatico", normativa:"UNI EN 61340-5-1"},
-                    {id:"EM4", title:"Microclima estivo umido", matrix:"MEDIA", r:3,p:5,d:3, cause:"UR>70% + T>28°C", danno:"Stress termico", prevenzione:"Deumidificatori 50%UR", protezione:"Abbigliamento traspirante", normativa:"UNI EN ISO 7730"},
-                    {id:"EM5", title:"Radiazioni IR forni", matrix:"BASSA", r:2,p:4,d:4, cause:"Termoretraibile colli", danno:"Cefalea, colpi calore", prevenzione:"Schermi riflettenti", protezione:"Visiera anti-IR DIN 11", normativa:"ISO 11399"},
-                    {id:"EM6", title:"Vibrazioni intere (camion)", matrix:"MEDIA", r:3,p:4,d:4, cause:"Scarico/riposizionamento pedane", danno:"Mal di schiena vibrazionale", prevenzione:"Sospensioni pneumatiche muletti", protezione:"Sedile antivibrazione", normativa:"ISO 2631-1"}
+                    {id:"MC1", title:"Stress termico caldo WBGT>28°C", matrix:"ALTA", r:4,p:5,d:4, cause:"Estate T>32°C U>70%", danno:"Colpo calore INAIL 28gg", prevenzione:"WBGT monitor + pause 15min/h", protezione:"Abbigliamento DRITECH", normativa:"D.Lgs.81/08 Tit.XLI"},
+                    {id:"MC2", title:"Stress termico freddo <10°C", matrix:"MEDIA", r:3,p:4,d:4, cause:"Celle frigo 0°C>4h", danno:"Ipotermia", prevenzione:"Rotazione turni 2h", protezione:"3 layer termico", normativa:"UNI EN 14058"},
+                    {id:"MC3", title:"Umidità relativa >80%", matrix:"MEDIA", r:3,p:5,d:3, cause:"No deumidificatori", danno:"Micotossine polmonari", prevenzione:"Deumidificatori 60%UR", protezione:"Calze traspiranti", normativa:"UNI 10339"},
+                    {id:"MC4", title:"Velocità aria <0.1m/s", matrix:"BASSA", r:2,p:4,d:3, cause:"Ventilazione insufficiente", danno:"Sonno, cali attenzione", prevenzione:"Ventilatori 0.2m/s", protezione:"--", normativa:"UNI EN ISO 7730"},
+                    {id:"MC5", title:"Radiazione termica celle", matrix:"MEDIA", r:3,p:3,d:4, cause:"Pannelli sandwich conduttivi", danno:"Disidratazione 2L/h", prevenzione:"Sensori IR", protezione:"Cappello riflettente", normativa:"ISO 7243"},
+                    {id:"MC6", title:"Variazioni rapide temperatura", matrix:"ALTA", r:4,p:3,d:4, cause:"Uscita celle -20°C→+30°C", danno:"Vasocostrizione shock", prevenzione:"Vestiaire termico", protezione:"Calzature termiche", normativa:"UNI EN 511"}
                 ]
             },
             8: {
-                title: "🧠 RISCHI PSICOSOCIALI/NOT TURNO", count: 6,
+                title: "🧠 RISCHI PSICOSOCIALI/NOT TURNO", count: 5,
                 risks: [
-                    {id:"PS1", title:"Stress da picchi ordini", matrix:"ALTA", r:4,p:5,d:4, cause:"Natale/BlackFriday +200% ordini", danno:"Ansia cronica, burnout", prevenzione:"Analisi carico/riposo HSE (HSE MS 47)", protezione:"Supporto psicologico EAP", normativa:"D.Lgs.81/08 Art.28 co.2"},
-                    {id:"PS2", title:"Disturbi sonno turni notte", matrix:"ALTA", r:4,p:4,d:5, cause:"Turnazione 3x3 senza adeguamento", danno:"Sonno deficitario cronico", prevenzione:"Rotazione progressiva 14gg (ACGIH TLV)", protezione:"Melatonina 1mg pre-sonno", normativa:"CCNL Logistica"},
-                    {id:"PS3", title:"Conflitti gerarchici", matrix:"MEDIA", r:3,p:4,d:4, cause:"Obiettivi produzione irrealistici", danno:"Depressione reattiva", prevenzione:"Sondaggi clima aziendale semestrali", protezione:"Mediazione HR", normativa:"D.Lgs.81/08 Allegato XXXI"},
-                    {id:"PS4", title:"Mobbing orizzontale", matrix:"MEDIA", r:3,p:3,d:4, cause:"Competizione interna premialità", danno:"Isolamento sociale", prevenzione:"Codice etica aziendale", protezione:"Sportello ascolto anonimo", normativa:"Legge 123/2007"},
-                    {id:"PS5", title:"Ansia errori picking", matrix:"ALTA", r:4,p:5,d:4, cause:"KPI 99.9% zero errori", danno:"Somatizzazioni psicosomatiche", prevenzione:"Double check random 5%", protezione:"Training mindfulness 10min/giorno", normativa:"ISO 45003:2021"},
-                    {id:"PS6", title:"Isolamento lavorativo", matrix:"BASSA", r:2,p:4,d:3, cause:"Picking voce solitario WMS", danno:"Apatia, demotivazione", prevenzione:"Pausa caffè collettiva 15min", protezione:"Comunicazione radio gruppo", normativa:"Convenzione ILO 155"}
+                    {id:"RP1", title:"Turni notturni 22-6 perturbazione circadiana", matrix:"ALTA", r:4,p:4,d:4, cause:"Sonno <6h", danno:"Errori 30% + incidenti", prevenzione:"Pausa 11h tra turni", protezione:"Occhiali blu-block", normativa:"CCNL Logistica"},
+                    {id:"RP2", title:"Stress picking target 120 colli/h", matrix:"MEDIA", r:3,p:5,d:4, cause:"Premi variabili", danno:"Burnout 25% turnover", prevenzione:"Rotazione mansioni", protezione:"Supporto psicologico", normativa:"D.Lgs.81/08 Tit.VI"},
+                    {id:"RP3", title:"Conflitti gerarchici capimagazzino", matrix:"MEDIA", r:3,p:4,d:3, cause:"Obiettivi irrealistici", danno:"Ansia cronica", prevenzione:"Riunioni settimanali", protezione:"--, normativa:"ISO 45003:2021"},
+                    {id:"RP4", title:"Isolamento lavoratore notturno", matrix:"ALTA", r:4,p:3,d:4, cause:"Comunicazione ridotta", danno:"Depressione stagionale", prevenzione:"Check-in radio orarie", protezione:"Linea ascolto 24h", normativa:"Patto territoriale"},
+                    {id:"RP5", title:"Mobbing orizzontale gruppo", matrix:"MEDIA", r:3,p:3,d:4, cause:"Competizione premi", danno:"Bassa performance 20%", prevenzione:"Team building mensile", protezione:"Anonimizzazione reclami", normativa:"Legge 300/70"}
                 ]
             }
-        ]
-    };
+        };
 
-    // === NAVIGAZIONE LIVELLO 2 CATEGORIE ===
-    function renderCategories() {
-        const grid = document.getElementById('categoriesGrid');
-        grid.innerHTML = Object.entries(RISCHI_DATABASE).map(([id, data]) => `
-            <div class="glass p-8 rounded-3xl shadow-pro hover:shadow-2xl cursor-pointer risk-card group" onclick="navigateToCategory(${id})">
-                <div class="text-4xl mb-4 opacity-80">${data.title.split(' ')[0].slice(1)}</div>
-                <h3 class="text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">${data.title}</h3>
-                <p class="text-slate-400 text-sm mb-4">${data.count} Rischi Analizzati</p>
-                <div class="flex items-center text-xs text-slate-500">
-                    <span class="w-2 h-2 bg-emerald-400 rounded-full mr-2"></span>
-                    Clicca per matrice R/P/D completa
-                </div>
-            </div>
-        `).join('');
-    }
-
-    // === NAVIGAZIONE LIVELLO 3 RISCHI CATEGORIA ===
-    function navigateToCategory(catId) {
-        document.getElementById('categoriesNav').classList.add('hidden');
-        document.getElementById('risksContainer').classList.remove('hidden');
-        
-        const category = RISCHI_DATABASE[catId];
-        document.getElementById('currentCategoryTitle').textContent = category.title;
-        document.getElementById('risksCount').textContent = `📊 ${category.count} Rischi - Matrice Rischio/Probabilità/Danno`;
-        
-        const grid = document.getElementById('risksGrid');
-        grid.innerHTML = category.risks.map(risk => `
-            <div class="glass p-6 rounded-2xl shadow-lg risk-card cursor-pointer hover:shadow-2xl" onclick="showRiskDetail('${risk.id}')" role="button" tabindex="0" aria-label="${risk.title}">
-                <div class="flex justify-between items-start mb-4">
-                    <h4 class="font-bold text-lg">${risk.title}</h4>
-                    <span class="px-3 py-1 rounded-full text-xs font-bold text-white ${risk.matrix.toLowerCase() === 'critica' ? 'matrix-crit' : risk.matrix.toLowerCase() === 'alta' ? 'matrix-alta' : risk.matrix.toLowerCase() === 'media' ? 'matrix-media' : 'matrix-bassa'}">
-                        ${risk.matrix}
-                    </span>
-                </div>
-                <div class="grid grid-cols-3 gap-2 text-xs text-slate-400 mb-4">
-                    <div>R: ${risk.r}</div>
-                    <div>P: ${risk.p}</div>
-                    <div>D: ${risk.d}</div>
-                </div>
-                <div class="text-xs text-slate-500 line-clamp-2">${risk.cause}</div>
-            </div>
-        `).join('');
-    }
-
-    // === DETTAGLIO LIVELLO 4 RISCHIO COMPLETO ===
-    function showRiskDetail(riskId) {
-        const risk = Object.values(RISCHI_DATABASE).flatMap(cat => cat.risks).find(r => r.id === riskId);
-        if (!risk) return;
-        
-        document.getElementById('modalTitle').textContent = risk.title;
-        document.getElementById('modalContent').innerHTML = `
-            <div class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <h4 class="font-bold text-cyan-400 mb-2">📊 MATRICE RISCHIO</h4>
-                        <div class="flex gap-4 text-sm">
-                            <span>Rischio: <strong>${risk.r}/5</strong></span>
-                            <span>Probabilità: <strong>${risk.p}/5</strong></span>
-                            <span>Danno: <strong>${risk.d}/5</strong></span>
+        // === RENDER CATEGORIE ===
+        function renderCategories() {
+            const container = document.getElementById('categories-container');
+            container.innerHTML = '';
+            
+            Object.entries(RISKS_DB).forEach(([key, category]) => {
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'glass-panel p-6 md:p-8 rounded-2xl shadow-pro risk-card cursor-pointer hover:-translate-y-2 group';
+                categoryCard.setAttribute('role', 'button');
+                categoryCard.setAttribute('tabindex', '0');
+                categoryCard.onclick = () => renderRisks(key);
+                categoryCard.onkeydown = (e) => { if (e.key === 'Enter' || e.key === ' ') renderRisks(key); };
+                
+                categoryCard.innerHTML = `
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-2xl font-bold shadow-xl group-hover:scale-110 transition-transform">
+                            ${getEmoji(key)}
                         </div>
-                        <div class="mt-4 p-4 rounded-xl bg-slate-800/50">
-                            <h5 class="font-bold mb-2">CAUSE PRINCIPALI</h5>
-                            <p class="text-sm">${risk.cause}</p>
+                        <div class="text-right">
+                            <div class="text-3xl font-black text-white mb-1">${category.count}</div>
+                            <div class="text-indigo-300 text-sm font-medium">RISCHI</div>
                         </div>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-emerald-400 mb-2">⚕️ DANNI INAIL</h4>
-                        <p class="text-sm mb-4">${risk.danno}</p>
-                        <div class="flex gap-2 text-xs bg-orange-500/20 p-3 rounded-xl">
-                            <span>🏥</span>
-                            <span>${risk.danno.includes('INAIL') ? risk.danno.match(/\(INAIL.*?gg\)/)?.[0] || 'Danno medio' : 'Danno medio'}</span>
+                    <h3 class="text-xl md:text-2xl font-black mb-4 text-white leading-tight">${category.title}</h3>
+                    <div class="flex items-center text-indigo-300 space-x-4 text-sm">
+                        <span>👆 Clicca per dettagli</span>
+                        <span class="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center text-xs font-bold group-hover:bg-indigo-400 transition-colors">▶</span>
+                    </div>
+                `;
+                container.appendChild(categoryCard);
+            });
+        }
+
+        function getEmoji(key) {
+            const emojis = {1:'🔧',2:'🧍‍♂️',3:'☣️',4:'🌡️',5:'🚜',6:'🔥',7:'🌡️',8:'🧠'};
+            return emojis[key] || '⚠️';
+        }
+
+        // === RENDER SINGOLI RISCHI ===
+        function renderRisks(categoryId) {
+            const category = RISKS_DB[categoryId];
+            const container = document.getElementById('categories-container');
+            container.innerHTML = `
+                <div class="col-span-full">
+                    <div class="glass-panel p-8 md:p-12 rounded-3xl shadow-pro mb-8">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+                            <div class="flex items-center space-x-4 mb-6 md:mb-0">
+                                <div class="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center text-3xl font-bold shadow-2xl">${getEmoji(categoryId)}</div>
+                                <div>
+                                    <h2 class="text-3xl md:text-4xl font-black">${category.title}</h2>
+                                    <p class="text-xl text-indigo-300">${category.count} rischi identificati</p>
+                                </div>
+                            </div>
+                            <button onclick="renderCategories()" class="px-6 py-2.5 bg-gray-700 hover:bg-gray-600 rounded-xl font-semibold shadow-lg transition-all md:ml-8" aria-label="Torna alle categorie">
+                                ← Torna indietro
+                            </button>
                         </div>
                     </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="risks-grid"></div>
                 </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="glass p-4 rounded-2xl">
-                        <h5 class="font-bold text-green-400 mb-3 flex items-center">🛡️ PREVENZIONE TECNICA</h5>
-                        <p class="text-sm">${risk.prevenzione}</p>
+            `;
+            
+            const risksGrid = document.getElementById('risks-grid');
+            category.risks.forEach(risk => {
+                const riskCard = document.createElement('div');
+                riskCard.className = `glass-panel p-6 md:p-8 rounded-2xl shadow-pro risk-card hover:border-l-indigo-400 ${getMatrixClass(risk.matrix)}`;
+                riskCard.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="font-bold text-xl md:text-2xl">${risk.title}</h4>
+                        <div class="px-4 py-2 rounded-xl font-bold text-white shadow-lg ${getMatrixClass(risk.matrix)}">
+                            ${risk.matrix}
+                        </div>
                     </div>
-                    <div class="glass p-4 rounded-2xl">
-                        <h5 class="font-bold text-blue-400 mb-3 flex items-center">🪖 PROTEZIONE INDIVIDUALE</h5>
-                        <p class="text-sm">${risk.protezione}</p>
+                    <div class="space-y-3 text-sm">
+                        <div><span class="font-semibold text-indigo-300">Rischio:</span> ${risk.r}/5 | <span class="font-semibold text-indigo-300">Probabilità:</span> ${risk.p}/5 | <span class="font-semibold text-indigo-300">Danno:</span> ${risk.d}/5</div>
+                        <div><span class="font-semibold text-orange-300">Cause:</span> ${risk.cause}</div>
+                        <div><span class="font-semibold text-red-300">Danno:</span> ${risk.danno}</div>
+                        <div><span class="font-semibold text-green-300">Prevenzione:</span> ${risk.prevenzione}</div>
+                        <div><span class="font-semibold text-blue-300">Protezione:</span> ${risk.protezione}</div>
+                        <div class="pt-3 border-t border-gray-600">
+                            <span class="text-xs bg-gray-700 px-3 py-1 rounded-full font-semibold">${risk.normativa}</span>
+                        </div>
+                    </div>
+                `;
+                risksGrid.appendChild(riskCard);
+            });
+        }
+
+        function getMatrixClass(matrix) {
+            const classes = {
+                'CRITICA': 'matrix-crit border-l-red-500',
+                'ALTA': 'matrix-alta border-l-amber-500',
+                'MEDIA': 'matrix-media border-l-yellow-500',
+                'BASSA': 'matrix-bassa border-l-emerald-500'
+            };
+            return classes[matrix] || 'bg-gray-600 border-l-gray-500';
+        }
+
+        // === TEST 20 DOMANDE ===
+        const QUIZ_QUESTIONS = [
+            {q: "Quale normativa regola DVR?", a: ["D.Lgs 81/2008", "D.Lgs 626/94", "D.Lgs 195/06", "D.Lgs 106/09"], c: 0},
+            {q: "Rischio CRITICO ha R/PD:", a: ["5/5/5", "3/4/4", "2/3/3", "4/2/4"], c: 0},
+            {q: "Transpallet max kg senza formazione:", a: ["25kg", "50kg", "100kg", "1500kg"], c: 0},
+            {q: "Protezione taglio nastri:", a: ["Guanti cut5", "Guanti nitrile", "Guanti lattice", "No guanti"], c: 0},
+            {q: "Illuminamento minimo scaffali:", a: ["200lux", "500lux", "100lux", "1000lux"], c: 0},
+            {q: "Rumore soglia azione dB(A):", a: ["85", "80", "90", "88"], c: 0},
+            {q: "Mascherina polveri legno:", a: ["FFP3", "FFP2", "FFP1", "Chirurgica"], c: 0},
+            {q: "Scala magazzino normativa:", a: ["EN131", "EN1004", "EN14183", "ISO1128"], c: 0},
+            {q: "CO soglia allarme ppm:", a: ["30", "50", "100", "200"], c: 0},
+            {q: "Corsie carrelli min larghezza:", a: ["3m", "2m", "4m", "2.5m"], c: 0},
+            {q: "Formaldeide classificazione:", a: ["H330", "H314", "H302", "H361"], c: 0},
+            {q: "Vibrazioni WBV soglia:", a: ["1.4m/s²", "0.5m/s²", "2m/s²", "0.8m/s²"], c: 0},
+            {q: "Estintore pallet legno:", a: ["Polvere 6kg", "CO2", "Acqua", "Schiuma"], c: 0},
+            {q: "WBGT caldo > soglia:", a: ["28°C", "26°C", "30°C", "25°C"], c: 0},
+            {q: "Turni notturni max consecutive:", a: ["5", "7", "3", "10"], c: 0},
+            {q: "Occhiali da lavoro:", a: ["Panoramica", "Correzione laser", "Sport", "Sole"], c: 0},
+            {q: "Casco carichi sospesi:", a: ["Classe E", "Classe B", "Classe A", "Classe C"], c: 0},
+            {q: "Picking ergonomico max colli/h:", a: ["80", "120", "150", "60"], c: 0},
+            {q: "GPL nube esplosiva %:", a: ["4.4%", "9.5%", "2.1%", "12%"], c: 0},
+            {q: "Amianto manipolazione:", a: ["Vietata", "FFP2", "Guanti", "Aspirazione"], c: 0}
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answers = [];
+
+        function startTest() {
+            document.getElementById('test-section').classList.remove('hidden');
+            document.getElementById('categories-container').style.display = 'none';
+            currentQuestion = 0;
+            score = 0;
+            answers = [];
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const q = QUIZ_QUESTIONS[currentQuestion];
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = `
+                <div class="glass-panel p-8 rounded-2xl mb-8">
+                    <div class="flex justify-between items-center mb-8">
+                        <div class="text-2xl font-bold">Q${currentQuestion + 1}/20</div>
+                        <div class="text-xl font-black text-indigo-400">${score}/${currentQuestion}</div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-8 text-center">${q.q}</h3>
+                    <div class="space-y-4">
+                        ${q.a.map((opt, i) => `
+                            <button onclick="selectAnswer(${i})" class="w-full glass-panel p-6 rounded-xl hover:bg-indigo-600 hover:border-indigo-400 border-2 border-transparent transition-all text-left shadow-md hover:shadow-lg" role="radio" aria-checked="false">
+                                <span class="font-semibold">${String.fromCharCode(65 + i)}.</span> ${opt}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div class="flex justify-between mt-12 pt-8 border-t border-gray-600">
+                        ${currentQuestion > 0 ? `<button onclick="prevQuestion()" class="px-6 py-2 bg-gray-600 hover:bg-gray-500 rounded-xl">← Precedente</button>` : ''}
+                        <button onclick="nextQuestion()" class="px-8 py-3 bg-indigo-500 hover:bg-indigo-600 rounded-xl font-semibold shadow-lg ml-auto">
+                            ${currentQuestion < 19 ? 'Avanti →' : '🎯 Completa Test'}
+                        </button>
                     </div>
                 </div>
-                <div class="p-4 rounded-2xl bg-gradient-to-r from-slate-700 to-slate-800">
-                    <h5 class="font-bold text-yellow-400 mb-2">📜 NORMATIVA RIFERIMENTI</h5>
-                    <p class="text-sm">${risk.normativa}</p>
-                </div>
-            </div>
-        `;
-        
-        document.getElementById('detailModal').classList.remove('hidden');
-    }
+            `;
+        }
 
-    function closeModal() {
-        document.getElementById('detailModal').classList.add('hidden');
-    }
+        function selectAnswer(index) {
+            answers[currentQuestion] = index;
+            const buttons = document.querySelectorAll('[role="radio"]');
+            buttons.forEach((btn, i) => {
+                btn.setAttribute('aria-checked', i === index);
+                if (i === index) {
+                    btn.classList.add('bg-indigo-500', 'border-indigo-400');
+                } else {
+                    btn.classList.remove('bg-indigo-500', 'border-indigo-400');
+                }
+            });
+        }
 
-    function showTest() {
-        document.getElementById('testModal').classList.remove('hidden');
-    }
+        function nextQuestion() {
+            if (answers[currentQuestion] !== undefined) {
+                if (answers[currentQuestion] === QUIZ_QUESTIONS[currentQuestion].c) score++;
+                if (currentQuestion < 19) {
+                    currentQuestion++;
+                    renderQuestion();
+                } else {
+                    showResults();
+                }
+            }
+        }
 
-    function closeTest() {
-        document.getElementById('testModal').classList.add('hidden');
-    }
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
 
-    // === EXPORT PDF ===
-    function exportPDF() {
-        window.jsPDF = window.jspdf.jsPDF;
-        const doc = new jsPDF('p', 'mm', 'a4');
-        html2canvas(document.body, {
-            scale: 0.6, useCORS: true, logging: false,
-            backgroundColor: '#0f172a'
-        }).then(canvas => {
-            const imgData = canvas.toDataURL('image/png');
-            const imgWidth = 210;
-            const pageHeight = 295;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            let heightLeft = imgHeight;
-            let position = 0;
+        function showResults() {
+            const percentage = Math.round((score / 20) * 100);
+            const passed = percentage >= 70;
+            
+            document.getElementById('quiz-container').innerHTML = '';
+            document.getElementById('test-section').classList.add('hidden');
+            document.getElementById('results-section').classList.remove('hidden');
+            
+            const badge = document.getElementById('results-badge');
+            const title = document.getElementById('results-title');
+            const scoreEl = document.getElementById('results-score');
+            
+            if (passed) {
+                badge.innerHTML = '<div class="bg-gradient-to-r from-emerald-500 to-teal-600 px-12 py-8 rounded-3xl shadow-2xl"><span class="text-6xl">🏆</span></div>';
+                title.textContent = 'TEST SUPERATO!';
+                scoreEl.textContent = `${percentage}%`;
+                scoreEl.className = 'text-5xl font-black mb-8 text-emerald-400';
+            } else {
+                badge.innerHTML = '<div class="bg-gradient-to-r from-orange-500 to-red-500 px-12 py-8 rounded-3xl shadow-2xl"><span class="text-6xl">📚</span></div>';
+                title.textContent = 'RIFAI IL TEST!';
+                scoreEl.textContent = `${percentage}%`;
+                scoreEl.className = 'text-5xl font-black mb-8 text-orange-400';
+            }
+        }
 
-            doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
+        function closeTest() {
+            document.getElementById('test-section').classList.add('hidden');
+            document.getElementById('results-section').classList.add('hidden');
+            document.getElementById('categories-container').style.display = 'grid';
+            renderCategories();
+        }
 
-            while (heightLeft >= 0) {
-                position = heightLeft - imgHeight;
-                doc.addPage();
-                doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        // === UTILITY ===
+        function exportCertificate() {
+            const percentage = Math.round((score / 20) * 100);
+            html2canvas(document.body).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                
+                pdf.setFontSize(20);
+                pdf.setTextColor(0, 100, 200);
+                pdf.text('CERTIFICATO CONOSCENZE DVR MAGAZZINO', 105, 30, { align: 'center' });
+                pdf.setFontSize(12);
+                pdf.text(`Punteggio ottenuto: ${percentage}%`, 105, 60, { align: 'center' });
+                pdf.text('Dott. Salvatore Trono - Consulente SPP', 105, 80, { align: 'center' });
+                pdf.text(`Data: ${new Date().toLocaleDateString('it-IT')}`, 105, 90, { align: 'center' });
+                
+                pdf.addImage(imgData, 'PNG', 10, 100, 190, 180);
+                pdf.save(`Certificato-DVR-${percentage}%-${Date.now()}.pdf`);
+            });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+        }
+
+        // === INIT ===
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCategories();
+            
+            if (localStorage.getItem('theme') === 'light') {
+                toggleTheme();
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') {
+                    closeTest();
+                    renderCategories();
+                }
+            });
+
+            // Init PWA
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('data:text/javascript;base64,...');
+            }
+        });
+
+        function exportPDF() {
+            html2canvas(document.body, { 
+                scale: 2, 
+                useCORS: true,
+                backgroundColor: '#0f172a',
+                logging: false
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const imgWidth = 210;
+                const pageHeight = 295;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
                 heightLeft -= pageHeight;
-            }
-            doc.save('DVR-Magazziniere-Trono-Completo.pdf');
-        });
-    }
 
-    function toggleTheme() {
-        document.documentElement.classList.toggle('dark');
-        localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-    }
-
-    // === INIT APP ===
-    document.addEventListener('DOMContentLoaded', () => {
-        renderCategories();
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') {
-                closeModal();
-                closeTest();
-                document.getElementById('risksContainer').classList.add('hidden');
-                document.getElementById('categoriesNav').classList.remove('hidden');
-            }
-        });
-
-        // Theme persistence
-        if (localStorage.theme === 'light') toggleTheme();
-    });
-
-    // PWA Ready
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('data:text/javascript;base64,' + btoa(`
-            self.addEventListener('fetch', e => e.respondWith(fetch(e.request)));
-        `));
-    }
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+                pdf.save('DVR-Magazziniere-Completo-52-Rischi-Dott-Salvatore-Trono.pdf');
+            });
+        }
     </script>
 </body>
 </html>
