@@ -1,0 +1,770 @@
+/* ============================================== */
+/* RESET E BASE                                   */
+/* ============================================== */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0f1117;
+    color: #e0e0e0;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: #60a5fa;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* ============================================== */
+/* UTILITÀ                                        */
+/* ============================================== */
+
+.hidden {
+    display: none !important;
+}
+
+.page {
+    display: none;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================== */
+/* HEADER                                         */
+/* ============================================== */
+
+#main-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(135deg, #1a1d2e 0%, #0f1117 100%);
+    border-bottom: 1px solid rgba(96, 165, 250, 0.2);
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.header-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+}
+
+.header-subtitle {
+    font-size: 0.95rem;
+    color: #60a5fa;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
+/* ============================================== */
+/* BREADCRUMB                                     */
+/* ============================================== */
+
+#breadcrumb {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.breadcrumb-link {
+    background: none;
+    border: none;
+    color: #60a5fa;
+    font-size: 0.9rem;
+    font-family: inherit;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.breadcrumb-link:hover {
+    background-color: rgba(96, 165, 250, 0.15);
+    color: #93c5fd;
+}
+
+.breadcrumb-link:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+}
+
+.breadcrumb-separator {
+    color: #4b5563;
+    font-weight: 700;
+    font-size: 1rem;
+    user-select: none;
+}
+
+.breadcrumb-current {
+    color: #9ca3af;
+    font-weight: 500;
+}
+
+/* ============================================== */
+/* MAIN CONTENT                                   */
+/* ============================================== */
+
+#app {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    width: 100%;
+}
+
+/* ============================================== */
+/* CARDS BASE                                     */
+/* ============================================== */
+
+.card {
+    background: linear-gradient(145deg, rgba(30, 34, 52, 0.9) 0%, rgba(20, 23, 36, 0.95) 100%);
+    border: 1px solid rgba(96, 165, 250, 0.12);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* ============================================== */
+/* CARD PRESENTAZIONE                             */
+/* ============================================== */
+
+.card-presentation {
+    text-align: center;
+    border-color: rgba(96, 165, 250, 0.25);
+}
+
+.presentation-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.card-presentation h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.3rem;
+}
+
+.presentation-title {
+    font-size: 1.05rem;
+    color: #60a5fa;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.presentation-divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    margin: 1.25rem auto;
+    border-radius: 2px;
+}
+
+.presentation-text {
+    font-size: 0.95rem;
+    color: #c9cdd5;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.presentation-text:last-child {
+    margin-bottom: 0;
+}
+
+.presentation-text strong {
+    color: #e0e7ff;
+}
+
+/* ============================================== */
+/* CARD DISCLAIMER                                */
+/* ============================================== */
+
+.card-disclaimer {
+    border-color: rgba(245, 158, 11, 0.3);
+    background: linear-gradient(145deg, rgba(35, 30, 20, 0.9) 0%, rgba(25, 22, 16, 0.95) 100%);
+}
+
+.card-disclaimer h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fbbf24;
+    margin-bottom: 1.25rem;
+}
+
+.disclaimer-text p {
+    font-size: 0.9rem;
+    color: #bdc1c9;
+    line-height: 1.75;
+    margin-bottom: 0.85rem;
+    text-align: justify;
+}
+
+.disclaimer-text p:last-child {
+    margin-bottom: 0;
+}
+
+.disclaimer-text strong {
+    color: #e5e7eb;
+}
+
+.citation-format {
+    background-color: rgba(96, 165, 250, 0.08);
+    border-left: 4px solid #3b82f6;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.88rem;
+    color: #93c5fd;
+    line-height: 1.7;
+}
+
+/* ============================================== */
+/* PULSANTE PRIMARIO                              */
+/* ============================================== */
+
+.start-container {
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 0.95rem 2.8rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    letter-spacing: 0.4px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.35);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
+}
+
+.btn-primary:focus-visible {
+    outline: 3px solid #93c5fd;
+    outline-offset: 3px;
+}
+
+/* ============================================== */
+/* TITOLI DI SEZIONE                              */
+/* ============================================== */
+
+.section-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid rgba(96, 165, 250, 0.2);
+}
+
+.section-description {
+    font-size: 0.95rem;
+    color: #9ca3af;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+/* ============================================== */
+/* GRIGLIA CATEGORIE                              */
+/* ============================================== */
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+}
+
+.card-category {
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    color: inherit;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-category::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, #3b82f6, #60a5fa);
+    border-radius: 16px 0 0 16px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card-category:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(96, 165, 250, 0.15);
+    border-color: rgba(96, 165, 250, 0.35);
+}
+
+.card-category:hover::before {
+    opacity: 1;
+}
+
+.card-category:focus-visible {
+    outline: 3px solid #60a5fa;
+    outline-offset: 2px;
+}
+
+.category-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+.card-category h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #e0e7ff;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.card-category p {
+    font-size: 0.88rem;
+    color: #9ca3af;
+    line-height: 1.6;
+}
+
+/* ============================================== */
+/* GRIGLIA RISCHI SPECIFICI                       */
+/* ============================================== */
+
+.risks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.card-risk {
+    background: linear-gradient(145deg, rgba(30, 34, 52, 0.85) 0%, rgba(20, 23, 36, 0.9) 100%);
+    border: 1px solid rgba(96, 165, 250, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    font-family: inherit;
+    color: inherit;
+    text-align: left;
+    width: 100%;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card-risk:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(96, 165, 250, 0.12);
+    border-color: rgba(96, 165, 250, 0.3);
+}
+
+.card-risk:focus-visible {
+    outline: 3px solid #60a5fa;
+    outline-offset: 2px;
+}
+
+.risk-number {
+    display: inline-block;
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    margin-bottom: 0.6rem;
+}
+
+.card-risk h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #e0e7ff;
+    line-height: 1.4;
+}
+
+/* ============================================== */
+/* DETTAGLIO RISCHIO                              */
+/* ============================================== */
+
+.detail-container {
+    margin-top: 1.5rem;
+}
+
+.detail-section {
+    background: linear-gradient(145deg, rgba(30, 34, 52, 0.85) 0%, rgba(20, 23, 36, 0.9) 100%);
+    border: 1px solid rgba(96, 165, 250, 0.1);
+    border-radius: 14px;
+    padding: 1.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.detail-section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(96, 165, 250, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.detail-section-title .icon {
+    font-size: 1.2rem;
+}
+
+/* Colori per tipo di sezione */
+.detail-section.esposizione .detail-section-title {
+    color: #f87171;
+}
+
+.detail-section.esposizione {
+    border-left: 4px solid rgba(248, 113, 113, 0.5);
+}
+
+.detail-section.danni .detail-section-title {
+    color: #fb923c;
+}
+
+.detail-section.danni {
+    border-left: 4px solid rgba(251, 146, 60, 0.5);
+}
+
+.detail-section.prevenzione .detail-section-title {
+    color: #34d399;
+}
+
+.detail-section.prevenzione {
+    border-left: 4px solid rgba(52, 211, 153, 0.5);
+}
+
+.detail-section.protezione .detail-section-title {
+    color: #60a5fa;
+}
+
+.detail-section.protezione {
+    border-left: 4px solid rgba(96, 165, 250, 0.5);
+}
+
+.detail-section.note .detail-section-title {
+    color: #a78bfa;
+}
+
+.detail-section.note {
+    border-left: 4px solid rgba(167, 139, 250, 0.5);
+}
+
+.detail-text {
+    font-size: 0.93rem;
+    color: #c9cdd5;
+    line-height: 1.8;
+}
+
+.detail-text p {
+    margin-bottom: 0.75rem;
+}
+
+.detail-text p:last-child {
+    margin-bottom: 0;
+}
+
+.detail-text strong {
+    color: #e5e7eb;
+}
+
+.detail-text ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0.5rem 0;
+}
+
+.detail-text ul li {
+    position: relative;
+    padding-left: 1.4rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+}
+
+.detail-text ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #60a5fa;
+    font-weight: 700;
+}
+
+/* Livelli di rischio */
+.risk-level {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-top: 0.5rem;
+}
+
+.risk-level.alto {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.risk-level.medio {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.risk-level.basso {
+    background-color: rgba(34, 197, 94, 0.2);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* Pulsante torna indietro nel dettaglio */
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(96, 165, 250, 0.1);
+    color: #60a5fa;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-back:hover {
+    background: rgba(96, 165, 250, 0.2);
+    border-color: rgba(96, 165, 250, 0.4);
+}
+
+.btn-back:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+}
+
+/* ============================================== */
+/* FOOTER                                         */
+/* ============================================== */
+
+#main-footer {
+    text-align: center;
+    padding: 1.5rem;
+    border-top: 1px solid rgba(96, 165, 250, 0.1);
+    margin-top: auto;
+    background-color: rgba(15, 17, 23, 0.95);
+}
+
+#main-footer p {
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-bottom: 0.25rem;
+}
+
+.footer-small {
+    font-size: 0.78rem !important;
+    color: #4b5563 !important;
+}
+
+/* ============================================== */
+/* RESPONSIVE                                     */
+/* ============================================== */
+
+/* Tablet */
+@media (max-width: 768px) {
+
+    .header-title {
+        font-size: 1.2rem;
+    }
+
+    .header-subtitle {
+        font-size: 0.85rem;
+    }
+
+    #app {
+        padding: 1.5rem 1rem;
+    }
+
+    .card {
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .card-presentation h2 {
+        font-size: 1.4rem;
+    }
+
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .risks-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 1rem 2rem;
+    }
+}
+
+/* Mobile piccoli */
+@media (max-width: 480px) {
+
+    html {
+        font-size: 15px;
+    }
+
+    #main-header {
+        padding: 1rem;
+    }
+
+    .header-title {
+        font-size: 1.05rem;
+    }
+
+    #app {
+        padding: 1rem 0.75rem;
+    }
+
+    .card {
+        padding: 1.25rem;
+    }
+
+    .presentation-icon {
+        font-size: 2.5rem;
+    }
+
+    .card-presentation h2 {
+        font-size: 1.25rem;
+    }
+
+    .detail-section {
+        padding: 1.25rem;
+    }
+
+    #breadcrumb {
+        padding: 0.7rem 0.75rem;
+        font-size: 0.82rem;
+    }
+}
+
+/* Accessibilità: riduzione animazioni */
+@media (prefers-reduced-motion: reduce) {
+
+    .page {
+        animation: none;
+    }
+
+    .card,
+    .card-category,
+    .card-risk,
+    .btn-primary,
+    .btn-back,
+    .breadcrumb-link {
+        transition: none;
+    }
+}
+
+/* Accessibilità: alto contrasto */
+@media (prefers-contrast: high) {
+
+    .card {
+        border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .card-category:hover {
+        border-color: rgba(255, 255, 255, 0.8);
+    }
+
+    body {
+        color: #ffffff;
+    }
+}
