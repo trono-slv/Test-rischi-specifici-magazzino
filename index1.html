@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Rischi Specifici in Magazzino - Dott. Salvatore Trono</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #FF6B35;
+            --secondary: #004E89;
+            --accent: #F7B801;
+            --success: #10B981;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container-main {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            min-height: 100vh;
+        }
+
+        .card-warehouse {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-warehouse:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, #e85d2a 100%);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.125rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--secondary);
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.125rem;
+            border: 2px solid var(--secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #e5e7eb;
+            padding: 1.25rem;
+            border-radius: 12px;
+            text-align: left;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: rgba(255, 107, 53, 0.05);
+            transform: translateX(8px);
+        }
+
+        .option-btn.selected {
+            background: linear-gradient(135deg, var(--primary) 0%, #e85d2a 100%);
+            border-color: var(--primary);
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .option-btn.correct {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .option-btn.incorrect {
+            background: var(--danger);
+            border-color: var(--danger);
+            color: white;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            transition: width 0.5s ease;
+        }
+
+        .timer-warning {
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .minimap-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .minimap-dot.answered {
+            background: var(--primary);
+        }
+
+        .minimap-dot.current {
+            background: var(--accent);
+            transform: scale(1.5);
+            box-shadow: 0 0 0 4px rgba(247, 184, 1, 0.3);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .disclaimer-box {
+            background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .credit-box {
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-main">
+        <!-- WELCOME SCREEN -->
+        <div id="welcomeScreen" class="min-h-screen flex items-center justify-center p-4">
+            <div class="card-warehouse max-w-4xl w-full fade-in">
+                <div class="text-center mb-8">
+                    <div class="text-6xl mb-4">🏭</div>
+                    <h1 class="text-4xl font-bold mb-2" style="color: var(--secondary);">
+                        Quiz Interattivo
+                    </h1>
+                    <h2 class="text-2xl font-semibold mb-4" style="color: var(--primary);">
+                        Rischi Specifici in Magazzino
+                    </h2>
+                    <p class="text-gray-600 text-lg">
+                        Test di valutazione delle competenze sulla sicurezza nel settore magazzinaggio
+                    </p>
+                </div>
+
+                <!-- DISCLAIMER -->
+                <div class="disclaimer-box">
+                    <div class="flex items-start gap-3">
+                        <div class="text-2xl">⚠️</div>
+                        <div>
+                            <h3 class="font-bold text-lg mb-2" style="color: var(--warning);">Disclaimer</h3>
+                            <p class="text-gray-700 text-sm leading-relaxed">
+                                Questo quiz è uno strumento formativo e non sostituisce la formazione ufficiale sulla sicurezza sul lavoro. 
+                                Le domande sono estratte casualmente da un paniere di 100 quesiti. Per essere considerato superato, 
+                                è necessario rispondere correttamente ad almeno 12 domande su 15 (80%). 
+                                Il tempo massimo è di 20 minuti.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CREDITI -->
+                <div class="credit-box">
+                    <div class="flex items-start gap-3">
+                        <div class="text-2xl">👨‍🏫</div>
+                        <div>
+                            <h3 class="font-bold text-lg mb-2" style="color: var(--secondary);">A cura di</h3>
+                            <p class="text-gray-700 font-semibold">
+                                Dott. Salvatore Trono
+                            </p>
+                            <p class="text-gray-600 text-sm mt-1">
+                                Esperto in Sicurezza sul Lavoro e Formazione Aziendale
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LINK TEORIA -->
+                <div class="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-lg mb-6">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="text-2xl">📚</div>
+                        <h3 class="font-bold text-lg" style="color: var(--secondary);">Materiale Didattico</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Prima di iniziare il test, ti consigliamo di studiare il materiale teorico:
+                    </p>
+                    <a href="https://salvatoretrono.github.io/rischi-specifici-magazzino/" 
+                       target="_blank" 
+                       class="inline-flex items-center gap-2 bg-white px-6 py-3 rounded-lg border-2 border-purple-500 text-purple-700 font-semibold hover:bg-purple-500 hover:text-white transition-all">
+                        🔗 Vai alla Lezione Teorica
+                        <span class="text-sm">↗</span>
+                    </a>
+                </div>
+
+                <!-- INFO TEST -->
+                <div class="grid md:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">📝</div>
+                        <div class="font-bold text-2xl" style="color: var(--primary);">15</div>
+                        <div class="text-gray-600 text-sm">Domande</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">⏱️</div>
+                        <div class="font-bold text-2xl" style="color: var(--secondary);">20</div>
+                        <div class="text-gray-600 text-sm">Minuti</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🎯</div>
+                        <div class="font-bold text-2xl" style="color: var(--accent);">80%</div>
+                        <div class="text-gray-600 text-sm">Per Superare</div>
+                    </div>
+                </div>
+
+                <!-- ISTRUZIONI -->
+                <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                    <h3 class="font-bold text-lg mb-4" style="color: var(--secondary);">📋 Istruzioni:</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 font-bold">✓</span>
+                            <span>15 domande estratte casualmente dal paniere di 100</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 font-bold">✓</span>
+                            <span>Le opzioni di risposta sono mescolate casualmente</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 font-bold">✓</span>
+                            <span>Clicca su una risposta per selezionarla e passare automaticamente alla domanda successiva</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 font-bold">✓</span>
+                            <span>Hai 20 minuti per completare il test</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-green-500 font-bold">✓</span>
+                            <span>Al termine riceverai un riepilogo dettagliato con le risposte corrette</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- PULSANTE START -->
+                <div class="text-center">
+                    <button onclick="startTest()" class="btn-primary text-xl">
+                        🚀 INIZIA IL TEST
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TEST SCREEN -->
+        <div id="testScreen" class="hidden min-h-screen p-4 py-8">
+            <div class="max-w-5xl mx-auto">
+                <!-- HEADER -->
+                <div class="card-warehouse mb-6">
+                    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                        <!-- Progress -->
+                        <div class="flex-1 w-full">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-sm font-semibold text-gray-600">Progresso</span>
+                                <span class="text-sm font-bold" style="color: var(--primary);">
+                                    <span id="currentQuestion">1</span>/15
+                                </span>
+                            </div>
+                            <div class="progress-bar">
+                                <div id="progressBar" class="progress-fill" style="width: 6.67%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Timer -->
+                        <div class="flex items-center gap-3 bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-3 rounded-lg">
+                            <div class="text-2xl">⏱️</div>
+                            <div>
+                                <div class="text-xs text-gray-600">Tempo Rimasto</div>
+                                <div id="timerDisplay" class="text-2xl font-bold" style="color: var(--secondary);">20:00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Minimap -->
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <div class="flex flex-wrap gap-2" id="minimapContainer">
+                            <!-- Generato via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOMANDA -->
+                <div class="card-warehouse mb-6 fade-in" id="questionCard">
+                    <div class="mb-6">
+                        <div class="inline-block bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-lg font-bold mb-4">
+                            Domanda <span id="questionNumber">1</span>
+                        </div>
+                        <h2 id="questionText" class="text-2xl font-bold text-gray-800 leading-relaxed">
+                            <!-- Testo domanda -->
+                        </h2>
+                    </div>
+
+                    <div id="optionsContainer" class="space-y-3">
+                        <!-- Opzioni generate via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTS SCREEN -->
+        <div id="resultsScreen" class="hidden min-h-screen p-4 py-8">
+            <div class="max-w-5xl mx-auto">
+                <div class="card-warehouse fade-in">
+                    <!-- Header Risultati -->
+                    <div class="text-center mb-8">
+                        <div id="resultIcon" class="text-8xl mb-4">🎉</div>
+                        <h1 id="resultTitle" class="text-4xl font-bold mb-2" style="color: var(--success);">
+                            TEST SUPERATO!
+                        </h1>
+                        <p class="text-gray-600 text-lg">Ecco i risultati del tuo test</p>
+                    </div>
+
+                    <!-- Statistiche -->
+                    <div class="grid md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg text-center">
+                            <div class="text-4xl mb-2">✅</div>
+                            <div id="correctDisplay" class="text-4xl font-bold" style="color: var(--success);">0</div>
+                            <div class="text-gray-600 font-medium">Risposte Corrette</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg text-center">
+                            <div class="text-4xl mb-2">⏱️</div>
+                            <div id="timeDisplay" class="text-4xl font-bold" style="color: var(--secondary);">00:00</div>
+                            <div class="text-gray-600 font-medium">Tempo Impiegato</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-lg text-center">
+                            <div class="text-4xl mb-2">📊</div>
+                            <div id="percentageDisplay" class="text-4xl font-bold" style="color: var(--accent);">0%</div>
+                            <div class="text-gray-600 font-medium">Percentuale</div>
+                        </div>
+                    </div>
+
+                    <!-- Azioni -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                        <button onclick="location.reload()" class="btn-secondary">
+                            🔄 RIVEDI LE RISPOSTE
+                        </button>
+                        <button onclick="generateNewTest()" class="btn-primary">
+                            ✨ GENERA NUOVO TEST
+                        </button>
+                    </div>
+
+                    <!-- Review Dettagliato -->
+                    <div>
+                        <h2 class="text-2xl font-bold mb-6" style="color: var(--secondary);">
+                            📊 Riepilogo Dettagliato
+                        </h2>
+                        <div id="reviewContainer" class="space-y-4">
+                            <!-- Generato via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== CONFIGURATION =====
+        const CONFIG = {
+            totalQuestions: 15,
+            testDuration: 1200, // 20 minuti in secondi
+            warningTime: 120, // Avviso a 2 minuti
+            passingScore: 12 // 80% di 15
+        };
+
+        // ===== STATE =====
+        let currentState = {
+            selectedQuestions: [],
+            currentIndex: 0,
+            answers: new Array(CONFIG.totalQuestions).fill(null),
+            startTime: null,
+            timerInterval: null,
+            timeRemaining: CONFIG.testDuration
+        };
+
+        // ===== DATABASE COMPLETO 100 DOMANDE =====
+        const questionBank = [
+            {
+                question: "Qual è il principale rischio associato all'uso di carrelli elevatori in magazzino?",
+                options: [
+                    "Investimento di persone e ribaltamento",
+                    "Esposizione a radiazioni",
+                    "Rumore eccessivo",
+                    "Esposizione a temperature elevate"
+                ],
+                correct: 0
+            },
+            {
+                question: "Quale DPI è obbligatorio per gli operatori che movimentano carichi in magazzino?",
+                options: [
+                    "Occhiali da sole",
+                    "Scarpe antinfortunistiche con puntale rinforzato",
+                    "Cuffie antirumore",
+                    "Maschera antigas"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è l'altezza massima consigliata per lo stoccaggio manuale di carichi senza ausili meccanici?",
+                options: [
+                    "3 metri",
+                    "2 metri",
+                    "1,70 metri",
+                    "2,5 metri"
+                ],
+                correct: 2
+            },
+            {
+                question: "Cosa indica la segnaletica orizzontale gialla e nera a strisce in magazzino?",
+                options: [
+                    "Zona di carico/scarico",
+                    "Passaggio pedonale",
+                    "Area di pericolo o ostacolo",
+                    "Zona di stoccaggio"
+                ],
+                correct: 2
+            },
+            {
+                question: "Qual è il peso massimo raccomandato per la movimentazione manuale occasionale di carichi da parte di un lavoratore adulto maschio?",
+                options: [
+                    "30 kg",
+                    "25 kg",
+                    "20 kg",
+                    "15 kg"
+                ],
+                correct: 1
+            },
+            {
+                question: "In caso di incendio in magazzino, quale è la prima azione da compiere?",
+                options: [
+                    "Cercare di spegnere l'incendio",
+                    "Attivare l'allarme e avvisare i colleghi",
+                    "Mettere in salvo i materiali di valore",
+                    "Chiudere le porte per contenere il fuoco"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la larghezza minima delle vie di circolazione pedonali in magazzino?",
+                options: [
+                    "50 cm",
+                    "80 cm",
+                    "1 metro",
+                    "1,5 metri"
+                ],
+                correct: 2
+            },
+            {
+                question: "Come devono essere posizionati i carichi sulle scaffalature?",
+                options: [
+                    "Sempre al centro per equilibrare il peso",
+                    "I più pesanti in alto per stabilità",
+                    "I più pesanti in basso e i più leggeri in alto",
+                    "Casualmente secondo necessità"
+                ],
+                correct: 2
+            },
+            {
+                question: "Qual è il corretto utilizzo del transpallet manuale?",
+                options: [
+                    "Trainare il carico camminando all'indietro",
+                    "Spingere il carico camminando in avanti",
+                    "Caricare fino a 2000 kg",
+                    "Utilizzarlo per trasportare persone"
+                ],
+                correct: 1
+            },
+            {
+                question: "Ogni quanto tempo devono essere verificate le scaffalature metalliche?",
+                options: [
+                    "Ogni 6 mesi",
+                    "Ogni anno",
+                    "Ogni 2 anni",
+                    "Solo in caso di danni visibili"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la distanza minima da mantenere tra le scaffalature e i dispositivi antincendio?",
+                options: [
+                    "30 cm",
+                    "50 cm",
+                    "1 metro",
+                    "Nessuna distanza specifica"
+                ],
+                correct: 2
+            },
+            {
+                question: "Cosa si intende per 'movimentazione manuale dei carichi' secondo il D.Lgs. 81/08?",
+                options: [
+                    "Solo il sollevamento di carichi",
+                    "Qualsiasi operazione di trasporto o sostegno di un carico",
+                    "Esclusivamente lo spostamento orizzontale",
+                    "Solo il deposito di carichi"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la funzione principale del parapetto nelle scaffalature?",
+                options: [
+                    "Supportare i carichi lateralmente",
+                    "Impedire la caduta dei materiali",
+                    "Facilitare il prelievo",
+                    "Migliorare l'estetica"
+                ],
+                correct: 1
+            },
+            {
+                question: "In presenza di materiali infiammabili, quale estintore NON deve essere utilizzato?",
+                options: [
+                    "Estintore a polvere",
+                    "Estintore a CO2",
+                    "Estintore a schiuma",
+                    "Estintore ad acqua"
+                ],
+                correct: 3
+            },
+            {
+                question: "Qual è la postura corretta per sollevare un carico da terra?",
+                options: [
+                    "Piegare la schiena mantenendo le gambe tese",
+                    "Piegare le ginocchia mantenendo la schiena dritta",
+                    "Ruotare il busto durante il sollevamento",
+                    "Sollevare con movimenti rapidi"
+                ],
+                correct: 1
+            },
+            {
+                question: "Quale normativa regola la sicurezza nei luoghi di lavoro in Italia?",
+                options: [
+                    "D.Lgs. 81/2008",
+                    "Legge 626/1994",
+                    "D.Lgs. 151/2001",
+                    "Legge 300/1970"
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual è la velocità massima consentita per i carrelli elevatori all'interno del magazzino?",
+                options: [
+                    "20 km/h",
+                    "15 km/h",
+                    "10 km/h",
+                    "5 km/h"
+                ],
+                correct: 2
+            },
+            {
+                question: "Come devono essere etichettati i prodotti chimici pericolosi?",
+                options: [
+                    "Con etichetta verde",
+                    "Con pittogrammi GHS/CLP",
+                    "Con codice a barre",
+                    "Con etichetta gialla"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il rischio principale dello stoccaggio di materiali in eccesso?",
+                options: [
+                    "Riduzione dello spazio",
+                    "Sovraccarico delle scaffalature e rischio crollo",
+                    "Difficoltà di inventario",
+                    "Aumento dei costi"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa indica il segnale di divieto con carrello elevatore barrato?",
+                options: [
+                    "Divieto di parcheggio",
+                    "Divieto di transito ai carrelli elevatori",
+                    "Divieto di carico",
+                    "Area di manutenzione"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la prima operazione da effettuare prima di utilizzare un carrello elevatore?",
+                options: [
+                    "Controllare il livello del carburante",
+                    "Effettuare il check-list di verifica giornaliera",
+                    "Caricare immediatamente un pallet",
+                    "Suonare il clacson"
+                ],
+                correct: 1
+            },
+            {
+                question: "In caso di versamento di liquidi pericolosi, cosa fare?",
+                options: [
+                    "Coprire con segatura o materiale assorbente",
+                    "Lavare immediatamente con acqua",
+                    "Lasciare evaporare",
+                    "Raccogliere con le mani protette"
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual è la funzione delle protezioni laterali sui carrelli elevatori?",
+                options: [
+                    "Proteggere il carico",
+                    "Proteggere l'operatore in caso di ribaltamento",
+                    "Migliorare la visibilità",
+                    "Supportare le forche"
+                ],
+                correct: 1
+            },
+            {
+                question: "Ogni quanto deve essere effettuata la formazione sulla sicurezza per i lavoratori?",
+                options: [
+                    "Solo all'assunzione",
+                    "Ogni anno",
+                    "Ogni 5 anni con aggiornamenti periodici",
+                    "Mai, è sufficiente quella iniziale"
+                ],
+                correct: 2
+            },
+            {
+                question: "Cosa si intende per 'near miss' in ambito sicurezza?",
+                options: [
+                    "Un incidente grave",
+                    "Un quasi-incidente senza conseguenze",
+                    "Un infortunio lieve",
+                    "Una non conformità"
+                ],
+                correct: 1
+            },
+            {
+                question: "Quale documentazione deve essere presente in magazzino per i prodotti chimici?",
+                options: [
+                    "Solo fatture",
+                    "Schede di Sicurezza (SDS)",
+                    "Certificati di qualità",
+                    "Manuali d'uso"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il limite di carico per un singolo ripiano di scaffalatura?",
+                options: [
+                    "Definito dal produttore nella targhetta",
+                    "Sempre 500 kg",
+                    "Non esiste un limite",
+                    "Determinato visivamente"
+                ],
+                correct: 0
+            },
+            {
+                question: "Come devono essere stoccati i materiali infiammabili?",
+                options: [
+                    "Vicino alle fonti di calore",
+                    "In armadi appositi ventilati e segnalati",
+                    "Insieme ad altri materiali",
+                    "All'aperto"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la distanza minima tra le pile di materiali e i corpi illuminanti?",
+                options: [
+                    "10 cm",
+                    "30 cm",
+                    "50 cm",
+                    "1 metro"
+                ],
+                correct: 2
+            },
+            {
+                question: "In caso di emergenza, quale via deve essere sempre sgombra?",
+                options: [
+                    "Solo l'uscita principale",
+                    "Tutte le vie di esodo",
+                    "Solo le scale",
+                    "Solo i corridoi principali"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il colore dei segnali di salvataggio?",
+                options: [
+                    "Rosso",
+                    "Giallo",
+                    "Verde",
+                    "Blu"
+                ],
+                correct: 2
+            },
+            {
+                question: "Cosa indica un pittogramma con fiamma?",
+                options: [
+                    "Materiale esplosivo",
+                    "Materiale infiammabile",
+                    "Materiale comburente",
+                    "Materiale tossico"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la temperatura massima di stoccaggio per materiali termosensibili?",
+                options: [
+                    "Specificata sulla scheda tecnica del prodotto",
+                    "Sempre 25°C",
+                    "Sempre 0°C",
+                    "Non esiste limite"
+                ],
+                correct: 0
+            },
+            {
+                question: "Come deve essere effettuato il prelievo di un carico da scaffalatura alta?",
+                options: [
+                    "Salendo sulla scaffalatura",
+                    "Utilizzando scale o piattaforme idonee",
+                    "Facendo cadere il materiale",
+                    "Con un bastone"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la funzione del 'punto di raccolta' in caso di evacuazione?",
+                options: [
+                    "Stoccare materiali",
+                    "Radunarsi per il conteggio delle persone",
+                    "Parcheggiare i mezzi",
+                    "Deposito attrezzi"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa deve fare un lavoratore che rileva una condizione di pericolo?",
+                options: [
+                    "Ignorarla se non lo riguarda direttamente",
+                    "Segnalarla immediatamente al responsabile",
+                    "Attendere che qualcun altro la segnali",
+                    "Risolverla personalmente"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il numero minimo di estintori necessari in un magazzino?",
+                options: [
+                    "1 ogni 100 mq",
+                    "1 ogni 200 mq",
+                    "Secondo valutazione rischio incendio",
+                    "1 ogni 50 mq"
+                ],
+                correct: 2
+            },
+            {
+                question: "Come devono essere identificate le corsie di transito dei mezzi?",
+                options: [
+                    "Con strisce gialle continue",
+                    "Con strisce bianche tratteggiate",
+                    "Con strisce rosse",
+                    "Non è necessaria marcatura"
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual è la causa principale degli infortuni da scivolamento?",
+                options: [
+                    "Scarpe inadeguate",
+                    "Pavimenti bagnati o oleosi",
+                    "Illuminazione scarsa",
+                    "Dislivelli"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa indica la scritta 'Vietato fumare' in magazzino?",
+                options: [
+                    "Raccomandazione",
+                    "Divieto assoluto per rischio incendio",
+                    "Consiglio per la salute",
+                    "Norma igienica"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la portata massima tipica di un transpallet manuale?",
+                options: [
+                    "500 kg",
+                    "1000 kg",
+                    "2000-2500 kg",
+                    "5000 kg"
+                ],
+                correct: 2
+            },
+            {
+                question: "Come devono essere conservate le bombole di gas?",
+                options: [
+                    "Sdraiate",
+                    "In piedi e ancorate",
+                    "Impilate",
+                    "In orizzontale"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è lo scopo della segnaletica di sicurezza?",
+                options: [
+                    "Decorazione",
+                    "Fornire informazioni sui rischi e comportamenti",
+                    "Identificare le zone",
+                    "Pubblicità aziendale"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa si intende per 'DPI di terza categoria'?",
+                options: [
+                    "DPI di costo elevato",
+                    "DPI contro rischi mortali o danni irreversibili",
+                    "DPI per dirigenti",
+                    "DPI usa e getta"
+                ],
+                correct: 1
+            },
+            {
+                question: "In caso di incidente, chi deve essere avvisato per primo?",
+                options: [
+                    "Il direttore generale",
+                    "Il responsabile della sicurezza e il 118 se necessario",
+                    "I colleghi",
+                    "L'assicurazione"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la distanza di sicurezza da mantenere tra carrello elevatore e pedoni?",
+                options: [
+                    "50 cm",
+                    "1 metro",
+                    "2 metri",
+                    "Nessuna distanza specifica"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa indica il simbolo del teschio su un prodotto chimico?",
+                options: [
+                    "Prodotto pericoloso per l'ambiente",
+                    "Prodotto tossico o letale",
+                    "Prodotto corrosivo",
+                    "Prodotto infiammabile"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il periodo di validità dell'abilitazione per condurre carrelli elevatori?",
+                options: [
+                    "3 anni",
+                    "5 anni",
+                    "10 anni",
+                    "A vita"
+                ],
+                correct: 1
+            },
+            {
+                question: "Come deve essere mantenuto l'ordine in magazzino?",
+                options: [
+                    "Solo a fine giornata",
+                    "Costantemente durante tutta l'attività",
+                    "Una volta a settimana",
+                    "Solo prima delle ispezioni"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il rischio principale del sovraccarico di una scaffalatura?",
+                options: [
+                    "Difficoltà di accesso",
+                    "Collasso strutturale",
+                    "Maggiore disordine",
+                    "Rallentamento operazioni"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa fare in caso di blackout improvviso in magazzino?",
+                options: [
+                    "Continuare a lavorare al buio",
+                    "Fermare le attività e attendere istruzioni",
+                    "Utilizzare accendini per illuminare",
+                    "Evacuare immediatamente"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la funzione delle luci lampeggianti sui carrelli elevatori?",
+                options: [
+                    "Decorazione",
+                    "Segnalare la presenza del mezzo in movimento",
+                    "Illuminazione supplementare",
+                    "Segnalare guasti"
+                ],
+                correct: 1
+            },
+            {
+                question: "Come devono essere posizionati i materiali sui pallet?",
+                options: [
+                    "Sporgenti oltre i bordi",
+                    "Entro i limiti del pallet e stabilmente",
+                    "Solo al centro",
+                    "Casualmente"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il principale rischio nell'uso di scale portatili in magazzino?",
+                options: [
+                    "Fatica muscolare",
+                    "Caduta dall'alto",
+                    "Danneggiamento della scala",
+                    "Perdita di tempo"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa indica il colore rosso nella segnaletica di sicurezza?",
+                options: [
+                    "Obbligo",
+                    "Divieto o pericolo",
+                    "Salvataggio",
+                    "Avvertimento"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la prima cosa da controllare su un estintore?",
+                options: [
+                    "Il peso",
+                    "La data di scadenza e la pressione (manometro)",
+                    "Il colore",
+                    "La marca"
+                ],
+                correct: 1
+            },
+            {
+                question: "Come devono essere gestiti i rifiuti speciali in magazzino?",
+                options: [
+                    "Gettati nei normali bidoni",
+                    "Raccolti separatamente secondo normativa",
+                    "Bruciati",
+                    "Lasciati all'aperto"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il limite di rumore giornaliero per un lavoratore senza protezioni?",
+                options: [
+                    "80 dB(A)",
+                    "85 dB(A)",
+                    "90 dB(A)",
+                    "100 dB(A)"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa indica un pallet marcato 'EUR' o 'EPAL'?",
+                options: [
+                    "Pallet europeo standardizzato",
+                    "Pallet monouso",
+                    "Pallet per export",
+                    "Pallet riciclato"
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual è la corretta procedura per lo stoccaggio di materiali su più livelli?",
+                options: [
+                    "Partire dall'alto verso il basso",
+                    "Partire dal basso verso l'alto",
+                    "Riempire casualmente",
+                    "Solo livelli pari"
+                ],
+                correct: 1
+            },
+            {
+                question: "Come deve essere la visibilità del conducente di un carrello elevatore?",
+                options: [
+                    "Sufficiente per vedere davanti",
+                    "Totale in tutte le direzioni durante la manovra",
+                    "Solo laterale",
+                    "Non necessaria con specchietti"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il rischio principale del 'multitasking' in magazzino?",
+                options: [
+                    "Maggiore produttività",
+                    "Riduzione dell'attenzione e aumento errori/incidenti",
+                    "Stanchezza",
+                    "Nessun rischio"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa sono le 'vie di fuga'?",
+                options: [
+                    "Percorsi per uscire in caso di emergenza",
+                    "Zone di stoccaggio temporaneo",
+                    "Corridoi principali",
+                    "Entrate secondarie"
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual è la funzione del 'registro antincendio'?",
+                options: [
+                    "Elenco dipendenti",
+                    "Documentazione verifiche e manutenzioni antincendio",
+                    "Registro presenze",
+                    "Elenco fornitori"
+                ],
+                correct: 1
+            },
+            {
+                question: "Come devono essere etichettate le scaffalature?",
+                options: [
+                    "Non è necessario",
+                    "Con targhetta indicante portata massima",
+                    "Solo con il logo aziendale",
+                    "Con codice a barre"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la posizione corretta delle mani sul transpallet durante lo spostamento?",
+                options: [
+                    "Sotto il timone",
+                    "Sul timone in posizione di comando",
+                    "Sui montanti",
+                    "Sulle forche"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa indica il pittogramma con punto esclamativo?",
+                options: [
+                    "Pericolo generico",
+                    "Irritante, nocivo o pericoloso per lo strato di ozono",
+                    "Tossico",
+                    "Esplosivo"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il principale rischio nella movimentazione di carichi sporgenti?",
+                options: [
+                    "Maggiore fatica",
+                    "Perdita di equilibrio e caduta carico",
+                    "Lentezza operativa",
+                    "Danneggiamento prodotto"
+                ],
+                correct: 1
+            },
+            {
+                question: "Come devono essere le calzature di sicurezza per magazzino?",
+                options: [
+                    "Con puntale rinforzato e suola antiscivolo",
+                    "Leggere e comode",
+                    "Eleganti",
+                    "Aperte per ventilazione"
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual è la distanza minima tra un carico e l'illuminazione artificiale?",
+                options: [
+                    "10 cm",
+                    "30 cm",
+                    "50 cm",
+                    "1 metro"
+                ],
+                correct: 2
+            },
+            {
+                question: "Cosa fare prima di entrare in un'area confinata in magazzino?",
+                options: [
+                    "Entrare direttamente",
+                    "Verificare autorizzazioni e presenza ossigeno",
+                    "Accendere luci",
+                    "Chiamare colleghi"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il significato del cartello blu rotondo con simbolo bianco?",
+                options: [
+                    "Divieto",
+                    "Obbligo",
+                    "Avvertimento",
+                    "Salvataggio"
+                ],
+                correct: 1
+            },
+            {
+                question: "Come deve essere effettuata la pulizia di un versamento di olio?",
+                options: [
+                    "Con acqua",
+                    "Con materiale assorbente specifico",
+                    "Lasciando evaporare",
+                    "Con aria compressa"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il rischio principale nell'impilare manualmente carichi oltre 1,5 metri?",
+                options: [
+                    "Fatica eccessiva",
+                    "Caduta carichi e lesioni",
+                    "Disordine",
+                    "Perdita di tempo"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa indica il termine 'MMC' nel D.Lgs. 81/08?",
+                options: [
+                    "Manutenzione Meccanica Carrelli",
+                    "Movimentazione Manuale dei Carichi",
+                    "Magazzino Merci Completo",
+                    "Metodo di Movimentazione Controllata"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la frequenza minima di controllo dei dispositivi di sicurezza delle scaffalature?",
+                options: [
+                    "Mensile",
+                    "Trimestrale",
+                    "Semestrale",
+                    "Annuale"
+                ],
+                correct: 3
+            },
+            {
+                question: "Come deve essere la temperatura di un magazzino per lo stoccaggio generale?",
+                options: [
+                    "Sotto 0°C",
+                    "Tra 15°C e 25°C",
+                    "Oltre 30°C",
+                    "Non rilevante"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il principale rischio nell'utilizzo di imballaggi danneggiati?",
+                options: [
+                    "Cattiva presentazione",
+                    "Fuoriuscita contenuto e possibili incidenti",
+                    "Maggiori costi",
+                    "Rallentamento operazioni"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa deve fare un operatore prima di lasciare un carrello elevatore?",
+                options: [
+                    "Lasciarlo acceso",
+                    "Abbassare le forche, spegnere motore, inserire freno",
+                    "Solo inserire il freno",
+                    "Lasciare le chiavi inserite"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il corretto metodo per scendere da un mezzo in magazzino?",
+                options: [
+                    "Saltare",
+                    "Scendere frontalmente usando i gradini",
+                    "Scivolare",
+                    "Scendere di schiena"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa indica un'etichetta ADR su un collo?",
+                options: [
+                    "Merce fragile",
+                    "Merce pericolosa per il trasporto",
+                    "Merce deperibile",
+                    "Merce di valore"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il principale obiettivo del D.Lgs. 81/2008?",
+                options: [
+                    "Aumentare la produttività",
+                    "Tutelare la salute e sicurezza dei lavoratori",
+                    "Ridurre i costi aziendali",
+                    "Standardizzare le procedure"
+                ],
+                correct: 1
+            },
+            {
+                question: "Come devono essere gestiti i prodotti in giacenza scaduti?",
+                options: [
+                    "Lasciati in magazzino",
+                    "Segregati e smaltiti secondo procedura",
+                    "Venduti a prezzo ridotto",
+                    "Riconfezionati"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la larghezza minima di una porta di emergenza?",
+                options: [
+                    "60 cm",
+                    "80 cm",
+                    "1,20 metri (verso apertura)",
+                    "2 metri"
+                ],
+                correct: 2
+            },
+            {
+                question: "Cosa indica il cartello con la scritta 'Uscita di emergenza'?",
+                options: [
+                    "Uscita normale",
+                    "Via di fuga da utilizzare in caso di pericolo",
+                    "Uscita riservata",
+                    "Uscita secondaria"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è il rischio principale nell'accatastamento instabile?",
+                options: [
+                    "Difficoltà di conteggio",
+                    "Crollo della pila e schiacciamento",
+                    "Maggiore ingombro",
+                    "Danneggiamento prodotti"
+                ],
+                correct: 1
+            },
+            {
+                question: "Come deve essere verificata la stabilità di un carico prima del trasporto?",
+                options: [
+                    "Visivamente",
+                    "Applicando leggera pressione/spinta controllata",
+                    "Non è necessario",
+                    "Solo per carichi pesanti"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la funzione del RLS (Rappresentante dei Lavoratori per la Sicurezza)?",
+                options: [
+                    "Sostituire il RSPP",
+                    "Rappresentare i lavoratori in materia di sicurezza",
+                    "Dirigere le operazioni",
+                    "Gestire le emergenze"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa deve contenere obbligatoriamente un piano di emergenza?",
+                options: [
+                    "Solo i numeri di emergenza",
+                    "Procedure di evacuazione, ruoli, planimetrie",
+                    "Solo le vie di fuga",
+                    "Elenco dipendenti"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la massima inclinazione consentita per una rampa di accesso carrelli?",
+                options: [
+                    "5%",
+                    "10%",
+                    "15%",
+                    "20%"
+                ],
+                correct: 1
+            },
+            {
+                question: "Come deve essere la pavimentazione di un magazzino?",
+                options: [
+                    "Morbida",
+                    "Liscia e antiscivolo, priva di buche",
+                    "Con tappeti",
+                    "In terra battuta"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è l'obbligo del lavoratore in materia di sicurezza secondo il D.Lgs. 81/08?",
+                options: [
+                    "Nessun obbligo, solo diritti",
+                    "Prendersi cura della propria sicurezza e di quella altrui",
+                    "Solo seguire ordini",
+                    "Solo indossare DPI"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa indica il triangolo giallo con punto esclamativo nero?",
+                options: [
+                    "Pericolo generico",
+                    "Obbligo",
+                    "Divieto",
+                    "Salvataggio"
+                ],
+                correct: 0
+            },
+            {
+                question: "Qual è la corretta sequenza in caso di principio di incendio?",
+                options: [
+                    "Allarme - Spegnimento - Evacuazione",
+                    "Spegnimento - Allarme - Evacuazione",
+                    "Evacuazione - Allarme - Spegnimento (se possibile in sicurezza)",
+                    "Solo evacuazione"
+                ],
+                correct: 2
+            },
+            {
+                question: "Qual è il tempo massimo di autonomia richiesto per l'illuminazione di emergenza?",
+                options: [
+                    "15 minuti",
+                    "30 minuti",
+                    "1 ora",
+                    "2 ore"
+                ],
+                correct: 2
+            },
+            {
+                question: "Come devono essere protette le zone con rischio di caduta dall'alto superiore a 50 cm?",
+                options: [
+                    "Con segnaletica",
+                    "Con parapetti normati",
+                    "Con nastro adesivo",
+                    "Non è necessario"
+                ],
+                correct: 1
+            },
+            {
+                question: "Qual è la procedura corretta per la sostituzione di una bombola GPL su carrello?",
+                options: [
+                    "Sostituirla in qualsiasi momento",
+                    "Spegnere il motore, in area ventilata, seguire procedura",
+                    "Sostituirla con motore acceso",
+                    "Solo in officina"
+                ],
+                correct: 1
+            },
+            {
+                question: "Cosa indica la marcatura CE su un DPI?",
+                options: [
+                    "Conformità alle normative europee",
+                    "Prodotto cinese",
+                    "Prodotto economico",
+                    "Prodotto di alta qualità"
+                ],
+                correct: 0
+            }
+        ];
+
+        // ===== UTILITY FUNCTIONS =====
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        function selectRandomQuestions() {
+            const shuffled = shuffleArray(questionBank);
+            return shuffled.slice(0, CONFIG.totalQuestions);
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // ===== MAIN FUNCTIONS =====
+        function startTest() {
+            // Seleziona 15 domande casuali
+            currentState.selectedQuestions = selectRandomQuestions();
+            
+            // Mescola le opzioni di ogni domanda
+            currentState.selectedQuestions = currentState.selectedQuestions.map(q => {
+                const correctAnswer = q.options[q.correct];
+                const shuffledOptions = shuffleArray(q.options);
+                const newCorrectIndex = shuffledOptions.indexOf(correctAnswer);
+                
+                return {
+                    ...q,
+                    options: shuffledOptions,
+                    correct: newCorrectIndex
+                };
+            });
+            
+            // Reset state
+            currentState.currentIndex = 0;
+            currentState.answers = new Array(CONFIG.totalQuestions).fill(null);
+            currentState.startTime = Date.now();
+            currentState.timeRemaining = CONFIG.testDuration;
+            
+            // Mostra schermata test
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('testScreen').classList.remove('hidden');
+            
+            // Inizializza UI
+            createMinimap();
+            loadQuestion(0);
+            startTimer();
+        }
+
+        function createMinimap() {
+            const container = document.getElementById('minimapContainer');
+            container.innerHTML = '';
+            
+            for (let i = 0; i < CONFIG.totalQuestions; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'minimap-dot';
+                dot.id = `minimap-${i}`;
+                dot.title = `Domanda ${i + 1}`;
+                container.appendChild(dot);
+            }
+            
+            updateMinimap();
+        }
+
+        function updateMinimap() {
+            for (let i = 0; i < CONFIG.totalQuestions; i++) {
+                const dot = document.getElementById(`minimap-${i}`);
+                dot.className = 'minimap-dot';
+                
+                if (currentState.answers[i] !== null) {
+                    dot.classList.add('answered');
+                }
+                
+                if (i === currentState.currentIndex) {
+                    dot.classList.add('current');
+                }
+            }
+        }
+
+        function loadQuestion(index) {
+            const question = currentState.selectedQuestions[index];
+            
+            // Aggiorna UI
+            document.getElementById('currentQuestion').textContent = index + 1;
+            document.getElementById('questionNumber').textContent = index + 1;
+            document.getElementById('questionText').textContent = question.question;
+            
+            // Aggiorna progress bar
+            const progress = ((index + 1) / CONFIG.totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            
+            // Crea opzioni
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+            
+            question.options.forEach((option, idx) => {
+                const button = document.createElement('button');
+                button.className = 'option-btn';
+                button.textContent = option;
+                button.onclick = () => selectOption(idx);
+                container.appendChild(button);
+            });
+            
+            updateMinimap();
+        }
+
+        function selectOption(optionIndex) {
+            // Previeni selezione multipla
+            if (currentState.answers[currentState.currentIndex] !== null) return;
+            
+            // Salva risposta
+            currentState.answers[currentState.currentIndex] = optionIndex;
+            
+            // Evidenzia opzione selezionata
+            document.querySelectorAll('.option-btn').forEach((btn, idx) => {
+                if (idx === optionIndex) {
+                    btn.classList.add('selected');
+                }
+            });
+            
+            // Aggiorna minimap
+            updateMinimap();
+            
+            // Avanzamento automatico dopo 500ms
+            setTimeout(() => {
+                if (currentState.currentIndex < CONFIG.totalQuestions - 1) {
+                    // Vai alla prossima domanda
+                    currentState.currentIndex++;
+                    loadQuestion(currentState.currentIndex);
+                } else {
+                    // Era l'ultima domanda -> Mostra risultati
+                    showResults();
+                }
+            }, 500);
+        }
+
+        function startTimer() {
+            const timerDisplay = document.getElementById('timerDisplay');
+            
+            currentState.timerInterval = setInterval(() => {
+                currentState.timeRemaining--;
+                timerDisplay.textContent = formatTime(currentState.timeRemaining);
+                
+                // Warning a 2 minuti
+                if (currentState.timeRemaining === CONFIG.warningTime) {
+                    timerDisplay.classList.add('timer-warning');
+                }
+                
+                // Tempo scaduto
+                if (currentState.timeRemaining <= 0) {
+                    clearInterval(currentState.timerInterval);
+                    showResults();
+                }
+            }, 1000);
+        }
+
+        function showResults() {
+            clearInterval(currentState.timerInterval);
+            
+            // Calcola risultati
+            let correctCount = 0;
+            currentState.selectedQuestions.forEach((q, idx) => {
+                if (currentState.answers[idx] === q.correct) {
+                    correctCount++;
+                }
+            });
+            
+            const timeUsed = CONFIG.testDuration - currentState.timeRemaining;
+            const percentage = Math.round((correctCount / CONFIG.totalQuestions) * 100);
+            const passed = correctCount >= CONFIG.passingScore;
+            
+            // Nascondi test, mostra risultati
+            document.getElementById('testScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+            
+            // Aggiorna UI risultati
+            const resultIcon = document.getElementById('resultIcon');
+            const resultTitle = document.getElementById('resultTitle');
+            
+            if (passed) {
+                resultIcon.textContent = '🎉';
+                resultTitle.textContent = 'TEST SUPERATO!';
+                resultTitle.style.color = 'var(--success)';
+            } else {
+                resultIcon.textContent = '😔';
+                resultTitle.textContent = 'TEST NON SUPERATO';
+                resultTitle.style.color = 'var(--danger)';
+            }
+            
+            document.getElementById('correctDisplay').textContent = correctCount;
+            document.getElementById('timeDisplay').textContent = formatTime(timeUsed);
+            document.getElementById('percentageDisplay').textContent = `${percentage}%`;
+            
+            // Genera review
+            generateReview();
+        }
+
+        function generateReview() {
+            const container = document.getElementById('reviewContainer');
+            container.innerHTML = '';
+            
+            currentState.selectedQuestions.forEach((q, idx) => {
+                const isCorrect = currentState.answers[idx] === q.correct;
+                const userAnswer = currentState.answers[idx];
+                
+                const reviewCard = document.createElement('div');
+                reviewCard.className = `p-6 rounded-lg border-2 ${isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'}`;
+                
+                reviewCard.innerHTML = `
+                    <div class="flex items-start gap-4">
+                        <div class="text-3xl">${isCorrect ? '✅' : '❌'}</div>
+                        <div class="flex-1">
+                            <div class="font-bold text-gray-800 mb-3">
+                                <span class="text-sm bg-gray-800 text-white px-2 py-1 rounded">Domanda ${idx + 1}</span>
+                                <p class="mt-2">${q.question}</p>
+                            </div>
+                            
+                            <div class="space-y-2 mb-3">
+                                ${q.options.map((opt, optIdx) => {
+                                    let className = 'p-3 rounded-lg ';
+                                    let icon = '';
+                                    
+                                    if (optIdx === q.correct) {
+                                        className += 'bg-green-100 border-2 border-green-500 font-semibold';
+                                        icon = '✓ ';
+                                    } else if (optIdx === userAnswer && optIdx !== q.correct) {
+                                        className += 'bg-red-100 border-2 border-red-500';
+                                        icon = '✗ ';
+                                    } else {
+                                        className += 'bg-gray-100 border border-gray-300';
+                                    }
+                                    
+                                    return `<div class="${className}">${icon}${opt}</div>`;
+                                }).join('')}
+                            </div>
+                            
+                            ${!isCorrect ? `
+                                <div class="bg-blue-50 border-l-4 border-blue-500 p-3 rounded">
+                                    <p class="text-sm text-blue-900">
+                                        <strong>💡 Risposta corretta:</strong> ${q.options[q.correct]}
+                                    </p>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(reviewCard);
+            });
+        }
+
+        function generateNewTest() {
+            location.reload();
+        }
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('✅ Quiz Rischi Specifici Magazzino caricato');
+            console.log(`📊 ${questionBank.length} domande nel database`);
+        });
+    </script>
+</body>
+</html>
+
+            
