@@ -49,40 +49,6 @@
             overflow: hidden;
         }
         
-        .option-btn:hover {
-            border-color: #667eea;
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
-        }
-        
-        .option-btn.correct {
-            background: #d1fae5 !important;
-            border-color: #10b981 !important;
-            animation: correctPulse 0.5s ease;
-        }
-        
-        .option-btn.incorrect {
-            background: #fee2e2 !important;
-            border-color: #ef4444 !important;
-            animation: shake 0.5s ease;
-        }
-        
-        .option-btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-        
-        @keyframes correctPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-        
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-        
         .timer {
             font-size: 2.5rem;
             font-weight: 700;
@@ -1797,45 +1763,32 @@
         }
 
         function selectAnswer(selectedOption, button) {
-            const question = currentTest[currentQuestionIndex];
-            const correctAnswer = question.options[question.correct];
-            const isCorrect = selectedOption === correctAnswer;
-            
-            // Disable all buttons
-            const buttons = document.querySelectorAll('.option-btn');
-            buttons.forEach(btn => {
-                btn.disabled = true;
-                const btnText = btn.textContent.substring(3);
-                if (btnText === correctAnswer) {
-                    btn.classList.add('correct');
-                } else if (btn === button && !isCorrect) {
-                    btn.classList.add('incorrect');
-                }
-            });
-            
-            // Store answer
-            userAnswers.push({
-                question: question.question,
-                selectedAnswer: selectedOption,
-                correctAnswer: correctAnswer,
-                isCorrect: isCorrect,
-                explanation: question.explanation
-            });
-            
-            // Stop timer
-            clearInterval(timer);
-            
-            // Auto-advance after 2 seconds
-            setTimeout(() => {
-                if (currentQuestionIndex < 29) {
-                    currentQuestionIndex++;
-                    loadQuestion();
-                    startTimer();
-                } else {
-                    showSummary();
-                }
-            }, 2000);
-        }
+    const question = currentTest[currentQuestionIndex];
+    const correctAnswer = question.options[question.correct];
+    const isCorrect = selectedOption === correctAnswer;
+    
+    // Store answer
+    userAnswers.push({
+        question: question.question,
+        selectedAnswer: selectedOption,
+        correctAnswer: correctAnswer,
+        isCorrect: isCorrect,
+        explanation: question.explanation
+    });
+    
+    // Stop timer
+    clearInterval(timer);
+    
+    // Advance immediately
+    if (currentQuestionIndex < 29) {
+        currentQuestionIndex++;
+        loadQuestion();
+        startTimer();
+    } else {
+        showSummary();
+    }
+}
+
 
         function startTimer() {
             const timerElement = document.getElementById('timer');
