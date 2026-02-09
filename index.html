@@ -97,103 +97,138 @@
 </head>
 <body class="warehouse-pattern">
     
-    <!-- SCHERMATA INIZIALE -->
-    <div id="welcomeScreen" class="min-h-screen flex items-center justify-center p-4">
-        <div class="glass-card rounded-2xl max-w-4xl w-full p-8 md:p-12">
-            
-            <!-- Header con badge industriale -->
-            <div class="text-center mb-8">
-                <div class="inline-block industrial-badge text-white font-bold text-sm mb-6">
-                    FORMAZIONE SICUREZZA SUL LAVORO
-                </div>
-                <h1 class="text-4xl md:text-5xl font-extrabold mb-4" style="color: var(--secondary);">
-                    📦 Quiz Rischi Specifici<br>in Magazzino
-                </h1>
-                <div class="flex items-center justify-center gap-3 mb-6">
-                    <div class="h-1 w-16 rounded" style="background: var(--primary);"></div>
-                    <span class="text-lg font-semibold" style="color: var(--accent);">TEST INTERATTIVO</span>
-                    <div class="h-1 w-16 rounded" style="background: var(--primary);"></div>
-                </div>
+  <!-- WELCOME SCREEN -->
+<div id="welcomeScreen" class="min-h-screen flex items-center justify-center p-4">
+    <div class="glass-card rounded-3xl p-8 md:p-12 max-w-4xl w-full warehouse-pattern">
+        
+        <!-- HEADER CON ICONA -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-24 h-24 rounded-2xl mb-6 badge-clip" 
+                 style="background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);">
+                <span class="text-5xl">📦</span>
             </div>
-
-            <!-- Autore -->
-            <div class="text-center mb-8 p-6 rounded-xl" style="background: rgba(74, 85, 104, 0.05);">
-                <p class="text-xl font-bold mb-2" style="color: var(--secondary);">
-                    Dott. Salvatore Trono
-                </p>
-                <p class="text-base font-semibold" style="color: var(--primary);">
-                    Esperto SSL - Formatore
+            <h1 class="text-4xl md:text-5xl font-black mb-3" style="color: var(--secondary);">
+                Quiz Rischi Specifici<br>in Magazzino
+            </h1>
+            <div class="inline-block px-6 py-2 rounded-full mt-4" 
+                 style="background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);">
+                <p class="text-white font-bold text-sm">
+                    👨‍🏫 Dott. Salvatore Trono - Esperto SSL - Formatore
                 </p>
             </div>
+        </div>
 
-            <!-- Istruzioni -->
-            <div class="mb-8 p-6 rounded-xl border-2" style="border-color: var(--accent); background: rgba(255, 193, 7, 0.05);">
-                <h2 class="text-xl font-bold mb-4 flex items-center gap-2" style="color: var(--secondary);">
-                    📋 Istruzioni
+        <!-- LINK MATERIALE TEORICO -->
+        <div class="mb-8">
+            <a href="https://trono-slv.github.io/Valutazione-dei-rischi-in-magazzino/" 
+               target="_blank"
+               class="block w-full p-6 rounded-2xl border-3 transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+               style="background: linear-gradient(135deg, #4A5568 0%, #2D3748 100%); border-color: var(--accent);">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-xl flex items-center justify-center" 
+                             style="background: var(--accent);">
+                            <span class="text-3xl">📚</span>
+                        </div>
+                        <div class="text-left">
+                            <h3 class="text-white font-bold text-xl mb-1">
+                                📖 Studia la Teoria
+                            </h3>
+                            <p class="text-gray-300 text-sm">
+                                Consulta il materiale didattico prima del quiz
+                            </p>
+                        </div>
+                    </div>
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                    </svg>
+                </div>
+            </a>
+        </div>
+
+        <!-- ISTRUZIONI -->
+        <div class="space-y-6 mb-8">
+            <div class="bg-white/50 rounded-2xl p-6 backdrop-blur">
+                <h2 class="font-bold text-xl mb-4 flex items-center gap-2" style="color: var(--primary);">
+                    <span class="text-2xl">📋</span> ISTRUZIONI
                 </h2>
                 <ul class="space-y-3 text-gray-700">
                     <li class="flex items-start gap-3">
-                        <span class="font-bold" style="color: var(--primary);">•</span>
-                        <span><strong>15 domande casuali</strong> estratte da un paniere di 96 quesiti sui rischi specifici in ambiente magazzino</span>
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white" 
+                              style="background: var(--primary);">1</span>
+                        <span><strong>15 domande casuali</strong> estratte da un paniere di 96 quesiti suddivisi per categoria di rischio</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="font-bold" style="color: var(--primary);">•</span>
-                        <span><strong>Tempo limite: 30 minuti</strong> (timer visibile in alto a destra)</span>
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white" 
+                              style="background: var(--primary);">2</span>
+                        <span><strong>30 minuti massimi</strong> per completare il test (timer visibile in alto)</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="font-bold" style="color: var(--primary);">•</span>
-                        <span>Clicca su una risposta per passare automaticamente alla <strong>domanda successiva</strong></span>
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white" 
+                              style="background: var(--primary);">3</span>
+                        <span>Ogni risposta ti farà <strong>avanzare automaticamente</strong> alla domanda successiva</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="font-bold" style="color: var(--primary);">•</span>
-                        <span>Sotto ogni domanda troverai un <strong>suggerimento didattico</strong> con riferimenti normativi</span>
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white" 
+                              style="background: var(--primary);">4</span>
+                        <span>Al termine visualizzerai un <strong>riepilogo dettagliato</strong> con risposte corrette ed errate</span>
                     </li>
                     <li class="flex items-start gap-3">
-                        <span class="font-bold" style="color: var(--primary);">•</span>
-                        <span>Al termine visualizzerai il <strong>riepilogo completo</strong> con risposte corrette in verde ed errate in rosso</span>
+                        <span class="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white" 
+                              style="background: var(--primary);">5</span>
+                        <span>Potrai <strong>ripetere lo stesso quiz</strong> o generarne uno nuovo con domande diverse</span>
                     </li>
                 </ul>
             </div>
 
-            <!-- Disclaimer -->
-            <div class="mb-8 p-6 rounded-xl" style="background: rgba(74, 85, 104, 0.05); border-left: 4px solid var(--secondary);">
-                <h3 class="text-sm font-bold mb-3 uppercase tracking-wide" style="color: var(--secondary);">
-                    ⚖️ Disclaimer Legale
+            <!-- DISCLAIMER LEGALE -->
+            <div class="bg-amber-50 border-2 border-amber-400 rounded-2xl p-6">
+                <h3 class="font-bold text-lg mb-3 flex items-center gap-2 text-amber-800">
+                    <span class="text-2xl">⚠️</span> DISCLAIMER LEGALE
                 </h3>
-                <p class="text-sm text-gray-600 leading-relaxed">
-                    Questo quiz ha <strong>finalità esclusivamente formative e didattiche</strong>. Le informazioni fornite sono aggiornate al 2023-2025 
-                    secondo il D.Lgs. 81/2008 e successive modifiche. Non sostituisce la formazione obbligatoria in aula né la valutazione dei rischi specifica 
-                    dell'azienda. L'autore declina ogni responsabilità per l'uso improprio dei contenuti.
+                <p class="text-sm text-amber-900 leading-relaxed">
+                    Questo quiz è uno <strong>strumento didattico autoformativo</strong> per la verifica delle conoscenze sui rischi specifici in ambiente magazzino. 
+                    <strong>Non sostituisce</strong> la formazione obbligatoria ai sensi del D.Lgs. 81/2008 e degli Accordi Stato-Regioni. 
+                    I contenuti sono basati su normativa vigente, linee guida INAIL e standard tecnici UNI EN, aggiornati al 2025.
                 </p>
             </div>
 
-            <!-- Crediti -->
-            <div class="mb-8 p-4 rounded-lg text-center text-sm text-gray-500" style="background: rgba(0,0,0,0.02);">
-                <p class="mb-1">
-                    <strong>Crediti:</strong> Contenuti basati su D.Lgs. 81/2008, norme UNI EN, linee guida INAIL
+            <!-- CREDITI -->
+            <div class="bg-gray-100 rounded-2xl p-6">
+                <h3 class="font-bold text-lg mb-3 flex items-center gap-2" style="color: var(--secondary);">
+                    <span class="text-2xl">ℹ️</span> CREDITI
+                </h3>
+                <p class="text-sm text-gray-700 leading-relaxed mb-3">
+                    <strong>Autore contenuti:</strong> Dott. Salvatore Trono - Esperto in Sicurezza sul Lavoro, Formatore qualificato<br>
+                    <strong>Riferimenti normativi:</strong> D.Lgs. 81/2008, Accordi Stato-Regioni 2011/2025, ISO 45001, Linee Guida INAIL<br>
+                    <strong>Standard tecnici:</strong> UNI EN ISO 20345, UNI EN 374, UNI EN 388, UNI EN 13893, UNI EN ISO 10819
                 </p>
-                <p>
-                    Sviluppato con Tailwind CSS • Ottimizzato per dispositivi mobili
+                <p class="text-xs text-gray-500 italic">
+                    Versione 1.0 - Gennaio 2025
                 </p>
             </div>
-
-            <!-- Buon Divertimento -->
-            <div class="text-center mb-6">
-                <p class="text-2xl font-bold mb-2" style="color: var(--primary);">
-                    🎯 Buon Divertimento!
-                </p>
-                <p class="text-gray-600">Testa le tue conoscenze sulla sicurezza in magazzino</p>
-            </div>
-
-            <!-- Pulsante Inizia -->
-            <button onclick="startQuiz()" 
-                    class="w-full py-5 rounded-xl font-bold text-xl text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-                    style="background: linear-gradient(135deg, var(--primary) 0%, #E65100 100%);">
-                🚀 INIZIA QUIZ
-            </button>
-
         </div>
+
+        <!-- MESSAGGIO MOTIVAZIONALE -->
+        <div class="text-center mb-8">
+            <p class="text-3xl font-black mb-2" style="color: var(--primary);">
+                🎯 Buon Divertimento!
+            </p>
+            <p class="text-gray-600 font-medium">
+                Metti alla prova le tue conoscenze sulla sicurezza in magazzino
+            </p>
+        </div>
+
+        <!-- PULSANTE AVVIO -->
+        <button onclick="startQuiz()" 
+                class="w-full py-6 rounded-2xl font-black text-2xl text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                style="background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);">
+            🚀 INIZIA IL QUIZ
+        </button>
+
     </div>
+</div>
+
 
     <!-- SCHERMATA QUIZ -->
     <div id="quizScreen" class="hidden min-h-screen p-4 py-8">
