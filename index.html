@@ -2223,23 +2223,35 @@
         }
 
         function selectOption(optionIndex) {
-            currentState.answers[currentState.currentIndex] = optionIndex;
+    // Previeni selezione multipla
+    if (currentState.answers[currentState.currentIndex] !== null) return;
+    
+    // Salva risposta
+    currentState.answers[currentState.currentIndex] = optionIndex;
+    
+    // Evidenzia opzione selezionata (feedback visivo immediato)
+    document.querySelectorAll('.option-btn').forEach((btn, idx) => {
+        if (idx === optionIndex) {
+            btn.classList.add('selected');
+        }
+    });
+    
+    // Aggiorna minimap
+    updateMinimap();
+    
+    // ✨ AVANZAMENTO AUTOMATICO DOPO 500ms
+    setTimeout(() => {
+        if (currentState.currentIndex < CONFIG.totalQuestions - 1) {
+            // Vai alla domanda successiva
+            currentState.currentIndex++;
             loadQuestion(currentState.currentIndex);
+        } else {
+            // Era l'ultima domanda → Mostra riepilogo
+            showResults();
         }
+    }, 500); // Delay di 500ms per mostrare la selezione
+}
 
-        function nextQuestion() {
-            if (currentState.currentIndex < CONFIG.totalQuestions - 1) {
-                currentState.currentIndex++;
-                loadQuestion(currentState.currentIndex);
-            }
-        }
-
-        function prevQuestion() {
-            if (currentState.currentIndex > 0) {
-                currentState.currentIndex--;
-                loadQuestion(currentState.currentIndex);
-            }
-        }
 
         function updateNavButtons() {
             document.getElementById('prevBtn').disabled = currentState.currentIndex === 0;
