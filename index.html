@@ -3,19 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Rischi Specifici Magazzino - 128 Domande</title>
+    <meta name="description" content="Simulatore test sicurezza sul lavoro - 30 domande random da database 128 quiz D.Lgs. 81/2008">
+    <title>Test Sicurezza sul Lavoro - Simulatore D.Lgs. 81/2008</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --primary: #2563eb;
-            --secondary: #7c3aed;
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --dark: #1e293b;
-            --light: #f1f5f9;
-        }
-        
         * {
             margin: 0;
             padding: 0;
@@ -23,402 +14,272 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 1rem;
         }
         
-        .container {
-            max-width: 1200px;
-            width: 100%;
+        .glass-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
-        
-        .header h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-        
-        .header p {
-            opacity: 0.9;
-            font-size: 1.1rem;
-        }
-        
-        .content {
-            padding: 2rem;
-        }
-        
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #1d4ed8;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
-        }
-        
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
-        
-        .btn-success:hover {
-            background: #059669;
-            transform: translateY(-2px);
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-        
-        .timer {
-            background: white;
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--dark);
-            display: inline-block;
-        }
-        
-        .timer.warning {
-            background: var(--warning);
-            color: white;
-            animation: pulse 1s infinite;
-        }
-        
-        .timer.danger {
-            background: var(--danger);
-            color: white;
-            animation: pulse 0.5s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
         
         .progress-bar {
-            height: 12px;
+            height: 8px;
             background: #e5e7eb;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 1.5rem;
+            position: relative;
         }
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transition: width 0.5s ease;
+            background: linear-gradient(90deg, #10b981, #059669);
+            transition: width 0.3s ease;
+        }
+        
+        .option-btn {
+            transition: all 0.3s ease;
+            border: 2px solid #e5e7eb;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option-btn:hover {
+            border-color: #667eea;
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        
+        .option-btn.correct {
+            background: #d1fae5 !important;
+            border-color: #10b981 !important;
+            animation: correctPulse 0.5s ease;
+        }
+        
+        .option-btn.incorrect {
+            background: #fee2e2 !important;
+            border-color: #ef4444 !important;
+            animation: shake 0.5s ease;
+        }
+        
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        .timer {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .timer.warning {
+            color: #f59e0b;
+            animation: timerPulse 1s infinite;
+        }
+        
+        .timer.danger {
+            color: #ef4444;
+            animation: timerPulse 0.5s infinite;
+        }
+        
+        @keyframes timerPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
         }
         
         .question-card {
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 1.5rem;
+            animation: slideIn 0.4s ease;
         }
         
-        .question-text {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .option {
-            background: #f8fafc;
-            padding: 1.25rem;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
+        .summary-row {
+            transition: all 0.2s ease;
         }
         
-        .option:hover {
-            background: #e0f2fe;
-            border-color: var(--primary);
+        .summary-row:hover {
+            background: #f9fafb;
             transform: translateX(4px);
         }
         
-        .option.selected {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        
-        .option-label {
-            font-weight: 700;
-            font-size: 1.1rem;
-            min-width: 30px;
-        }
-        
-        .option-text {
-            flex: 1;
-            font-size: 1.05rem;
-            line-height: 1.5;
-        }
-        
-        .minimap {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-        }
-        
-        .minimap-dot {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .minimap-dot.unanswered {
-            background: #cbd5e1;
-            color: #64748b;
-        }
-        
-        .minimap-dot.answered {
-            background: var(--warning);
-            color: white;
-        }
-        
-        .minimap-dot.current {
-            background: #fbbf24;
-            color: white;
-            transform: scale(1.3);
-            box-shadow: 0 4px 12px rgba(251, 191, 36, 0.5);
-        }
-        
-        .minimap-dot:hover {
-            transform: scale(1.2);
-        }
-        
-        .result-icon {
-            font-size: 5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            font-size: 1.1rem;
-            color: #64748b;
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
             font-weight: 600;
         }
         
-        .review-item {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
         }
         
-        .review-question {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .review-option {
-            padding: 0.75rem;
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-        }
-        
-        .review-option.user-answer {
+        .badge-error {
             background: #fee2e2;
-            border: 2px solid var(--danger);
+            color: #991b1b;
         }
         
-        .review-option.correct-answer {
-            background: #d1fae5;
-            border: 2px solid var(--success);
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transition: all 0.3s ease;
         }
         
-        .review-option.correct-user {
-            background: #d1fae5;
-            border: 2px solid var(--success);
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
         
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.5rem;
-            }
-            
-            .question-text {
-                font-size: 1.1rem;
-            }
-            
-            .minimap {
-                grid-template-columns: repeat(auto-fill, minmax(35px, 1fr));
-            }
-            
-            .minimap-dot {
-                width: 35px;
-                height: 35px;
-                font-size: 0.8rem;
-            }
+        .btn-secondary {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- HOME SCREEN -->
-        <div id="homeScreen">
-            <div class="header">
-                <h1>🏭 Quiz Rischi Specifici Magazzino</h1>
-                <p>128 domande complete su sicurezza e salute</p>
+    <div class="max-w-4xl mx-auto">
+        <!-- HEADER -->
+        <header class="text-center mb-8 text-white">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2">🛡️ Test Sicurezza sul Lavoro</h1>
+            <p class="text-lg opacity-90">Simulazione esame D.Lgs. 81/2008 - 30 domande random</p>
+        </header>
+
+        <!-- SCHERMATA INIZIALE -->
+        <div id="startScreen" class="glass-card p-8 text-center">
+            <div class="mb-6">
+                <svg class="w-24 h-24 mx-auto text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
             </div>
-            <div class="content text-center">
-                <div class="mb-8">
-                    <div class="text-6xl mb-4">📋</div>
-                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Test Completo</h2>
-                    <p class="text-lg text-gray-600 mb-6">
-                        • 15 domande estratte casualmente<br>
-                        • Tempo: 20 minuti<br>
-                        • Punteggio minimo: 12/15 (80%)<br>
-                        • Domande su tutti i rischi specifici
-                    </p>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Benvenuto al Test di Sicurezza</h2>
+            <div class="text-left max-w-md mx-auto mb-6 space-y-3">
+                <div class="flex items-start gap-3">
+                    <span class="text-2xl">📋</span>
+                    <p class="text-gray-700"><strong>30 domande</strong> estratte casualmente da un paniere di 128 quiz</p>
                 </div>
-                <button onclick="startTest()" class="btn btn-primary text-xl">
-                    ▶️ AVVIA TEST
-                </button>
+                <div class="flex items-start gap-3">
+                    <span class="text-2xl">⏱️</span>
+                    <p class="text-gray-700"><strong>40 secondi</strong> per ogni domanda (avanzamento automatico)</p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="text-2xl">✅</span>
+                    <p class="text-gray-700"><strong>Superamento:</strong> minimo 21/30 risposte corrette (70%)</p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="text-2xl">🔀</span>
+                    <p class="text-gray-700"><strong>Opzioni randomizzate</strong> per ogni domanda</p>
+                </div>
             </div>
+            <button onclick="startTest()" class="btn-primary px-8 py-4 rounded-full text-xl font-semibold">
+                Inizia il Test 🚀
+            </button>
         </div>
 
-        <!-- TEST SCREEN -->
+        <!-- SCHERMATA TEST -->
         <div id="testScreen" class="hidden">
-            <div class="header">
-                <div class="flex justify-between items-center flex-wrap gap-4">
+            <!-- TIMER E PROGRESS -->
+            <div class="glass-card p-6 mb-6">
+                <div class="grid grid-cols-2 gap-6 mb-4">
                     <div>
-                        <h2 class="text-2xl font-bold">Domanda <span id="currentQ">1</span>/15</h2>
+                        <p class="text-sm text-gray-600 mb-2">Domanda</p>
+                        <p class="text-2xl font-bold text-gray-800"><span id="currentQuestion">1</span>/30</p>
                     </div>
-                    <div class="timer" id="timer">20:00</div>
+                    <div>
+                        <p class="text-sm text-gray-600 mb-2">Tempo rimanente</p>
+                        <div id="timer" class="timer">40s</div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div id="progressBar" class="progress-fill" style="width: 3.33%"></div>
                 </div>
             </div>
-            <div class="content">
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressBar" style="width: 6.67%"></div>
-                </div>
-                
-                <div class="question-card">
-                    <div class="question-text" id="questionText"></div>
-                    <div id="optionsContainer"></div>
-                </div>
-                
-                <div class="flex justify-center gap-4 mb-4">
-                    <button onclick="showSummary()" class="btn btn-success">
-                        ✅ Termina e Mostra Risultati
-                    </button>
-                </div>
-                
-                <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-bold text-lg mb-3 text-center">📍 Mappa Domande</h3>
-                    <div class="minimap" id="minimap"></div>
-                </div>
+
+            <!-- DOMANDA -->
+            <div id="questionCard" class="glass-card p-8 question-card">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6" id="questionText"></h3>
+                <div id="optionsContainer" class="space-y-4"></div>
             </div>
         </div>
 
-        <!-- RESULTS SCREEN -->
-        <div id="resultsScreen" class="hidden">
-            <div class="header">
-                <h1>📊 Risultati Test</h1>
-            </div>
-            <div class="content">
-                <div class="text-center mb-8">
-                    <div class="result-icon" id="resultIcon">🎉</div>
-                    <h2 class="text-4xl font-bold mb-6" id="resultTitle">TEST SUPERATO!</h2>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                        <div class="stat-card">
-                            <div class="stat-value" id="correctDisplay">0</div>
-                            <div class="stat-label">Risposte Corrette</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="timeDisplay">00:00</div>
-                            <div class="stat-label">Tempo Impiegato</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value" id="percentageDisplay">0%</div>
-                            <div class="stat-label">Percentuale</div>
-                        </div>
+        <!-- SCHERMATA RIEPILOGO -->
+        <div id="summaryScreen" class="hidden">
+            <div class="glass-card p-8">
+                <!-- RISULTATO -->
+                <div id="resultHeader" class="text-center mb-8">
+                    <!-- Populated by JavaScript -->
+                </div>
+
+                <!-- STATISTICHE -->
+                <div class="grid grid-cols-3 gap-4 mb-8">
+                    <div class="text-center p-4 bg-gray-50 rounded-xl">
+                        <p class="text-3xl font-bold text-gray-800" id="totalCorrect">0</p>
+                        <p class="text-sm text-gray-600">Corrette</p>
+                    </div>
+                    <div class="text-center p-4 bg-gray-50 rounded-xl">
+                        <p class="text-3xl font-bold text-gray-800" id="totalIncorrect">0</p>
+                        <p class="text-sm text-gray-600">Errate</p>
+                    </div>
+                    <div class="text-center p-4 bg-gray-50 rounded-xl">
+                        <p class="text-3xl font-bold text-gray-800" id="percentage">0%</p>
+                        <p class="text-sm text-gray-600">Percentuale</p>
                     </div>
                 </div>
-                
-                <h3 class="text-2xl font-bold mb-4 text-center">📝 Riepilogo Dettagliato</h3>
-                <div id="reviewContainer"></div>
-                
-                <div class="flex justify-center gap-4 mt-8">
-                    <button onclick="location.reload()" class="btn btn-primary">
-                        ✨ Nuovo Test
+
+                <!-- RIEPILOGO DOMANDE -->
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">📊 Riepilogo Dettagliato</h3>
+                <div id="summaryList" class="space-y-4 mb-8 max-h-96 overflow-y-auto"></div>
+
+                <!-- PULSANTI AZIONE -->
+                <div class="flex gap-4 justify-center flex-wrap">
+                    <button onclick="retryTest()" class="btn-primary px-6 py-3 rounded-full font-semibold">
+                        🔄 Ripeti Test
+                    </button>
+                    <button onclick="generateNewTest()" class="btn-secondary px-6 py-3 rounded-full font-semibold">
+                        ✨ Genera Nuovo Test
                     </button>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
         // ========================================
         // DATABASE COMPLETO 128 DOMANDE
         // ========================================
@@ -467,32 +328,21 @@
                     "La combinazione di probabilità e gravità"
                 ],
                 correct: 1,
-                explanation: "Il 'pericolo' è definito come proprietà o qualità intrinseca di un fattore (sostanza, attrezzo, metodo) avente potenziale di causare danni (art. 2 D.Lgs. 81/2008)."
+                explanation: "Il pericolo è la proprietà intrinseca di un fattore (sostanza, attrezzatura, metodo) di poter causare danni. Il rischio è invece la probabilità che il danno si verifichi."
             },
             {
                 question: "Cosa si intende per 'rischio' in ambito di sicurezza sul lavoro?",
                 options: [
                     "La fonte del pericolo",
-                    "La probabilità di raggiungimento del livello potenziale di danno",
-                    "Il danno già verificatosi",
-                    "La misura di prevenzione adottata"
+                    "La probabilità di raggiungimento del livello potenziale di danno nelle condizioni di impiego/esposizione",
+                    "Solo la gravità del danno",
+                    "L'assenza di misure di prevenzione"
                 ],
                 correct: 1,
-                explanation: "Il 'rischio' è la probabilità di raggiungimento del livello potenziale di danno nelle condizioni di impiego o di esposizione (art. 2 D.Lgs. 81/2008)."
+                explanation: "Il rischio è la probabilità di raggiungimento del livello potenziale di danno nelle condizioni di impiego o di esposizione e dimensioni possibili del danno stesso (art. 2 D.Lgs. 81/2008)."
             },
             {
-                question: "Chi ha l'obbligo di nominare il medico competente?",
-                options: [
-                    "Il Rappresentante dei Lavoratori per la Sicurezza",
-                    "L'RSPP",
-                    "Il datore di lavoro quando la sorveglianza sanitaria è obbligatoria",
-                    "I lavoratori esposti a rischi"
-                ],
-                correct: 2,
-                explanation: "Il datore di lavoro ha l'obbligo di nominare il medico competente quando è prevista la sorveglianza sanitaria obbligatoria (art. 18 e 38 D.Lgs. 81/2008)."
-            },
-            {
-                question: "Qual è la durata minima della formazione generale per i lavoratori?",
+                question: "Qual è la durata minima del corso di formazione generale per i lavoratori?",
                 options: [
                     "2 ore",
                     "4 ore",
@@ -500,56 +350,43 @@
                     "12 ore"
                 ],
                 correct: 1,
-                explanation: "Secondo l'Accordo Stato-Regioni del 21/12/2011, la formazione generale ha durata minima di 4 ore per tutti i settori."
+                explanation: "L'Accordo Stato-Regioni del 21/12/2011 prevede una formazione generale di 4 ore per tutti i lavoratori, indipendentemente dal settore di rischio."
             },
             {
-                question: "Ogni quanti anni deve essere effettuato l'aggiornamento della formazione dei lavoratori?",
+                question: "Qual è la durata della formazione specifica per lavoratori in aziende a rischio basso?",
                 options: [
-                    "Ogni 2 anni",
-                    "Ogni 3 anni",
-                    "Ogni 5 anni",
+                    "4 ore",
+                    "8 ore",
+                    "12 ore",
+                    "16 ore"
+                ],
+                correct: 0,
+                explanation: "Per aziende a rischio BASSO, la formazione specifica è di 4 ore (totale con formazione generale: 8 ore). Rischio MEDIO: 8 ore. Rischio ALTO: 12 ore."
+            },
+            {
+                question: "Qual è la periodicità dell'aggiornamento della formazione dei lavoratori in materia di sicurezza?",
+                options: [
+                    "Annuale (2 ore)",
+                    "Ogni 3 anni (4 ore)",
+                    "Ogni 5 anni (6 ore)",
                     "Ogni 10 anni"
                 ],
                 correct: 2,
-                explanation: "L'Accordo Stato-Regioni del 21/12/2011 prevede un aggiornamento quinquennale (ogni 5 anni) di durata minima 6 ore per tutti i settori."
+                explanation: "L'aggiornamento della formazione per i lavoratori è quinquennale (ogni 5 anni) con durata minima di 6 ore per tutti i livelli di rischio (Accordo Stato-Regioni 21/12/2011)."
             },
             {
-                question: "Qual è il termine per l'aggiornamento del Documento di Valutazione dei Rischi (DVR)?",
+                question: "Chi è il Rappresentante dei Lavoratori per la Sicurezza (RLS)?",
                 options: [
-                    "Ogni anno",
-                    "In occasione di modifiche significative del processo produttivo",
-                    "Ogni 5 anni",
-                    "Solo in caso di infortuni gravi"
+                    "Un dipendente nominato dal datore di lavoro",
+                    "Il medico competente",
+                    "Persona eletta/designata dai lavoratori per rappresentarli in materia di salute e sicurezza",
+                    "L'RSPP"
                 ],
-                correct: 1,
-                explanation: "Il DVR deve essere rielaborato in occasione di modifiche del processo produttivo o dell'organizzazione significative ai fini della SSL (art. 29 D.Lgs. 81/2008)."
+                correct: 2,
+                explanation: "L'RLS è eletto o designato dai lavoratori per rappresentarli su salute e sicurezza. Ha diritto a formazione specifica, consultazione e accesso a documentazione (art. 47-50 D.Lgs. 81/2008)."
             },
             {
-                question: "Qual è la sanzione per il datore di lavoro che non effettua la valutazione dei rischi?",
-                options: [
-                    "Sanzione amministrativa pecuniaria",
-                    "Arresto da 3 a 6 mesi o ammenda",
-                    "Sospensione dell'attività",
-                    "Solo richiamo scritto"
-                ],
-                correct: 1,
-                explanation: "L'art. 55 del D.Lgs. 81/2008 prevede l'arresto da 3 a 6 mesi o ammenda da 2.500 a 6.400 euro per il datore di lavoro che non effettua la valutazione dei rischi."
-            },
-
-            // DOMANDE 11-20
-            {
-                question: "Qual è il numero minimo di lavoratori per l'obbligo di nomina del Rappresentante dei Lavoratori per la Sicurezza (RLS)?",
-                options: [
-                    "Non c'è numero minimo, va sempre nominato",
-                    "5 lavoratori",
-                    "10 lavoratori",
-                    "15 lavoratori"
-                ],
-                correct: 0,
-                explanation: "Non esiste un numero minimo: il RLS deve essere eletto o designato in tutte le aziende o unità produttive (art. 47 D.Lgs. 81/2008)."
-            },
-            {
-                question: "Qual è la durata minima della formazione iniziale per l'RLS?",
+                question: "Qual è la durata minima del corso di formazione per RLS in aziende fino a 50 dipendenti?",
                 options: [
                     "12 ore",
                     "24 ore",
@@ -557,51 +394,75 @@
                     "40 ore"
                 ],
                 correct: 2,
-                explanation: "L'art. 37 comma 11 del D.Lgs. 81/2008 prevede una formazione iniziale di almeno 32 ore per il Rappresentante dei Lavoratori per la Sicurezza."
+                explanation: "Il corso RLS ha durata minima di 32 ore (art. 37 comma 11 D.Lgs. 81/2008), con aggiornamento annuale di 4 ore (fino a 50 dipendenti) o 8 ore (oltre 50 dipendenti)."
             },
+
+            // DOMANDE 11-20
             {
-                question: "Qual è la periodicità dell'aggiornamento formativo dell'RLS?",
+                question: "Qual è la periodicità dell'aggiornamento della formazione per RLS?",
                 options: [
-                    "Annuale (4 ore aziende fino 50 dipendenti, 8 ore oltre)",
+                    "Annuale (4 ore per aziende fino a 50 dipendenti)",
                     "Biennale",
-                    "Quinquennale",
+                    "Ogni 5 anni",
                     "Non è previsto aggiornamento"
                 ],
                 correct: 0,
-                explanation: "L'aggiornamento dell'RLS è annuale: 4 ore per aziende fino a 50 dipendenti, 8 ore per aziende con più di 50 dipendenti."
+                explanation: "L'aggiornamento per RLS è annuale: 4 ore per aziende fino a 50 dipendenti, 8 ore per aziende oltre 50 dipendenti (art. 37 comma 11 D.Lgs. 81/2008)."
             },
             {
-                question: "Chi può svolgere direttamente i compiti di RSPP nelle aziende artigiane e industriali fino a 30 dipendenti?",
+                question: "Cos'è il DVR (Documento di Valutazione dei Rischi)?",
                 options: [
-                    "Qualsiasi dipendente",
-                    "Il datore di lavoro se ha frequentato appositi corsi",
-                    "Solo un consulente esterno",
-                    "Il lavoratore più anziano"
+                    "Un certificato medico",
+                    "Documento che contiene la valutazione di tutti i rischi e le misure di prevenzione/protezione",
+                    "Un registro infortuni",
+                    "Un piano di evacuazione"
                 ],
                 correct: 1,
-                explanation: "Secondo l'art. 34 del D.Lgs. 81/2008, il datore di lavoro può svolgere direttamente i compiti di RSPP previo corso di formazione specifico."
+                explanation: "Il DVR è il documento obbligatorio (art. 17 e 28 D.Lgs. 81/2008) che riporta la valutazione di tutti i rischi presenti in azienda e le misure di prevenzione e protezione attuate/programmate."
             },
             {
-                question: "Qual è la durata della formazione per il datore di lavoro che svolge i compiti di RSPP in aziende a rischio basso?",
+                question: "Entro quanto tempo dalla costituzione di una nuova impresa deve essere elaborato il DVR?",
                 options: [
-                    "8 ore",
-                    "16 ore",
-                    "24 ore",
-                    "32 ore"
+                    "Immediatamente",
+                    "Entro 30 giorni",
+                    "Entro 90 giorni",
+                    "Entro 6 mesi"
+                ],
+                correct: 2,
+                explanation: "Il DVR deve essere elaborato entro 90 giorni dalla data di inizio attività della nuova impresa (art. 28 comma 3-bis D.Lgs. 81/2008)."
+            },
+            {
+                question: "Quando deve essere aggiornato il DVR?",
+                options: [
+                    "Ogni anno obbligatoriamente",
+                    "In occasione di modifiche significative del processo produttivo, infortuni gravi, nuove valutazioni o quando richiesto dalla sorveglianza sanitaria",
+                    "Solo in caso di ispezione",
+                    "Mai, una volta redatto è valido per sempre"
                 ],
                 correct: 1,
-                explanation: "L'Accordo Stato-Regioni del 21/12/2011 prevede 16 ore di formazione per il datore di lavoro RSPP in aziende a rischio basso."
+                explanation: "Il DVR deve essere rielaborato in caso di modifiche significative del processo produttivo, evoluzione tecnica, infortuni significativi o esiti della sorveglianza sanitaria (art. 29 D.Lgs. 81/2008)."
             },
             {
-                question: "Cosa deve contenere obbligatoriamente il Piano di Emergenza ed Evacuazione?",
+                question: "Qual è la sanzione per il datore di lavoro che non elabora il DVR?",
                 options: [
-                    "Solo le vie di fuga",
-                    "Planimetrie, procedure, nominativi addetti, modalità di chiamata soccorsi",
+                    "Solo ammenda pecuniaria",
+                    "Arresto da 3 a 6 mesi o ammenda da 2.500 a 6.400 euro",
+                    "Nessuna sanzione",
+                    "Sospensione dell'attività"
+                ],
+                correct: 1,
+                explanation: "L'omessa elaborazione del DVR è punita con arresto da 3 a 6 mesi o ammenda da 2.740,00 a 7.014,40 euro (art. 55 comma 1 lett. a D.Lgs. 81/2008)."
+            },
+            {
+                question: "Cosa deve contenere il piano di emergenza aziendale?",
+                options: [
+                    "Solo l'elenco degli estintori",
+                    "Procedure di evacuazione, ruoli emergenza (addetti antincendio/primo soccorso), planimetrie, numeri utili, punto raccolta",
                     "Solo i numeri di emergenza",
-                    "L'elenco dei DPI"
+                    "Non è obbligatorio"
                 ],
                 correct: 1,
-                explanation: "Il Piano di Emergenza deve contenere planimetrie, procedure operative, addetti alle emergenze, modalità di allarme e chiamata soccorsi esterni (DM 10/03/1998)."
+                explanation: "Il piano di emergenza deve contenere: procedure di evacuazione, ruoli e responsabilità (squadre di emergenza), vie di fuga, punti di raccolta, planimetrie, numeri utili (art. 43 e All. IV D.Lgs. 81/2008)."
             },
             {
                 question: "Con quale periodicità devono essere effettuate le prove di evacuazione?",
@@ -609,59 +470,13 @@
                     "Mensile",
                     "Trimestrale",
                     "Semestrale",
-                    "Annuale"
+                    "Almeno annuale (più frequente in caso di alto rischio)"
                 ],
-                correct: 2,
-                explanation: "Il DM 10/03/1998 prevede almeno due esercitazioni antincendio all'anno (periodicità semestrale) per verificare l'efficacia del piano di emergenza."
+                correct: 3,
+                explanation: "Le prove di evacuazione devono essere effettuate almeno una volta l'anno. In attività ad alto rischio (es. scuole, ospedali) possono essere richieste prove più frequenti (semestrali)."
             },
             {
-                question: "Qual è la larghezza minima delle vie di fuga?",
-                options: [
-                    "60 cm",
-                    "80 cm",
-                    "120 cm",
-                    "Non è specificata"
-                ],
-                correct: 2,
-                explanation: "Il DM 10/03/1998 stabilisce che le vie di esodo devono avere larghezza minima di 120 cm (oppure 80 cm se servono meno di 25 persone)."
-            },
-            {
-                question: "Qual è la distanza massima da percorrere per raggiungere un'uscita di sicurezza in attività a rischio medio?",
-                options: [
-                    "15 metri",
-                    "30 metri",
-                    "45 metri",
-                    "60 metri"
-                ],
-                correct: 2,
-                explanation: "Per attività a rischio di incendio medio, la distanza massima da percorrere per raggiungere un'uscita di sicurezza è 45 metri (DM 10/03/1998)."
-            },
-            {
-                question: "Qual è la classe di rischio incendio di un ufficio con meno di 300 persone?",
-                options: [
-                    "Rischio basso",
-                    "Rischio medio",
-                    "Rischio elevato",
-                    "Rischio altissimo"
-                ],
-                correct: 0,
-                explanation: "Gli uffici con affollamento inferiore a 300 persone sono classificati a rischio incendio basso secondo il DM 10/03/1998."
-            },
-
-            // DOMANDE 21-30
-            {
-                question: "Qual è il numero minimo di addetti antincendio richiesto in un'azienda?",
-                options: [
-                    "1 addetto ogni 10 lavoratori",
-                    "Almeno 1 addetto, numero sufficiente in base alla valutazione del rischio",
-                    "2 addetti obbligatori",
-                    "Dipende solo dalle dimensioni dell'azienda"
-                ],
-                correct: 1,
-                explanation: "Non esiste un rapporto fisso: il numero deve essere adeguato in base alla valutazione del rischio incendio e garantire sempre la presenza di almeno un addetto."
-            },
-            {
-                question: "Qual è la durata della formazione per addetti antincendio in attività a rischio basso?",
+                question: "Qual è la durata minima del corso di formazione per addetti antincendio in attività a rischio basso?",
                 options: [
                     "2 ore",
                     "4 ore",
@@ -669,835 +484,444 @@
                     "16 ore"
                 ],
                 correct: 1,
-                explanation: "Il DM 10/03/1998 prevede un corso di 4 ore per addetti antincendio in attività a rischio basso."
+                explanation: "Per attività a rischio incendio BASSO: 4 ore. MEDIO: 8 ore. ALTO: 16 ore (D.M. 10/03/1998, in attesa del nuovo D.M. 02/09/2021 in vigore dal 04/10/2022)."
             },
             {
-                question: "Ogni quanti anni deve essere rinnovata la formazione degli addetti antincendio in attività a rischio medio?",
+                question: "Qual è la periodicità dell'aggiornamento per addetti antincendio (rischio basso)?",
                 options: [
-                    "Ogni anno",
-                    "Ogni 2 anni",
+                    "Annuale",
                     "Ogni 3 anni",
-                    "Ogni 5 anni"
-                ],
-                correct: 3,
-                explanation: "Il DM 02/09/2021 prevede l'aggiornamento quinquennale (5 anni) per addetti antincendio in attività a rischio medio."
-            },
-            {
-                question: "Qual è il tipo di estintore più idoneo per un quadro elettrico in tensione?",
-                options: [
-                    "Estintore a schiuma",
-                    "Estintore ad acqua",
-                    "Estintore a CO2",
-                    "Estintore a polvere ABC"
+                    "Ogni 5 anni",
+                    "Ogni 10 anni"
                 ],
                 correct: 2,
-                explanation: "L'estintore a CO2 è dielettrico (non conduce elettricità) ed è il più idoneo per incendi su apparecchiature elettriche in tensione."
+                explanation: "L'aggiornamento per addetti antincendio è quinquennale (ogni 5 anni): 2 ore per rischio basso, 5 ore per medio, 8 ore per alto (D.M. 02/09/2021)."
             },
             {
-                question: "A quale classe di fuoco appartiene un incendio di materiali solidi (legno, carta, tessuti)?",
+                question: "Qual è la durata minima del corso di formazione per addetti al primo soccorso in aziende di gruppo B?",
                 options: [
-                    "Classe A",
-                    "Classe B",
-                    "Classe C",
-                    "Classe D"
-                ],
-                correct: 0,
-                explanation: "La classe A comprende incendi di materiali solidi combustibili come legno, carta, tessuti, che formano brace."
-            },
-            {
-                question: "Qual è la distanza massima da percorrere per raggiungere un estintore?",
-                options: [
-                    "10 metri",
-                    "20 metri",
-                    "30 metri",
-                    "Non è specificata"
-                ],
-                correct: 2,
-                explanation: "Il DM 10/03/1998 raccomanda che gli estintori siano distribuiti in modo che la distanza da percorrere non superi i 30 metri."
-            },
-            {
-                question: "Qual è il numero minimo di addetti al primo soccorso richiesto in azienda?",
-                options: [
-                    "1 addetto ogni 20 lavoratori",
-                    "Almeno 1 addetto, numero adeguato per garantire presenza costante",
-                    "2 addetti obbligatori",
-                    "Solo nelle aziende con più di 50 dipendenti"
-                ],
-                correct: 1,
-                explanation: "Il DM 388/2003 richiede un numero sufficiente di addetti per garantire presenza in ogni turno lavorativo, minimo 1 addetto sempre presente."
-            },
-            {
-                question: "In quale gruppo di aziende ai fini del primo soccorso rientra un'azienda con 5 dipendenti nel settore commercio?",
-                options: [
-                    "Gruppo A",
-                    "Gruppo B",
-                    "Gruppo C",
-                    "Non rientra in alcun gruppo"
-                ],
-                correct: 2,
-                explanation: "Le aziende con meno di 5 lavoratori nei settori a basso rischio (es. commercio, uffici) rientrano nel Gruppo C (DM 388/2003)."
-            },
-            {
-                question: "Qual è la durata del corso di formazione per addetti al primo soccorso in aziende del Gruppo B?",
-                options: [
-                    "4 ore",
                     "8 ore",
                     "12 ore",
-                    "16 ore"
+                    "16 ore",
+                    "24 ore"
                 ],
-                correct: 2,
-                explanation: "Il DM 388/2003 prevede un corso di 12 ore per addetti al primo soccorso nelle aziende del Gruppo B e C."
+                correct: 1,
+                explanation: "Per aziende gruppo B e C: 12 ore. Per aziende gruppo A (alto rischio): 16 ore (D.M. 388/2003). Aggiornamento triennale: 4 ore (gruppo B/C), 6 ore (gruppo A)."
             },
+
+            // DOMANDE 21-30
             {
-                question: "Ogni quanti anni è previsto l'aggiornamento della formazione per addetti al primo soccorso del Gruppo A?",
+                question: "Qual è la periodicità dell'aggiornamento per addetti al primo soccorso?",
                 options: [
-                    "Ogni anno",
-                    "Ogni 2 anni",
+                    "Annuale",
+                    "Biennale",
                     "Ogni 3 anni",
                     "Ogni 5 anni"
                 ],
                 correct: 2,
-                explanation: "Il DM 388/2003 stabilisce un aggiornamento triennale di 6 ore per addetti al primo soccorso delle aziende del Gruppo A."
+                explanation: "L'aggiornamento per addetti al primo soccorso è triennale (ogni 3 anni): 4 ore per gruppi B e C, 6 ore per gruppo A (D.M. 388/2003)."
             },
-
-            // DOMANDE 31-40
             {
-                question: "Cosa deve fare prioritariamente un addetto al primo soccorso in caso di emergenza?",
+                question: "Cosa sono i DPI (Dispositivi di Protezione Individuale)?",
                 options: [
-                    "Somministrare farmaci",
-                    "Valutare la sicurezza della scena e proteggere se stesso",
-                    "Spostare immediatamente l'infortunato",
-                    "Chiamare i familiari"
+                    "Attrezzature collettive",
+                    "Attrezzature destinate ad essere indossate dal lavoratore per proteggerlo dai rischi",
+                    "Segnaletica di sicurezza",
+                    "Procedure operative"
                 ],
                 correct: 1,
-                explanation: "La priorità è garantire la sicurezza della scena e dell'operatore prima di intervenire sull'infortunato (protocollo BLS)."
+                explanation: "I DPI sono attrezzature destinate ad essere indossate e tenute dal lavoratore per proteggerlo contro uno o più rischi (art. 74 D.Lgs. 81/2008 e Regolamento UE 2016/425)."
             },
             {
-                question: "Qual è il numero per l'emergenza sanitaria in Italia?",
+                question: "Quante categorie di DPI esistono secondo il Regolamento UE 2016/425?",
                 options: [
-                    "112",
-                    "113",
-                    "115",
-                    "118"
-                ],
-                correct: 3,
-                explanation: "Il 118 è il numero nazionale di emergenza sanitaria (NUE 112 è il numero unico europeo che reindirizza comunque al 118)."
-            },
-            {
-                question: "Qual è il rapporto compressioni/ventilazioni nella RCP (rianimazione cardiopolmonare) nell'adulto?",
-                options: [
-                    "15:2",
-                    "30:2",
-                    "30:1",
-                    "15:1"
+                    "2 categorie",
+                    "3 categorie (I, II, III con rischio crescente)",
+                    "4 categorie",
+                    "5 categorie"
                 ],
                 correct: 1,
-                explanation: "Le linee guida internazionali (ERC 2021) prevedono un rapporto 30 compressioni toraciche ogni 2 ventilazioni."
+                explanation: "I DPI sono classificati in 3 categorie: I (rischi minimi), II (rischi medi), III (rischi gravi o mortali, es. anticaduta, protezione vie respiratorie) secondo Reg. UE 2016/425."
             },
             {
-                question: "Qual è la profondità corretta delle compressioni toraciche nell'adulto?",
+                question: "Chi deve fornire i DPI ai lavoratori?",
                 options: [
-                    "2-3 cm",
-                    "3-4 cm",
-                    "5-6 cm",
-                    "7-8 cm"
-                ],
-                correct: 2,
-                explanation: "Le linee guida ERC 2021 raccomandano compressioni profonde 5-6 cm nell'adulto, permettendo il riespansione completa del torace."
-            },
-            {
-                question: "Cosa si intende per DPI (Dispositivo di Protezione Individuale)?",
-                options: [
-                    "Dispositivo utilizzato per proteggere le macchine",
-                    "Attrezzatura destinata ad essere indossata dal lavoratore per proteggerlo dai rischi",
-                    "Sistema di allarme aziendale",
-                    "Documento di valutazione dei rischi"
+                    "I lavoratori devono acquistarli autonomamente",
+                    "Il datore di lavoro, gratuitamente",
+                    "Il rappresentante dei lavoratori",
+                    "L'RSPP"
                 ],
                 correct: 1,
-                explanation: "Il DPI è definito come qualsiasi attrezzatura destinata ad essere indossata dal lavoratore per proteggerlo contro uno o più rischi (D.Lgs. 81/2008 art. 74)."
+                explanation: "Il datore di lavoro deve fornire gratuitamente i DPI ai lavoratori e assicurarsi che siano adeguati, conformi (marcatura CE), mantenuti efficienti e che i lavoratori siano addestrati (art. 77-78 D.Lgs. 81/2008)."
             },
             {
-                question: "In quale categoria rientrano i DPI per la protezione dell'udito?",
+                question: "Quando è obbligatorio l'addestramento per l'uso dei DPI?",
                 options: [
-                    "I categoria (rischi minimi)",
-                    "II categoria (rischi significativi)",
-                    "III categoria (rischi gravi)",
-                    "Non sono classificati"
+                    "Sempre per tutti i DPI",
+                    "Solo per DPI di terza categoria e per dispositivi di protezione dell'udito",
+                    "Mai, basta la consegna",
+                    "Solo su richiesta del lavoratore"
                 ],
                 correct: 1,
-                explanation: "I DPI dell'udito (cuffie, tappi) appartengono alla II categoria (rischi significativi ma non irreversibili - Reg. UE 2016/425)."
+                explanation: "L'addestramento è obbligatorio per DPI di III categoria (rischi gravi/mortali) e per dispositivi di protezione dell'udito (art. 77 comma 5 D.Lgs. 81/2008)."
+            },
+            {
+                question: "Qual è la marcatura obbligatoria sui DPI per attestarne la conformità?",
+                options: [
+                    "Marchio nazionale",
+                    "Marcatura CE",
+                    "Timbro del produttore",
+                    "Codice QR"
+                ],
+                correct: 1,
+                explanation: "Tutti i DPI devono riportare la marcatura CE che attesta la conformità ai requisiti essenziali di salute e sicurezza del Regolamento UE 2016/425."
             },
             {
                 question: "Qual è l'obbligo del lavoratore riguardo ai DPI?",
                 options: [
-                    "Può decidere autonomamente se indossarli",
-                    "Deve utilizzarli conformemente alle informazioni e alla formazione ricevute",
-                    "Deve acquistarli a proprie spese",
-                    "Deve indossarli solo in presenza del datore di lavoro"
+                    "Nessun obbligo",
+                    "Utilizzarli correttamente, averne cura, non apportare modifiche, segnalare difetti",
+                    "Solo indossarli quando ispezionati",
+                    "Acquistarli personalmente"
                 ],
                 correct: 1,
-                explanation: "L'art. 78 del D.Lgs. 81/2008 obbliga i lavoratori ad utilizzare i DPI conformemente alle informazioni ricevute e alla formazione svolta."
+                explanation: "Il lavoratore deve: utilizzare i DPI conformemente all'addestramento, averne cura, non apportare modifiche di propria iniziativa, segnalare difetti o inconvenienti (art. 78 D.Lgs. 81/2008)."
             },
             {
-                question: "Chi ha l'obbligo di fornire i DPI ai lavoratori?",
+                question: "Cosa si intende per 'lavoro in quota'?",
                 options: [
-                    "I lavoratori devono acquistarli autonomamente",
-                    "Il datore di lavoro gratuitamente",
-                    "L'RSPP",
-                    "Il medico competente"
+                    "Lavoro oltre i 10 metri dal suolo",
+                    "Attività lavorativa che espone il lavoratore al rischio di caduta da altezza superiore a 2 metri",
+                    "Solo lavori su ponteggi",
+                    "Lavori in montagna"
                 ],
                 correct: 1,
-                explanation: "L'art. 18 del D.Lgs. 81/2008 obbliga il datore di lavoro a fornire ai lavoratori i necessari DPI gratuitamente."
+                explanation: "Per lavoro in quota si intende attività lavorativa che espone il lavoratore al rischio di caduta da altezza superiore a 2 metri rispetto a un piano stabile (art. 107 D.Lgs. 81/2008)."
             },
             {
-                question: "Qual è la marcatura obbligatoria per i DPI immessi sul mercato europeo?",
+                question: "Qual è la priorità delle misure di protezione per lavori in quota?",
                 options: [
-                    "Marchio CE",
-                    "Marchio ISO",
-                    "Marchio TUV",
-                    "Marchio IMQ"
+                    "Prima i DPI anticaduta",
+                    "Prima misure di protezione collettiva (parapetti, reti), poi DPI come ultima risorsa",
+                    "Solo formazione dei lavoratori",
+                    "Nessuna priorità definita"
                 ],
-                correct: 0,
-                explanation: "Il Regolamento UE 2016/425 impone la marcatura CE per tutti i DPI immessi sul mercato europeo dopo valutazione di conformità."
+                correct: 1,
+                explanation: "La priorità è: 1) protezioni collettive (parapetti, reti); 2) protezioni individuali (DPI anticaduta) solo quando le collettive non sono applicabili (art. 111 D.Lgs. 81/2008)."
             },
             {
-                question: "Qual è la frequenza minima della sorveglianza sanitaria per lavoratori esposti a rumore sopra 85 dB(A)?",
+                question: "Qual è l'obbligo del datore di lavoro prima di iniziare lavori in quota?",
                 options: [
-                    "Trimestrale",
-                    "Semestrale",
-                    "Annuale",
-                    "Biennale"
+                    "Nessun obbligo particolare",
+                    "Valutare i rischi, privilegiare protezioni collettive, fornire DPI adeguati, formare e addestrare i lavoratori",
+                    "Solo fornire scale",
+                    "Avvisare i vigili del fuoco"
                 ],
-                correct: 2,
-                explanation: "L'art. 196 del D.Lgs. 81/2008 prevede controllo sanitario annuale per lavoratori esposti a livelli di rumore superiori agli 85 dB(A)."
+                correct: 1,
+                explanation: "Il datore di lavoro deve: valutare i rischi, adottare misure collettive prioritarie, fornire DPI anticaduta idonei, formare/addestrare i lavoratori (art. 111 e 136-139 D.Lgs. 81/2008)."
             },
 
-            // DOMANDE 41-50
+            // DOMANDE 31-40
             {
-                question: "Qual è il limite di esposizione giornaliera al rumore che non deve mai essere superato?",
+                question: "Qual è la periodicità delle verifiche periodiche per attrezzature di sollevamento (gru, piattaforme)?",
                 options: [
-                    "80 dB(A)",
-                    "85 dB(A)",
-                    "87 dB(A)",
-                    "90 dB(A)"
-                ],
-                correct: 2,
-                explanation: "L'art. 189 del D.Lgs. 81/2008 stabilisce 87 dB(A) come valore limite di esposizione che non deve mai essere superato (con DPI)."
-            },
-            {
-                question: "A partire da quale livello di esposizione giornaliera al rumore è obbligatorio l'uso dei DPI uditivi?",
-                options: [
-                    "80 dB(A)",
-                    "85 dB(A)",
-                    "87 dB(A)",
-                    "90 dB(A)"
-                ],
-                correct: 1,
-                explanation: "A partire da 85 dB(A) (valore superiore d'azione) l'uso dei DPI uditivi diventa obbligatorio (art. 193 D.Lgs. 81/2008)."
-            },
-            {
-                question: "Qual è il valore inferiore di azione per l'esposizione giornaliera al rumore?",
-                options: [
-                    "75 dB(A)",
-                    "80 dB(A)",
-                    "85 dB(A)",
-                    "87 dB(A)"
-                ],
-                correct: 1,
-                explanation: "Il valore inferiore di azione è 80 dB(A): oltre questa soglia scattano obblighi informativi e messa a disposizione dei DPI (art. 189 D.Lgs. 81/2008)."
-            },
-            {
-                question: "Qual è il limite di peso massimo sollevabile manualmente da un lavoratore maschio adulto in condizioni ideali?",
-                options: [
-                    "15 kg",
-                    "20 kg",
-                    "25 kg",
-                    "30 kg"
-                ],
-                correct: 2,
-                explanation: "La norma ISO 11228-1 e le Linee Guida NIOSH indicano 25 kg come peso massimo sollevabile in condizioni ideali per un maschio adulto."
-            },
-            {
-                question: "Qual è il limite di peso massimo sollevabile manualmente da una lavoratrice femmina adulta in condizioni ideali?",
-                options: [
-                    "10 kg",
-                    "15 kg",
-                    "20 kg",
-                    "25 kg"
-                ],
-                correct: 1,
-                explanation: "Per le lavoratrici il peso massimo raccomandato in condizioni ideali è 15 kg (ridotto rispetto ai 25 kg per i maschi)."
-            },
-            {
-                question: "Qual è l'altezza ideale da terra per la movimentazione manuale dei carichi?",
-                options: [
-                    "Da terra a 30 cm",
-                    "Da 50 cm a 75 cm",
-                    "Da 75 cm a 100 cm",
-                    "Oltre 150 cm"
-                ],
-                correct: 1,
-                explanation: "L'altezza ideale per sollevare carichi è tra i 50 e 75 cm da terra (zona di comfort tra le nocche e la spalla)."
-            },
-            {
-                question: "Qual è la distanza massima orizzontale raccomandata del carico dal corpo durante la movimentazione?",
-                options: [
-                    "10 cm",
-                    "25 cm",
-                    "40 cm",
-                    "60 cm"
-                ],
-                correct: 1,
-                explanation: "La distanza orizzontale del carico dal corpo non dovrebbe superare i 25 cm per evitare sovraccarichi lombari (metodo NIOSH)."
-            },
-            {
-                question: "A partire da quale livello di esposizione giornaliera alle vibrazioni mano-braccio scatta l'obbligo di sorveglianza sanitaria?",
-                options: [
-                    "1,5 m/s²",
-                    "2,5 m/s²",
-                    "3,5 m/s²",
-                    "5 m/s²"
-                ],
-                correct: 1,
-                explanation: "L'art. 202 del D.Lgs. 81/2008 stabilisce 2,5 m/s² come valore di azione per le vibrazioni mano-braccio che attiva la sorveglianza sanitaria."
-            },
-            {
-                question: "Qual è il valore limite di esposizione giornaliera alle vibrazioni mano-braccio?",
-                options: [
-                    "2,5 m/s²",
-                    "3,5 m/s²",
-                    "5 m/s²",
-                    "7,5 m/s²"
-                ],
-                correct: 2,
-                explanation: "Il valore limite di esposizione per vibrazioni mano-braccio è 5 m/s² su 8 ore: non deve mai essere superato (art. 201 D.Lgs. 81/2008)."
-            },
-            {
-                question: "Qual è il valore di azione per l'esposizione giornaliera alle vibrazioni al corpo intero?",
-                options: [
-                    "0,3 m/s²",
-                    "0,5 m/s²",
-                    "0,8 m/s²",
-                    "1,0 m/s²"
-                ],
-                correct: 1,
-                explanation: "Il valore di azione per vibrazioni corpo intero è 0,5 m/s² su 8 ore (art. 201 D.Lgs. 81/2008)."
-            },
-
-            // DOMANDE 51-60
-            {
-                question: "Qual è il valore limite di esposizione giornaliera alle vibrazioni al corpo intero?",
-                options: [
-                    "0,5 m/s²",
-                    "0,8 m/s²",
-                    "1,0 m/s²",
-                    "1,15 m/s²"
-                ],
-                correct: 3,
-                explanation: "Il valore limite per vibrazioni corpo intero è 1,15 m/s² su 8 ore: superarlo è vietato (art. 201 D.Lgs. 81/2008)."
-            },
-            {
-                question: "Qual è il simbolo di pericolo per le sostanze cancerogene secondo il Regolamento CLP?",
-                options: [
-                    "Teschio su tibie incrociate",
-                    "Punto esclamativo",
-                    "Bomba che esplode",
-                    "Cilindro di gas"
-                ],
-                correct: 0,
-                explanation: "Il pittogramma GHS06 (teschio su tibie incrociate) indica tossicità acuta, mentre GHS08 (danno alla salute) indica cancerogeni/mutageni."
-            },
-            {
-                question: "Cosa significa la sigla CMR in riferimento alle sostanze chimiche?",
-                options: [
-                    "Corrosivo, Mutageno, Reattivo",
-                    "Cancerogeno, Mutageno, tossico per la Riproduzione",
-                    "Comburente, Metallico, Radioattivo",
-                    "Criogenico, Mortale, Respirabile"
-                ],
-                correct: 1,
-                explanation: "CMR identifica sostanze Cancerogene, Mutagene e tossiche per la Riproduzione (categorie di pericolo 1A, 1B, 2 del Reg. CLP)."
-            },
-            {
-                question: "Qual è il documento che accompagna le sostanze chimiche pericolose con tutte le informazioni di sicurezza?",
-                options: [
-                    "Certificato di conformità",
-                    "Scheda di Sicurezza (SDS)",
-                    "Manuale d'uso",
-                    "Dichiarazione del produttore"
-                ],
-                correct: 1,
-                explanation: "La Scheda di Dati di Sicurezza (SDS) è il documento obbligatorio che fornisce informazioni su proprietà, pericoli e uso sicuro delle sostanze (Reg. REACH)."
-            },
-            {
-                question: "Quante sezioni contiene obbligatoriamente una Scheda di Dati di Sicurezza (SDS)?",
-                options: [
-                    "8 sezioni",
-                    "12 sezioni",
-                    "16 sezioni",
-                    "20 sezioni"
-                ],
-                correct: 2,
-                explanation: "La SDS contiene obbligatoriamente 16 sezioni standardizzate secondo il Regolamento (UE) 2015/830 che modifica il REACH."
-            },
-            {
-                question: "Qual è il significato del pittogramma GHS07 (punto esclamativo)?",
-                options: [
-                    "Esplosivo",
-                    "Tossicità acuta, irritazione, sensibilizzazione",
-                    "Corrosivo",
-                    "Gas sotto pressione"
-                ],
-                correct: 1,
-                explanation: "GHS07 indica pericoli di minore gravità: tossicità acuta categoria 4, irritazione cutanea/oculare, sensibilizzazione cutanea, tossicità specifica."
-            },
-            {
-                question: "Qual è il limite di esposizione professionale (OEL) per l'amianto?",
-                options: [
-                    "0,01 fibre/cm³",
-                    "0,1 fibre/cm³",
-                    "1 fibra/cm³",
-                    "L'amianto è vietato, limite zero"
-                ],
-                correct: 0,
-                explanation: "Nonostante il divieto (L. 257/1992), per attività di bonifica il limite è 0,01 fibre/cm³ misurate su 8 ore (D.Lgs. 81/2008 art. 254)."
-            },
-            {
-                question: "Da quale anno è vietato l'uso dell'amianto in Italia?",
-                options: [
-                    "1982",
-                    "1992",
-                    "2002",
-                    "2012"
-                ],
-                correct: 1,
-                explanation: "La Legge 257 del 27 marzo 1992 ha vietato l'estrazione, importazione, produzione e commercializzazione dell'amianto in Italia."
-            },
-            {
-                question: "Qual è la modalità principale di esposizione pericolosa all'amianto?",
-                options: [
-                    "Contatto cutaneo",
-                    "Ingestione",
-                    "Inalazione di fibre",
-                    "Assorbimento attraverso gli occhi"
-                ],
-                correct: 2,
-                explanation: "L'inalazione di fibre di amianto aerodisperse è la via principale di esposizione che causa patologie polmonari (asbestosi, mesotelioma, carcinoma)."
-            },
-            {
-                question: "Chi può effettuare attività di bonifica dell'amianto?",
-                options: [
-                    "Qualsiasi impresa edile",
-                    "Solo imprese iscritte all'Albo Gestori Ambientali Categoria 10",
-                    "Solo il proprietario dell'immobile",
-                    "Qualsiasi lavoratore autonomo"
-                ],
-                correct: 1,
-                explanation: "Solo le imprese iscritte all'Albo Gestori Ambientali Categoria 10 possono svolgere attività di bonifica amianto (D.Lgs. 152/2006)."
-            },
-
-            // DOMANDE 61-70
-            {
-                question: "Qual è il valore inferiore di azione per l'esposizione a radiazioni ottiche artificiali (laser)?",
-                options: [
-                    "Dipende dalla lunghezza d'onda e dalla classe del laser",
-                    "1 mW/cm²",
-                    "10 mW/cm²",
-                    "Non esistono valori di azione"
-                ],
-                correct: 0,
-                explanation: "I valori limite di esposizione (VLE) per radiazioni ottiche variano in base alla lunghezza d'onda e classe del laser (Capo V Titolo VIII D.Lgs. 81/2008)."
-            },
-            {
-                question: "Quale classe di laser richiede misure di protezione più stringenti?",
-                options: [
-                    "Classe 1",
-                    "Classe 2",
-                    "Classe 3B",
-                    "Classe 4"
-                ],
-                correct: 3,
-                explanation: "I laser di Classe 4 sono i più pericolosi: possono causare danni gravi a pelle e occhi anche per riflessione diffusa (norma IEC 60825-1)."
-            },
-            {
-                question: "Qual è il principale rischio dell'esposizione a radiazioni UV (ultraviolette)?",
-                options: [
-                    "Danni al sistema nervoso",
-                    "Ustioni cutanee e danni oculari (cheratocongiuntivite, cataratta)",
-                    "Sterilità",
-                    "Perdita dell'udito"
-                ],
-                correct: 1,
-                explanation: "Le radiazioni UV causano eritema cutaneo, cheratocongiuntivite attinica, cataratta e aumentano il rischio di tumori cutanei (art. 214 D.Lgs. 81/2008)."
-            },
-            {
-                question: "Qual è il valore limite di esposizione per i campi elettromagnetici a 50 Hz (frequenza industriale)?",
-                options: [
-                    "10 µT",
-                    "100 µT",
-                    "1000 µT (1 mT)",
-                    "Non è definito"
-                ],
-                correct: 2,
-                explanation: "Il valore limite di esposizione per campi magnetici a 50 Hz è 1 mT (1000 µT) secondo la Direttiva 2013/35/UE recepita nel D.Lgs. 81/2008."
-            },
-            {
-                question: "Cosa si intende per 'atmosfera esplosiva' (ATEX)?",
-                options: [
-                    "Ambiente con alta concentrazione di CO2",
-                    "Miscela di aria e sostanze infiammabili (gas, vapori, polveri) in proporzioni tali da causare esplosione",
-                    "Ambiente ad alta pressione",
-                    "Zona con presenza di materiale radioattivo"
-                ],
-                correct: 1,
-                explanation: "Un'atmosfera esplosiva è una miscela di aria e sostanze infiammabili in cui la combustione si propaga a tutta la miscela (D.Lgs. 81/2008 Titolo XI)."
-            },
-            {
-                question: "Qual è il documento obbligatorio per la valutazione del rischio di atmosfere esplosive?",
-                options: [
-                    "DUVRI",
-                    "Documento di Protezione contro le Esplosioni (DPE)",
-                    "Piano Operativo di Sicurezza (POS)",
-                    "Scheda di Sicurezza (SDS)"
-                ],
-                correct: 1,
-                explanation: "Il Documento sulla Protezione contro le Esplosioni (DPE) è obbligatorio dove possono formarsi atmosfere esplosive (art. 294 D.Lgs. 81/2008)."
-            },
-            {
-                question: "Cosa indicano le zone classificate ATEX 0, 1 e 2?",
-                options: [
-                    "Livello di rischio incendio",
-                    "Frequenza e durata della presenza di atmosfera esplosiva da gas",
-                    "Temperatura dell'ambiente",
-                    "Concentrazione di ossigeno"
-                ],
-                correct: 1,
-                explanation: "Zona 0: presenza continua; Zona 1: probabile durante attività normale; Zona 2: improbabile e breve durata (Direttiva 1999/92/CE)."
-            },
-            {
-                question: "Qual è il significato della marcatura CE su una macchina?",
-                options: [
-                    "Certificazione di qualità",
-                    "Conformità ai requisiti essenziali di sicurezza delle direttive UE",
-                    "Prodotto fabbricato in Europa",
-                    "Garanzia di 2 anni"
-                ],
-                correct: 1,
-                explanation: "La marcatura CE attesta che il fabbricante dichiara la conformità della macchina ai requisiti essenziali di sicurezza (Direttiva Macchine 2006/42/CE)."
-            },
-            {
-                question: "Qual è il documento che deve obbligatoriamente accompagnare una macchina marcata CE?",
-                options: [
-                    "Certificato di collaudo",
-                    "Dichiarazione di Conformità CE e Manuale d'uso",
-                    "Polizza assicurativa",
-                    "Contratto di manutenzione"
-                ],
-                correct: 1,
-                explanation: "Ogni macchina deve essere corredata di Dichiarazione CE di Conformità e Manuale di istruzioni nella lingua dell'utilizzatore (Dir. 2006/42/CE)."
-            },
-            {
-                question: "Qual è la periodicità delle verifiche periodiche per apparecchi di sollevamento (gru, montacarichi)?",
-                options: [
-                    "Semestrale",
                     "Annuale",
                     "Biennale",
-                    "Quinquennale"
-                ],
-                correct: 1,
-                explanation: "Gli apparecchi di sollevamento devono essere sottoposti a verifica periodica annuale da parte di organismi abilitati (D.Lgs. 81/2008 All. VII)."
-            },
-
-            // DOMANDE 71-80
-            {
-                question: "Chi effettua le verifiche periodiche sulle attrezzature di lavoro?",
-                options: [
-                    "Il datore di lavoro autonomamente",
-                    "ASL/ARPA o organismi notificati abilitati",
-                    "L'RSPP",
-                    "Il medico competente"
-                ],
-                correct: 1,
-                explanation: "Le verifiche periodiche sono effettuate da ASL/ARPA o da soggetti pubblici/privati abilitati dal Ministero (art. 71 D.Lgs. 81/2008)."
-            },
-            {
-                question: "Qual è l'obbligo del datore di lavoro riguardo alla manutenzione delle attrezzature di lavoro?",
-                options: [
-                    "Manutenzione solo in caso di guasto",
-                    "Manutenzione secondo le indicazioni del fabbricante",
-                    "Manutenzione ogni 5 anni",
-                    "Non è obbligatoria se l'attrezzatura funziona"
-                ],
-                correct: 1,
-                explanation: "Il datore di lavoro deve garantire la manutenzione delle attrezzature secondo le indicazioni del fabbricante o delle norme di buona tecnica (art. 71 D.Lgs. 81/2008)."
-            },
-            {
-                question: "Cosa si intende per 'lavoro in quota' secondo il D.Lgs. 81/2008?",
-                options: [
-                    "Lavoro a più di 3 metri di altezza",
-                    "Lavoro in cui sussiste rischio di caduta da una quota >2 metri",
-                    "Lavoro su tetti e coperture",
-                    "Lavoro con uso di scale"
-                ],
-                correct: 1,
-                explanation: "Si definisce lavoro in quota l'attività lavorativa che espone il lavoratore al rischio di caduta da una quota >2 metri (art. 107 D.Lgs. 81/2008)."
-            },
-            {
-                question: "Qual è la misura di protezione prioritaria contro le cadute dall'alto?",
-                options: [
-                    "Cinture di sicurezza",
-                    "Reti di protezione",
-                    "Protezioni collettive (parapetti, impalcati completi)",
-                    "Formazione dei lavoratori"
+                    "Ogni anno (prima verifica) poi ogni 2 anni, oppure annuale se previsto",
+                    "Ogni 5 anni"
                 ],
                 correct: 2,
-                explanation: "La gerarchia delle misure privilegia protezioni collettive (parapetti, ponteggi completi) rispetto ai DPI anticaduta (art. 111 D.Lgs. 81/2008)."
+                explanation: "Le verifiche periodiche per attrezzature di lavoro (es. gru, piattaforme, carrelli elevatori) sono effettuate: prima verifica entro 60 giorni dalla messa in servizio, poi ogni anno o biennalmente secondo tipologia (All. VII D.Lgs. 81/2008 e D.M. 11/04/2011)."
             },
             {
-                question: "Quando è obbligatorio il Piano di Montaggio, Uso e Smontaggio (PIMUS) per i ponteggi?",
+                question: "Chi effettua le verifiche periodiche delle attrezzature di lavoro?",
                 options: [
-                    "Solo per ponteggi superiori a 20 metri",
-                    "Sempre, per qualsiasi ponteggio",
-                    "Solo per ponteggi non conformi",
-                    "Solo in cantieri con più di 10 lavoratori"
+                    "Il datore di lavoro internamente",
+                    "ASL/ARPA o enti abilitati (es. organismi notificati)",
+                    "L'RSPP",
+                    "Il costruttore"
                 ],
                 correct: 1,
-                explanation: "Il PIMUS è obbligatorio per qualsiasi ponteggio, indipendentemente da altezza e tipo (art. 136 D.Lgs. 81/2008)."
+                explanation: "Le verifiche periodiche sono effettuate da ASL/ARPA o da soggetti pubblici o privati abilitati secondo criteri stabiliti dal Ministero (art. 71 D.Lgs. 81/2008 e D.M. 11/04/2011)."
             },
             {
-                question: "Chi deve redigere il Piano di Montaggio, Uso e Smontaggio (PIMUS) del ponteggio?",
+                question: "Cosa deve riportare la marcatura sulle attrezzature di lavoro?",
                 options: [
-                    "Il datore di lavoro dell'impresa installatrice",
-                    "Il coordinatore per la sicurezza",
-                    "Il capocantiere",
-                    "Il fornitore del ponteggio"
-                ],
-                correct: 0,
-                explanation: "Il PIMUS è redatto dal datore di lavoro dell'impresa che installa il ponteggio, anche in base alle indicazioni del fabbricante (art. 136 D.Lgs. 81/2008)."
-            },
-            {
-                question: "Qual è l'altezza minima dei parapetti di protezione contro le cadute?",
-                options: [
-                    "80 cm",
-                    "1 metro",
-                    "1,20 metri",
-                    "1,50 metri"
+                    "Solo il nome del produttore",
+                    "Marcatura CE (se applicabile), dati identificativi (fabbricante, modello, matricola, anno), portata, istruzioni d'uso",
+                    "Solo la data di acquisto",
+                    "Nessuna marcatura obbligatoria"
                 ],
                 correct: 1,
-                explanation: "I parapetti devono essere alti almeno 1 metro e composti da corrente superiore, intermedio e tavola fermapiede di almeno 20 cm (All. IV D.Lgs. 81/2008)."
+                explanation: "Le attrezzature devono riportare marcatura CE (se direttiva macchine applicabile), targhe con dati identificativi, portata massima, istruzioni d'uso e manutenzione (art. 70 D.Lgs. 81/2008)."
             },
             {
-                question: "Qual è l'obbligo formativo per i lavoratori addetti al montaggio/smontaggio ponteggi?",
+                question: "Cos'è il PiMUS (Piano di Montaggio, Uso e Smontaggio)?",
                 options: [
-                    "Corso di 16 ore",
-                    "Corso di 28 ore con aggiornamento quadriennale di 4 ore",
-                    "Corso di 40 ore",
-                    "Non è prevista formazione specifica"
+                    "Un tipo di ponteggio",
+                    "Documento obbligatorio per ponteggi con procedure operative, disegni, schemi",
+                    "Un DPI",
+                    "Un registro infortuni"
                 ],
                 correct: 1,
-                explanation: "Gli addetti a montaggio/smontaggio/trasformazione ponteggi devono frequentare corso di 28 ore con aggiornamento di 4 ore ogni 4 anni (All. XXI D.Lgs. 81/2008)."
+                explanation: "Il PiMUS è il documento obbligatorio che definisce le procedure per montaggio, uso e smontaggio dei ponteggi, compresi disegni esecutivi e calcoli (art. 136 D.Lgs. 81/2008)."
+            },
+            {
+                question: "Chi deve redigere il PiMUS?",
+                options: [
+                    "Il lavoratore che usa il ponteggio",
+                    "Il datore di lavoro (o suo delegato), eventualmente con supporto tecnico qualificato",
+                    "Il fabbricante del ponteggio",
+                    "L'RLS"
+                ],
+                correct: 1,
+                explanation: "Il PiMUS è redatto dal datore di lavoro o da persona da lui delegata, con competenze tecniche adeguate. Per ponteggi complessi può essere necessario il supporto di un tecnico qualificato (art. 136 D.Lgs. 81/2008)."
+            },
+            {
+                question: "Qual è l'altezza massima per ponteggi senza progetto specifico?",
+                options: [
+                    "Non c'è limite",
+                    "20 metri",
+                    "Fino all'altezza prevista dall'autorizzazione ministeriale del ponteggio (di solito max 20 o 24 m)",
+                    "10 metri"
+                ],
+                correct: 2,
+                explanation: "I ponteggi possono essere montati fino all'altezza prevista dallo schema-tipo dell'autorizzazione ministeriale (di solito 20 o 24 m). Oltre tale altezza serve progetto specifico di un ingegnere (art. 133 D.Lgs. 81/2008)."
+            },
+            {
+                question: "Con quale periodicità devono essere verificati i ponteggi durante l'uso?",
+                options: [
+                    "Giornalmente",
+                    "Settimanalmente",
+                    "Dopo eventi eccezionali (es. maltempo), interruzioni > 30 giorni, ogni modifica",
+                    "Solo all'installazione"
+                ],
+                correct: 2,
+                explanation: "Il preposto deve verificare il ponteggio: prima dell'uso, dopo eventi meteorologici eccezionali, interruzioni di lavoro superiori a 30 giorni, modifiche significative (art. 136 D.Lgs. 81/2008)."
             },
             {
                 question: "Cosa si intende per 'spazio confinato'?",
                 options: [
-                    "Ambiente piccolo e affollato",
-                    "Ambiente a ventilazione naturale sfavorevole, con aperture limitate e non progettato per presenza continuativa",
-                    "Luogo sotterraneo",
-                    "Area riservata al personale autorizzato"
+                    "Qualsiasi locale chiuso",
+                    "Ambiente limitato in cui il pericolo di morte/infortunio grave è elevato per presenza di sostanze pericolose, carenza ossigeno, difficoltà di evacuazione",
+                    "Solo silos e cisterne",
+                    "Ambienti sotterranei"
                 ],
                 correct: 1,
-                explanation: "Spazio confinato: ambiente con aperture limitate, ventilazione naturale sfavorevole, non progettato per permanenza umana (DPR 177/2011)."
+                explanation: "Spazio confinato: ambiente limitato, con aperture di accesso limitate e ventilazione naturale sfavorevole, non progettato per permanenza prolungata, con rischi specifici (DPR 177/2011)."
             },
             {
-                question: "Qual è il documento obbligatorio prima di accedere a uno spazio confinato?",
+                question: "Quali sono i principali rischi negli spazi confinati?",
                 options: [
-                    "DVR",
-                    "Permesso di lavoro (Permit to Work)",
-                    "DUVRI",
-                    "POS"
+                    "Solo temperatura elevata",
+                    "Asfissia (carenza O2), intossicazione (gas tossici), incendio/esplosione, seppellimento, annegamento",
+                    "Solo polveri",
+                    "Nessun rischio particolare"
                 ],
                 correct: 1,
-                explanation: "Prima dell'accesso a spazi confinati è obbligatorio il permesso di lavoro che autorizza l'ingresso dopo verifica delle condizioni di sicurezza (DPR 177/2011)."
+                explanation: "Rischi principali: asfissia (O2 < 19,5%), intossicazione (H2S, CO, etc.), atmosfere esplosive, seppellimento, annegamento, temperatura estrema (DPR 177/2011)."
+            },
+            {
+                question: "Qual è l'obbligo del datore di lavoro prima di far entrare lavoratori in spazi confinati?",
+                options: [
+                    "Nessun obbligo",
+                    "Valutare i rischi, eliminare/ridurre sostanze pericolose, misurare atmosfera, garantire ventilazione, presenza assistenza esterna, DPI adeguati, procedura emergenza",
+                    "Solo dare elmetto",
+                    "Avvisare i vigili del fuoco"
+                ],
+                correct: 1,
+                explanation: "Obblighi: valutare rischi, bonificare l'ambiente, misurare atmosfera (O2, gas tossici), ventilare, presenza assistenza esterna (preposto), DPI adeguati (respiratori, anticaduta), piano emergenza (DPR 177/2011)."
             },
 
-            // DOMANDE 81-90
+            // DOMANDE 41-50
             {
-                question: "Qual è il livello minimo di ossigeno (O₂) per considerare sicuro l'accesso a uno spazio confinato?",
+                question: "Qual è il livello minimo di ossigeno accettabile per entrare in uno spazio confinato senza autorespiratore?",
                 options: [
-                    "18%",
-                    "19,5%",
                     "21%",
-                    "23%"
+                    "19,5%",
+                    "18%",
+                    "15%"
                 ],
                 correct: 1,
-                explanation: "La concentrazione di ossigeno deve essere compresa tra 19,5% e 23% in volume: sotto il 19,5% si ha atmosfera asfittica (DPR 177/2011)."
+                explanation: "La concentrazione minima di ossigeno deve essere ≥ 19,5% (valore normale: 20,9%). Sotto 19,5% è richiesto l'uso di autorespiratori (SCBA) o sistemi ad adduzione d'aria."
             },
             {
-                question: "Qual è il limite di concentrazione di monossido di carbonio (CO) in uno spazio confinato?",
+                question: "Qual è la sanzione per il datore di lavoro che non rispetta le prescrizioni del DPR 177/2011 sugli spazi confinati?",
                 options: [
-                    "10 ppm",
-                    "25 ppm",
-                    "35 ppm",
-                    "50 ppm"
+                    "Nessuna sanzione",
+                    "Arresto da 3 a 6 mesi o ammenda",
+                    "Solo richiamo verbale",
+                    "Sospensione temporanea attività"
                 ],
                 correct: 1,
-                explanation: "Il limite di esposizione professionale (TLV-TWA) per CO è 25 ppm su 8 ore; superato questo valore l'ambiente non è sicuro."
+                explanation: "La violazione delle disposizioni del DPR 177/2011 è punita con arresto da 3 a 6 mesi o ammenda da 2.500 a 6.400 euro (art. 3 comma 3 DPR 177/2011 richiama sanzioni D.Lgs. 81/2008)."
             },
             {
-                question: "Qual è l'obbligo di presenza durante lavori in spazi confinati?",
+                question: "Cosa si intende per 'lavoro elettrico sotto tensione'?",
                 options: [
-                    "Almeno 2 lavoratori all'interno",
-                    "Un sorvegliante esterno (preposto) in costante contatto con chi lavora dentro",
-                    "Il datore di lavoro deve essere presente",
-                    "Non ci sono obblighi specifici"
+                    "Qualsiasi lavoro vicino a impianti elettrici",
+                    "Lavoro durante il quale un lavoratore entra con parti del corpo o attrezzi nella zona di lavoro sotto tensione",
+                    "Solo installazione quadri",
+                    "Manutenzione con impianto spento"
                 ],
                 correct: 1,
-                explanation: "È obbligatoria la presenza di un sorvegliante (preposto) all'esterno in continuo contatto con chi lavora nello spazio confinato (DPR 177/2011 art. 3)."
+                explanation: "Lavoro sotto tensione: lavoratore entra con parti del corpo o attrezzi nella zona di lavoro sotto tensione (< distanza minima). Richiede formazione specifica PES/PAV (CEI 11-27)."
             },
             {
-                question: "Qual è il documento che deve essere redatto per lavori su impianti elettrici?",
+                question: "Cosa significa la qualifica PES (Persona Esperta)?",
                 options: [
-                    "Piano di Sicurezza e Coordinamento (PSC)",
-                    "Piano di Lavoro con procedura di sicurezza e autorizzazione",
-                    "DUVRI",
-                    "DVR"
+                    "Persona che ha seguito un corso di primo soccorso",
+                    "Persona con conoscenze tecniche ed esperienza tali da permetterle di analizzare i rischi e evitare i pericoli dell'elettricità",
+                    "Persona addetta alle emergenze",
+                    "Responsabile sicurezza"
                 ],
                 correct: 1,
-                explanation: "Prima di lavori su impianti elettrici si deve redigere un piano di lavoro con individuazione delle procedure di sicurezza (CEI 11-27 e D.Lgs. 81/2008)."
+                explanation: "PES (Persona Esperta): ha conoscenze tecniche, esperienza e capacità per analizzare i rischi elettrici e evitare pericoli. Può lavorare sotto tensione (CEI 11-27:2021)."
             },
             {
-                question: "Cosa prevede la norma CEI 11-27 per i lavori elettrici?",
+                question: "Cosa significa la qualifica PAV (Persona Avvertita)?",
                 options: [
-                    "Solo l'uso di DPI",
-                    "Qualifica PES (Persona Esperta) e PAV (Persona Avvertita) + procedure operative",
-                    "Lavoro sempre in tensione",
-                    "Formazione generica"
+                    "Persona che ha ricevuto istruzioni generiche",
+                    "Persona adeguatamente avvertita da PES per evitare pericoli dell'elettricità",
+                    "Persona che sostituisce il datore di lavoro",
+                    "Persona addetta antincendio"
                 ],
                 correct: 1,
-                explanation: "La CEI 11-27 definisce qualifiche (PES, PAV, PEI) e procedure operative per lavori su impianti elettrici, sotto tensione o fuori tensione."
+                explanation: "PAV (Persona Avvertita): ha ricevuto istruzioni adeguate da PES per evitare pericoli elettrici. Può operare sotto sorveglianza PES (CEI 11-27:2021)."
             },
             {
-                question: "Cosa significa lavorare 'fuori tensione' su un impianto elettrico?",
+                question: "Qual è la periodicità della formazione per PES/PAV?",
                 options: [
-                    "Lavorare di notte",
-                    "Applicare le 5 regole di sicurezza: sezionare, bloccare, verificare assenza tensione, mettere a terra, delimitare",
-                    "Lavorare con guanti isolanti",
-                    "Lavorare con bassa tensione"
+                    "Annuale",
+                    "Biennale",
+                    "Aggiornamento consigliato ogni 3-5 anni o quando cambiano normative/mansioni",
+                    "Una tantum"
                 ],
-                correct: 1,
-                explanation: "Lavorare fuori tensione richiede le 5 regole: sezionamento, blocco, verifica, messa a terra e in corto circuito, delimitazione zona (CEI 11-27)."
+                correct: 2,
+                explanation: "La CEI 11-27 raccomanda aggiornamento periodico (ogni 3-5 anni) o quando cambiano normative, mansioni, interruzioni prolungate. L'azienda deve valutare la periodicità."
             },
             {
-                question: "Chi è il Coordinatore per la Sicurezza in fase di Progettazione (CSP)?",
+                question: "Cos'è il Piano di Sicurezza e Coordinamento (PSC)?",
                 options: [
-                    "Il direttore dei lavori",
-                    "Tecnico abilitato nominato dal committente per redigere PSC e coordinare la sicurezza in progettazione",
-                    "L'impresa appaltatrice",
-                    "Il capocantiere"
+                    "Un DPI",
+                    "Documento obbligatorio nei cantieri temporanei/mobili con più imprese, redatto dal CSP",
+                    "Un registro presenze",
+                    "Una planimetria"
                 ],
                 correct: 1,
-                explanation: "Il CSP è un tecnico abilitato nominato dal committente per redigere il PSC e coordinare la sicurezza in fase di progettazione (art. 89-91 D.Lgs. 81/2008)."
-            },
-            {
-                question: "Quando è obbligatoria la nomina del Coordinatore per la Sicurezza in cantiere?",
-                options: [
-                    "Sempre",
-                    "Quando sono presenti più imprese, anche non contemporaneamente",
-                    "Solo per cantieri oltre i 200 uomini-giorno",
-                    "Solo per lavori pubblici"
-                ],
-                correct: 1,
-                explanation: "Il Coordinatore per la Sicurezza è obbligatorio quando in cantiere operano più imprese, anche non contemporaneamente (art. 90 D.Lgs. 81/2008)."
-            },
-            {
-                question: "Qual è il contenuto principale del Piano di Sicurezza e Coordinamento (PSC)?",
-                options: [
-                    "Solo i costi della sicurezza",
-                    "Analisi dei rischi, misure preventive, coordinamento, costi della sicurezza",
-                    "Elenco dei lavoratori",
-                    "Planimetrie del cantiere"
-                ],
-                correct: 1,
-                explanation: "Il PSC contiene: descrizione dell'opera, individuazione rischi, misure preventive/protettive, prescrizioni operative, coordinamento, stima costi sicurezza (art. 100 D.Lgs. 81/2008)."
+                explanation: "Il PSC è redatto dal Coordinatore per la Sicurezza in Progettazione (CSP) nei cantieri con più imprese. Contiene analisi rischi, interferenze, misure di coordinamento (art. 100 D.Lgs. 81/2008)."
             },
             {
                 question: "Chi redige il Piano Operativo di Sicurezza (POS)?",
                 options: [
                     "Il committente",
-                    "Il coordinatore per la sicurezza",
-                    "Ciascuna impresa esecutrice per la parte di lavori di propria competenza",
-                    "Il direttore dei lavori"
+                    "Ogni impresa esecutrice per la propria attività nel cantiere",
+                    "Solo l'impresa affidataria",
+                    "Il CSE"
                 ],
-                correct: 2,
-                explanation: "Il POS è redatto da ciascuna impresa esecutrice in riferimento al singolo cantiere e deve essere conforme al PSC (art. 96 e 17 D.Lgs. 81/2008)."
+                correct: 1,
+                explanation: "Il POS è redatto da ciascuna impresa esecutrice prima dell'inizio lavori. Contiene: valutazione rischi, misure di prevenzione, organizzazione del lavoro (art. 96 e 17 D.Lgs. 81/2008)."
+            },
+            {
+                question: "Chi è il Coordinatore per la Sicurezza in fase di Progettazione (CSP)?",
+                options: [
+                    "Il direttore lavori",
+                    "Tecnico abilitato nominato dal committente per redigere PSC e fascicolo opera",
+                    "L'impresa affidataria",
+                    "L'RSPP del committente"
+                ],
+                correct: 1,
+                explanation: "Il CSP è un tecnico abilitato (architetto, ingegnere, geometra con formazione specifica) nominato dal committente per redigere PSC e fascicolo dell'opera (art. 89 e 91 D.Lgs. 81/2008)."
+            },
+            {
+                question: "Chi è il Coordinatore per la Sicurezza in fase di Esecuzione (CSE)?",
+                options: [
+                    "L'impresa principale",
+                    "Tecnico abilitato nominato dal committente per verificare applicazione PSC e coordinare imprese durante i lavori",
+                    "Il direttore lavori",
+                    "Un lavoratore qualsiasi"
+                ],
+                correct: 1,
+                explanation: "Il CSE è nominato dal committente per verificare l'applicazione del PSC, coordinare le imprese, proporre modifiche al PSC, verificare idoneità POS (art. 92 D.Lgs. 81/2008)."
             },
 
-            // DOMANDE 91-100
+            // DOMANDE 51-60
             {
-                question: "Quando è obbligatoria la notifica preliminare in cantiere?",
+                question: "Qual è la durata minima del corso di formazione per CSP/CSE?",
+                options: [
+                    "40 ore",
+                    "60 ore",
+                    "120 ore",
+                    "Non è prevista formazione obbligatoria"
+                ],
+                correct: 2,
+                explanation: "La formazione per coordinatori per la sicurezza è di almeno 120 ore, con aggiornamento quinquennale di 40 ore (art. 98 D.Lgs. 81/2008 e All. XIV)."
+            },
+            {
+                question: "Quando è obbligatoria la notifica preliminare all'ASL per cantieri temporanei/mobili?",
                 options: [
                     "Sempre",
-                    "Per cantieri con durata superiore a 30 giorni e almeno 20 uomini-giorno o presenza di sostanze/lavori particolari",
-                    "Solo per cantieri pubblici",
-                    "Solo per demolizioni"
+                    "Se durata lavori ≥ 30 giorni lavorativi con ≥ 20 lavoratori, o volume lavori > 500 uomini-giorno",
+                    "Solo per cantieri edili",
+                    "Mai"
                 ],
                 correct: 1,
-                explanation: "La notifica preliminare è obbligatoria se: durata >30 giorni con >20 lavoratori o >200 uomini-giorno o lavori con rischi particolari (art. 99 D.Lgs. 81/2008)."
+                explanation: "La notifica preliminare è obbligatoria se: durata lavori ≥ 30 giorni lavorativi con ≥ 20 lavoratori contemporanei, oppure volume lavori > 500 uomini-giorno (art. 99 D.Lgs. 81/2008)."
             },
             {
-                question: "A chi va trasmessa la notifica preliminare?",
+                question: "Chi deve effettuare la notifica preliminare?",
                 options: [
-                    "Solo al committente",
-                    "All'ASL e alla Direzione Provinciale del Lavoro competenti per territorio",
-                    "All'INAIL",
-                    "Al sindaco"
+                    "L'impresa affidataria",
+                    "Il committente o responsabile lavori (prima dell'inizio lavori)",
+                    "Il CSE",
+                    "Ogni impresa esecutrice"
                 ],
                 correct: 1,
-                explanation: "La notifica preliminare deve essere trasmessa all'ASL e alla Direzione Provinciale del Lavoro territorialmente competenti (art. 99 D.Lgs. 81/2008)."
+                explanation: "La notifica preliminare è trasmessa dal committente o responsabile lavori all'ASL territorialmente competente prima dell'inizio dei lavori (art. 99 D.Lgs. 81/2008)."
             },
             {
-                question: "Qual è il contenuto obbligatorio della notifica preliminare?",
+                question: "Cosa deve contenere il fascicolo dell'opera?",
                 options: [
-                    "Solo i dati del committente",
-                    "Dati cantiere, committente, imprese, lavori, CSP/CSE, entità presunta uomini-giorno",
-                    "Solo la durata dei lavori",
-                    "Elenco dei macchinari"
+                    "Solo disegni tecnici",
+                    "Informazioni utili per prevenzione e protezione durante manutenzioni successive dell'opera",
+                    "Elenco fornitori",
+                    "Contabilità lavori"
                 ],
                 correct: 1,
-                explanation: "La notifica deve contenere: dati committente/cantiere, natura opera, imprese, coordinatori, data inizio lavori, durata prevista, n° lavoratori, entità uomini-giorno (All. XII D.Lgs. 81/2008)."
+                explanation: "Il fascicolo dell'opera contiene informazioni su rischi prevedibili durante manutenzioni/trasformazioni future (ubicazione interferenze, procedure manutenzione sicura) (art. 91 comma 1 lett. b D.Lgs. 81/2008)."
             },
             {
-                question: "Qual è la sanzione per il committente che non designa i coordinatori per la sicurezza quando obbligatorio?",
+                question: "Chi deve redigere il fascicolo dell'opera?",
                 options: [
-                    "Sanzione amministrativa pecuniaria",
-                    "Arresto da 3 a 6 mesi o ammenda da 2.500 a 6.400 euro",
-                    "Richiamo scritto",
-                    "Sospensione dell'attività"
+                    "L'impresa affidataria",
+                    "Il Coordinatore per la Sicurezza in Progettazione (CSP), aggiornato dal CSE",
+                    "Il committente",
+                    "Il direttore lavori"
                 ],
                 correct: 1,
-                explanation: "L'art. 157 del D.Lgs. 81/2008 prevede per il committente arresto da 3 a 6 mesi o ammenda da 2.500 a 6.400 euro."
+                explanation: "Il fascicolo dell'opera è redatto dal CSP e aggiornato dal CSE in corso d'opera. Viene consegnato al committente al termine dei lavori (art. 91 e 92 D.Lgs. 81/2008)."
             },
             {
-                question: "Cosa si intende per 'lavori particolarmente pericolosi' in cantiere (All. XI D.Lgs. 81/2008)?",
-                options: [
-                    "Lavori in quota",
-                    "Lavori con esposizione ad agenti chimici, biologici, atmosfere esplosive, etc.",
-                    "Lavori di notte",
-                    "Lavori manuali pesanti"
-                ],
-                correct: 1,
-                explanation: "L'Allegato XI elenca lavori particolarmente pericolosi: esposizione ad agenti chimici/biologici/cancerogeni, radiazioni ionizzanti, atmosfere esplosive, amianto, silice, etc."
-            },
-            {
-                question: "Qual è l'obbligo del datore di lavoro in caso di appalto?",
+                question: "Qual è l'obbligo del committente in caso di cantiere con più imprese?",
                 options: [
                     "Nessun obbligo",
-                    "Verificare idoneità tecnico-professionale dell'appaltatore e cooperare per coordinamento",
-                    "Solo pagare l'appaltatore",
-                    "Solo controllare il prodotto finale"
+                    "Nominare CSP e CSE (se previsto), verificare idoneità tecnico-professionale imprese, consegna PSC",
+                    "Solo pagare le imprese",
+                    "Sostituire il datore di lavoro"
                 ],
                 correct: 1,
-                explanation: "Il committente deve verificare l'idoneità tecnico-professionale delle imprese appaltatrici/subappaltatrici (art. 26 D.Lgs. 81/2008)."
+                explanation: "Il committente deve: nominare CSP e CSE, verificare idoneità tecnico-professionale delle imprese (DURC, documento valutazione rischi, etc.), consegnare PSC alle imprese (art. 90 D.Lgs. 81/2008)."
+            },
+            {
+                question: "Cos'è il DURC (Documento Unico di Regolarità Contributiva)?",
+                options: [
+                    "Un certificato medico",
+                    "Attestato di regolarità contributiva previdenziale/assistenziale, richiesto per appalti",
+                    "Un DPI",
+                    "Una polizza assicurativa"
+                ],
+                correct: 1,
+                explanation: "Il DURC attesta la regolarità contributiva verso INPS, INAIL e Casse Edili. È obbligatorio per appalti pubblici e richiesto per la verifica di idoneità tecnico-professionale (art. 90 D.Lgs. 81/2008)."
             },
             {
                 question: "Cos'è il DUVRI (Documento Unico di Valutazione dei Rischi da Interferenze)?",
@@ -1532,6 +956,8 @@
                 correct: 2,
                 explanation: "I costi della sicurezza per l'eliminazione dei rischi da interferenze devono essere indicati nel DUVRI e non sono soggetti a ribasso d'asta (art. 26 comma 5 D.Lgs. 81/2008)."
             },
+
+            // DOMANDE 61-70
             {
                 question: "Qual è la responsabilità del preposto in materia di sicurezza?",
                 options: [
@@ -1541,10 +967,8 @@
                     "Sostituire il datore di lavoro"
                 ],
                 correct: 1,
-                explanation: "Il preposto deve sovrintendere alle attività lavorative e vigilare sull'osservanza da parte dei lavoratori delle direttive e procedure di sicurezza (art.19 D.Lgs. 81/2008)."
+                explanation: "Il preposto deve sovrintendere alle attività lavorative e vigilare sull'osservanza da parte dei lavoratori delle direttive e procedure di sicurezza (art. 19 D.Lgs. 81/2008)."
             },
-
-            // DOMANDE 101-110
             {
                 question: "Qual è la durata minima della formazione particolare aggiuntiva per i preposti?",
                 options: [
@@ -1644,6 +1068,8 @@
                 correct: 1,
                 explanation: "Il datore di lavoro deve adibire il lavoratore a mansioni compatibili con il suo stato di salute; se impossibile, si applica la normativa giuslavoristica (art. 42 D.Lgs. 81/2008)."
             },
+
+            // DOMANDE 71-80
             {
                 question: "Qual è il livello di azione giornaliero per l'esposizione al rumore?",
                 options: [
@@ -1655,8 +1081,6 @@
                 correct: 0,
                 explanation: "Il livello di azione inferiore è LEX = 80 dB(A) e ppeak = 135 dB(C); sopra questo livello scattano obblighi di informazione/formazione (art. 189 D.Lgs. 81/2008)."
             },
-
-            // DOMANDE 111-120
             {
                 question: "Qual è il valore limite di esposizione giornaliera al rumore?",
                 options: [
@@ -1676,183 +1100,230 @@
                     "Dai 87 dB(A)",
                     "Dai 90 dB(A)"
                 ],
-                correct: 1,
-                explanation: "La sorveglianza sanitaria è obbligatoria quando l'esposizione supera il livello superiore di azione di 85 dB(A) LEX (art. 196 D.Lgs. 81/2008)."
+                correct: 
+1,
+                explanation: "La sorveglianza sanitaria è obbligatoria quando l'esposizione supera il livello superiore di azione (LEX = 85 dB(A) o ppeak = 137 dB(C)) (art. 196 D.Lgs. 81/2008)."
             },
             {
-                question: "Qual è il valore limite di esposizione giornaliera alle vibrazioni al sistema mano-braccio?",
+                question: "Qual è il livello di azione giornaliero per le vibrazioni al sistema mano-braccio?",
                 options: [
                     "2,5 m/s²",
                     "5 m/s²",
-                    "8 m/s²",
-                    "10 m/s²"
+                    "0,5 m/s²",
+                    "1 m/s²"
                 ],
-                correct: 1,
-                explanation: "Il valore limite giornaliero per vibrazioni mano-braccio è 5 m/s² su 8 ore; il livello di azione è 2,5 m/s² (art. 201 D.Lgs. 81/2008)."
+                correct: 0,
+                explanation: "Per vibrazioni mano-braccio: livello di azione A(8) = 2,5 m/s², valore limite di esposizione A(8) = 5 m/s² (art. 201 D.Lgs. 81/2008)."
             },
             {
-                question: "Qual è il valore limite di esposizione giornaliera alle vibrazioni al corpo intero?",
+                question: "Qual è il valore limite di esposizione giornaliero per le vibrazioni al sistema mano-braccio?",
+                options: [
+                    "2,5 m/s²",
+                    "5 m/s²",
+                    "1,15 m/s²",
+                    "0,5 m/s²"
+                ],
+                correct: 1,
+                explanation: "Il valore limite di esposizione per vibrazioni mano-braccio è A(8) = 5 m/s²; non può essere superato (art. 201 D.Lgs. 81/2008)."
+            },
+            {
+                question: "Qual è il livello di azione giornaliero per le vibrazioni al corpo intero?",
                 options: [
                     "0,5 m/s²",
-                    "0,8 m/s²",
                     "1,0 m/s²",
-                    "1,15 m/s²"
+                    "1,15 m/s²",
+                    "2,5 m/s²"
                 ],
-                correct: 2,
-                explanation: "Il valore limite giornaliero per vibrazioni corpo intero è 1,0 m/s² su 8 ore; il livello di azione è 0,5 m/s² (art. 201 D.Lgs. 81/2008)."
+                correct: 0,
+                explanation: "Per vibrazioni corpo intero: livello di azione A(8) = 0,5 m/s², valore limite di esposizione A(8) = 1,0 m/s² (art. 201 D.Lgs. 81/2008)."
             },
             {
                 question: "Cosa si intende per 'agente chimico pericoloso'?",
                 options: [
                     "Qualsiasi sostanza chimica",
-                    "Agente chimico classificato come pericoloso o che può presentare rischio per la salute e sicurezza",
-                    "Solo sostanze tossiche",
-                    "Solo sostanze esplosive"
+                    "Agente chimico classificato pericoloso o che presenta rischio per salute/sicurezza",
+                    "Solo sostanze cancerogene",
+                    "Solo gas infiammabili"
                 ],
                 correct: 1,
-                explanation: "Agente chimico pericoloso: agente che soddisfa criteri di classificazione come pericoloso secondo Regolamento CLP o che presenta comunque un rischio (art. 222 D.Lgs. 81/2008)."
+                explanation: "Agente chimico pericoloso: classificato pericoloso secondo Regolamento CLP 1272/2008 o che presenta comunque rischio per salute/sicurezza dei lavoratori (art. 222 D.Lgs. 81/2008)."
             },
             {
-                question: "Qual è la gerarchia delle misure di prevenzione per agenti chimici?",
+                question: "Qual è la gerarchia delle misure di prevenzione per il rischio chimico?",
                 options: [
-                    "Prima i DPI, poi le altre misure",
-                    "Eliminazione/sostituzione, misure tecniche/organizzative, DPI come ultima risorsa",
-                    "Solo ventilazione",
-                    "Solo informazione ai lavoratori"
+                    "Prima DPI, poi aspirazione",
+                    "Sostituzione/riduzione sostanze pericolose, progettazione processi, misure organizzative, DPI come ultima risorsa",
+                    "Solo ventilazione generale",
+                    "Solo formazione"
                 ],
                 correct: 1,
-                explanation: "La gerarchia prevede: 1) eliminazione/sostituzione; 2) progettazione sistemi di lavoro e controlli tecnici; 3) DPI come misura residuale (art. 225 D.Lgs. 81/2008)."
+                explanation: "Gerarchia: 1) Eliminazione/sostituzione; 2) Progettazione processi; 3) Misure organizzative/protezione collettiva; 4) DPI come ultima risorsa (art. 224 D.Lgs. 81/2008)."
             },
             {
-                question: "Cosa identifica un pittogramma di pericolo su un'etichetta CLP?",
+                question: "Cosa sono le sostanze CMR?",
                 options: [
-                    "Il paese di produzione",
-                    "La classe di pericolo della sostanza (es. tossicità, infiammabilità)",
-                    "Il produttore",
-                    "La quantità di prodotto"
+                    "Sostanze combustibili",
+                    "Sostanze Cancerogene, Mutagene, tossiche per la Riproduzione",
+                    "Sostanze corrosive",
+                    "Sostanze metalliche"
                 ],
                 correct: 1,
-                explanation: "Il pittogramma (simbolo grafico con bordo rosso) comunica visivamente la classe di pericolo della sostanza secondo il Regolamento CLP (CE) 1272/2008."
+                explanation: "CMR: Cancerogene (categoria 1A, 1B, 2), Mutagene (cat. 1A, 1B, 2), tossiche per la Riproduzione (cat. 1A, 1B, 2). Soggette a Titolo IX Capo II D.Lgs. 81/2008 con obblighi specifici."
             },
             {
-                question: "Cosa deve contenere obbligatoriamente una Scheda di Dati di Sicurezza (SDS)?",
-                options: [
-                    "Solo il nome della sostanza",
-                    "16 sezioni standard: identificazione, pericoli, composizione, primo soccorso, misure antincendio, etc.",
-                    "Solo i pittogrammi",
-                    "Solo le istruzioni d'uso"
-                ],
-                correct: 1,
-                explanation: "La SDS deve contenere 16 sezioni standard secondo il Regolamento REACH (es. identificazione, composizione, pericoli, primo soccorso, manipolazione, stoccaggio, etc.)."
-            },
-            {
-                question: "Qual è l'obbligo del datore di lavoro in caso di uso di agenti cancerogeni/mutageni?",
+                question: "Qual è l'obbligo del datore di lavoro per sostanze CMR?",
                 options: [
                     "Nessun obbligo particolare",
-                    "Sostituzione se tecnicamente possibile, riduzione esposizione al minimo, registro esposti, sorveglianza sanitaria speciale",
+                    "Sostituire se tecnicamente possibile, ridurre esposizione al minimo, registro esposti, sorveglianza sanitaria, cartella sanitaria conservata 40 anni",
                     "Solo informare i lavoratori",
-                    "Vietarne l'uso sempre"
+                    "Vietare l'uso"
                 ],
                 correct: 1,
-                explanation: "Per agenti cancerogeni/mutageni: obbligo di sostituzione (se possibile), riduzione esposizione, ambienti a tenuta, registro esposti, sorveglianza sanitaria speciale (Titolo IX Capo II D.Lgs. 81/2008)."
+                explanation: "Per CMR: sostituzione se possibile, riduzione esposizione al minimo, registro esposti aggiornato, sorveglianza sanitaria, cartella sanitaria conservata 40 anni dopo cessazione esposizione (art. 236-243 D.Lgs. 81/2008)."
             },
+
+            // DOMANDE 81-90
             {
-                question: "Per quanto tempo deve essere conservato il registro degli esposti ad agenti cancerogeni/mutageni?",
+                question: "Qual è la durata di conservazione della cartella sanitaria per esposti a CMR?",
                 options: [
-                    "5 anni",
                     "10 anni",
-                    "40 anni dopo la cessazione dell'esposizione",
+                    "20 anni",
+                    "40 anni dopo cessazione esposizione",
                     "Per sempre"
                 ],
                 correct: 2,
-                explanation: "Il registro degli esposti ad agenti cancerogeni/mutageni deve essere conservato per almeno 40 anni dalla cessazione dell'esposizione (art. 243 D.Lgs. 81/2008)."
+                explanation: "Per lavoratori esposti a cancerogeni/mutageni, la cartella sanitaria deve essere conservata per 40 anni dalla cessazione dell'esposizione (art. 243 D.Lgs. 81/2008)."
             },
-
-            // DOMANDE 121-128
             {
                 question: "Cosa si intende per 'agente biologico'?",
                 options: [
-                    "Qualsiasi prodotto naturale",
-                    "Microrganismo (batterio, virus, fungo) che può provocare infezioni, allergie o intossicazioni",
+                    "Solo batteri",
+                    "Qualsiasi microrganismo, coltura cellulare, endoparassita umano che può provocare infezioni, allergie, intossicazioni",
                     "Solo virus",
-                    "Sostanze chimiche di origine biologica"
+                    "Solo funghi"
                 ],
                 correct: 1,
-                explanation: "Agente biologico: qualsiasi microrganismo (anche geneticamente modificato), coltura cellulare ed endoparassita che può provocare infezioni, allergie o intossicazioni (art. 267 D.Lgs. 81/2008)."
+                explanation: "Agente biologico: qualsiasi microrganismo (anche geneticamente modificato), coltura cellulare, endoparassita umano che può provocare infezioni, allergie o intossicazioni (art. 267 D.Lgs. 81/2008)."
             },
             {
-                question: "Quanti sono i gruppi di classificazione degli agenti biologici in base al rischio?",
+                question: "Quanti sono i gruppi di classificazione degli agenti biologici?",
                 options: [
                     "2 gruppi",
                     "3 gruppi",
-                    "4 gruppi (da 1 a 4 con pericolosità crescente)",
+                    "4 gruppi (da 1 a 4 in ordine crescente di rischio)",
                     "5 gruppi"
                 ],
                 correct: 2,
-                explanation: "Gli agenti biologici sono classificati in 4 gruppi in base al rischio di infezione: gruppo 1 (basso/nullo) fino a gruppo 4 (rischio elevato, nessuna profilassi/terapia) (art. 268 D.Lgs. 81/2008)."
+                explanation: "Gli agenti biologici sono classificati in 4 gruppi secondo pericolosità crescente: Gruppo 1 (bassa probabilità malattia), 2, 3, 4 (alta probabilità, malattia grave, no profilassi/terapia) (art. 268 D.Lgs. 81/2008)."
             },
             {
-                question: "Qual è l'obbligo del datore di lavoro per esposizione ad agenti biologici del gruppo 3 o 4?",
+                question: "Qual è l'obbligo del datore di lavoro per agenti biologici gruppo 3 e 4?",
                 options: [
                     "Nessun obbligo particolare",
-                    "Autorizzazione preventiva del Ministero della Salute",
-                    "Solo informazione ai lavoratori",
+                    "Autorizzazione ASL, misure di contenimento elevate, sorveglianza sanitaria, registro esposti",
+                    "Solo formazione",
                     "Divieto assoluto di utilizzo"
                 ],
                 correct: 1,
-                explanation: "Per agenti biologici del gruppo 3 e 4 è richiesta comunicazione preventiva all'organo di vigilanza e misure di contenimento specifiche (art. 270 e All. XLVI D.Lgs. 81/2008)."
+                explanation: "Per agenti biologici gruppo 3-4: comunicazione ASL, misure di contenimento specifiche, sorveglianza sanitaria obbligatoria, registro esposti, elenco lavoratori all'organo di vigilanza (art. 279-280 D.Lgs. 81/2008)."
             },
             {
-                question: "Qual è il limite di esposizione giornaliera ai campi elettromagnetici (CEM) per il pubblico generico?",
+                question: "Qual è il limite di esposizione per i campi elettromagnetici (CEM) 0 Hz - 1 Hz?",
                 options: [
-                    "Non esiste un limite",
-                    "I limiti sono più restrittivi rispetto ai lavoratori",
-                    "I limiti sono uguali ai lavoratori",
-                    "I limiti sono meno restrittivi"
+                    "Non ci sono limiti",
+                    "Valori limite di esposizione (VLE) e valori di azione (VA) definiti da direttiva 2013/35/UE",
+                    "100 V/m",
+                    "50 Hz"
                 ],
                 correct: 1,
-                explanation: "I limiti di esposizione per la popolazione generale (pubblico) sono più restrittivi di quelli per i lavoratori per garantire maggiore tutela (riferimento: Direttiva 2013/35/UE recepita nel Titolo VIII Capo IV D.Lgs. 81/2008)."
+                explanation: "I limiti CEM sono definiti dalla Direttiva 2013/35/UE (recepita nel D.Lgs. 81/2008 Titolo VIII Capo IV): VLE agli effetti sanitari e VA per diversi range di frequenza."
             },
             {
-                question: "Cosa si intende per 'radiazioni ottiche artificiali'?",
+                question: "Quali sono i principali effetti sanitari dei CEM a bassa frequenza (< 100 kHz)?",
                 options: [
-                    "Solo la luce del sole",
-                    "Radiazioni elettromagnetiche nell'intervallo 100 nm - 1 mm (UV, visibile, IR) da sorgenti artificiali",
+                    "Solo riscaldamento",
+                    "Stimolazione nervi/muscoli, effetti sul SNC",
+                    "Solo effetti psicologici",
+                    "Nessun effetto"
+                ],
+                correct: 1,
+                explanation: "CEM a bassa frequenza (< 100 kHz, es. 50 Hz rete elettrica): effetti acuti diretti (stimolazione nervi/muscoli, effetti su SNC, rischio fibrillazione cardiaca)."
+            },
+            {
+                question: "Quali sono i principali effetti sanitari dei CEM ad alta frequenza (> 100 kHz)?",
+                options: [
+                    "Solo stimolazione nervosa",
+                    "Riscaldamento tessuti (effetti termici) e stress termico",
+                    "Solo effetti genetici",
+                    "Nessun effetto"
+                ],
+                correct: 1,
+                explanation: "CEM ad alta frequenza (> 100 kHz, es. radiofrequenze): effetti termici (riscaldamento tessuti, stress termico, colpo di calore)."
+            },
+            {
+                question: "Cosa si intende per 'radiazione ottica' (ROA)?",
+                options: [
+                    "Solo luce visibile",
+                    "Radiazioni elettromagnetiche nel range 100 nm - 1 mm: UV, visibile, infrarosso",
                     "Solo laser",
-                    "Radiazioni ionizzanti"
+                    "Solo raggi X"
                 ],
                 correct: 1,
-                explanation: "Le radiazioni ottiche artificiali comprendono ultraviolette (UV), visibili e infrarosse (IR) generate da sorgenti artificiali come laser, lampade, saldature (Titolo VIII Capo V D.Lgs. 81/2008)."
+                explanation: "Radiazioni ottiche (ROA): radiazioni elettromagnetiche da 100 nm a 1 mm (ultraviolette 100-400 nm, visibili 380-780 nm, infrarosse 780 nm-1 mm) (Titolo VIII Capo V D.Lgs. 81/2008)."
             },
             {
-                question: "Qual è la classificazione dei laser in base al rischio?",
+                question: "Quali sono i valori limite di esposizione per ROA?",
                 options: [
-                    "2 classi",
-                    "3 classi",
-                    "4 classi principali (1, 2, 3, 4) con pericolosità crescente",
-                    "5 classi"
+                    "Non esistono",
+                    "Valori limite di esposizione (VLE) definiti in All. XXXVII D.Lgs. 81/2008 per irradianza/esposizione radiante",
+                    "100 W/m²",
+                    "Discrezione del datore"
                 ],
-                correct: 2,
-                explanation: "I laser sono classificati in 4 classi principali secondo la norma CEI EN 60825: Classe 1 (sicuro), 2 (basso rischio), 3 (rischio medio), 4 (rischio elevato)."
+                correct: 1,
+                explanation: "I VLE per ROA sono definiti nell'Allegato XXXVII del D.Lgs. 81/2008 in termini di irradianza efficace (W/m²) e esposizione radiante efficace (J/m²) per diversi range spettrali."
             },
             {
-                question: "Qual è la distanza minima di sicurezza da rispettare durante operazioni di saldatura per proteggere terzi dalle radiazioni ottiche?",
+                question: "Qual è il principale rischio delle radiazioni UV?",
                 options: [
-                    "1 metro",
-                    "2 metri",
-                    "Deve essere delimitata l'area con schermi protettivi",
-                    "Non è necessaria alcuna protezione"
+                    "Solo abbronzatura",
+                    "Eritema (scottature), cheratite, cataratta, invecchiamento precoce pelle, tumori cutanei",
+                    "Solo danni estetici",
+                    "Nessun rischio"
                 ],
-                correct: 2,
-                explanation: "Le operazioni di saldatura devono essere schermate per proteggere i lavoratori circostanti dalle radiazioni UV e IR mediante schermi o delimitazione dell'area (Titolo VIII Capo V D.Lgs. 81/2008)."
+                correct: 1,
+                explanation: "UV (100-400 nm): eritema, fotocheratite, cataratta, fotoinvecchiamento cutaneo, tumori cutanei (carcinomi, melanoma). Fonti: sole, saldatura, lampade UV."
+            },
+
+            // DOMANDE 91-100
+            {
+                question: "Qual è il rischio principale dei laser?",
+                options: [
+                    "Solo abbagliamento",
+                    "Danni alla retina (cecità), ustioni cutanee, incendi",
+                    "Solo calore",
+                    "Nessun rischio"
+                ],
+                correct: 1,
+                explanation: "Laser: danni alla retina (maculopatia, cecità per riflessione/visione diretta fascio), ustioni cutanee, innesco incendi. Classificazione: Classe 1 (sicuro) a Classe 4 (molto pericoloso)."
             },
             {
-                question: "Qual è l'obbligo del datore di lavoro in caso di movimentazione manuale dei carichi?",
+                question: "Cosa si intende per 'movimentazione manuale dei carichi'?",
+                options: [
+                    "Solo sollevamento con carrelli",
+                    "Operazioni di trasporto/sostegno di un carico con le sole forze umane (sollevare, deporre, spingere, tirare, portare, spostare)",
+                    "Solo trasporto con mezzi meccanici",
+                    "Movimentazione automatizzata"
+                ],
+                correct: 1,
+                explanation: "MMC: operazioni di trasporto/sostegno di carico ad opera di uno o più lavoratori (sollevare, deporre, spingere, tirare, portare, spostare) che comportano rischio dorso-lombare (art. 167 D.Lgs. 81/2008)."
+            },
+            {
+                question: "Qual è l'obbligo del datore di lavoro per la movimentazione manuale dei carichi?",
                 options: [
                     "Nessun obbligo",
-                    "Valutare il rischio, adottare misure organizzative, fornire informazione/formazione/addestramento",
-                    "Vietare la movimentazione manuale",
-                    "Solo fornire carrelli"
+                    "Adottare misure organizzative per evitare/ridurre MMC, valutare il rischio, informare/formare/addestrare",
+                    "Solo fornire DPI",
+                    "Vietare la movimentazione"
                 ],
                 correct: 1,
                 explanation: "Il datore di lavoro deve: adottare misure organizzative per evitare/ridurre la movimentazione manuale; valutare il rischio secondo norme tecniche (ISO 11228); informare/formare/addestrare (Titolo VI D.Lgs. 81/2008)."
@@ -1867,622 +1338,615 @@
                 ],
                 correct: 2,
                 explanation: "La norma ISO 11228-1 raccomanda un peso di riferimento di 25 kg per maschi adulti in condizioni ideali (ridotto per donne, giovani, anziani, condizioni non ideali)."
+            },
+            {
+                question: "Quali sono i fattori da considerare nella valutazione del rischio da MMC?",
+                options: [
+                    "Solo il peso",
+                    "Caratteristiche del carico, sforzo fisico, caratteristiche ambiente, esigenze dell'attività, fattori individuali",
+                    "Solo la frequenza",
+                    "Solo la distanza"
+                ],
+                correct: 1,
+                explanation: "Secondo l'All. XXXIII D.Lgs. 81/2008: caratteristiche del carico, sforzo fisico richiesto, caratteristiche ambiente di lavoro, esigenze dell'attività, fattori individuali di rischio."
+            },
+            {
+                question: "Cosa si intende per 'sovraccarico biomeccanico degli arti superiori'?",
+                options: [
+                    "Sollevamento carichi pesanti",
+                    "Movimenti ripetitivi, posture incongrue, applicazione forze con mani/braccia, vibrazioni degli arti superiori",
+                    "Solo digitare al computer",
+                    "Camminare"
+                ],
+                correct: 1,
+                explanation: "Sovraccarico biomeccanico arti superiori: movimenti ripetitivi, posture incongrue, forze manuali, vibrazioni, compressioni, basse temperature → patologie muscoloscheletriche (Titolo VI D.Lgs. 81/2008)."
+            },
+            {
+                question: "Qual è il metodo più utilizzato per valutare il rischio da movimenti ripetitivi degli arti superiori?",
+                options: [
+                    "Solo osservazione",
+                    "Checklist OCRA (Occupational Repetitive Actions) / Indice OCRA",
+                    "Questionario",
+                    "Non è richiesta valutazione"
+                ],
+                correct: 1,
+                explanation: "Il metodo OCRA (ISO 11228-3) è lo standard per valutare rischio da movimenti ripetitivi: checklist OCRA (screening) o Indice OCRA (analitico) considerano frequenza, forza, posture, carenza recuperi, fattori complementari."
+            },
+            {
+                question: "Cosa si intende per 'stress lavoro-correlato'?",
+                options: [
+                    "Solo stanchezza",
+                    "Condizione di squilibrio tra richieste lavorative e capacità individuali di farvi fronte, che può accompagnarsi a disfunzioni fisiche/psicologiche/sociali",
+                    "Paura del lavoro",
+                    "Solo problemi psicologici"
+                ],
+                correct: 1,
+                explanation: "Stress lavoro-correlato: percezione di squilibrio tra domanda lavorativa e capacità/risorse per farvi fronte. Può causare: disturbi psicofisici, calo performance, assenteismo (art. 28 comma 1 D.Lgs. 81/2008)."
+            },
+            {
+                question: "Qual è l'obbligo del datore di lavoro per la valutazione dello stress lavoro-correlato?",
+                options: [
+                    "Facoltativa",
+                    "Obbligatoria nel DVR secondo metodologia INAIL o equivalente",
+                    "Solo se ci sono segnalazioni",
+                    "Non prevista"
+                ],
+                correct: 1,
+                explanation: "La valutazione dello stress lavoro-correlato è obbligatoria (art. 28 comma 1 D.Lgs. 81/2008, Accordo Europeo 8/10/2004). Metodologia INAIL: fase preliminare (indicatori oggettivi) + eventuale fase approfondita (percezione soggettiva)."
+            },
+            {
+                question: "Qual è la metodologia INAIL per la valutazione dello stress lavoro-correlato?",
+                options: [
+                    "Solo questionari anonimi",
+                    "Approccio a 2 fasi: fase preliminare (indicatori oggettivi: eventi sentinella, contenuto/contesto lavoro) + eventuale fase approfondita (percezione soggettiva lavoratori)",
+                    "Solo interviste individuali",
+                    "Discrezionale"
+                ],
+                correct: 1,
+                explanation: "Metodologia INAIL: 1) Fase preliminare: analisi indicatori oggettivi (eventi sentinella: infortuni, assenze, turnover; contenuto lavoro: carico, orari; contesto: ruolo, relazioni, autonomia). 2) Se rischio medio/alto: fase approfondita con questionari/focus group."
+            },
+
+            // DOMANDE 101-110
+            {
+                question: "Quali sono i principali fattori di contenuto del lavoro che possono generare stress?",
+                options: [
+                    "Solo lo stipendio",
+                    "Carico/ritmo di lavoro, orario di lavoro, pianificazione compiti, monotonia/ripetitività, utilizzo competenze",
+                    "Solo i rapporti con i colleghi",
+                    "Solo l'ambiente fisico"
+                ],
+                correct: 1,
+                explanation: "Fattori di contenuto: carico/ritmo lavoro, orario lavoro (turni, notturno, rigidità), pianificazione compiti, monotonia/ripetitività, utilizzo competenze (sotto/sovraqualificazione)."
+            },
+            {
+                question: "Quali sono i principali fattori di contesto del lavoro che possono generare stress?",
+                options: [
+                    "Solo la retribuzione",
+                    "Ruolo nell'organizzazione, autonomia decisionale, relazioni interpersonali, evoluzione/sviluppo carriera, interfaccia casa-lavoro",
+                    "Solo il tipo di contratto",
+                    "Solo la distanza da casa"
+                ],
+                correct: 1,
+                explanation: "Fattori di contesto: ruolo (ambiguità, conflitto di ruolo), autonomia decisionale, relazioni interpersonali (conflitti, violenze, mobbing), evoluzione carriera, interfaccia casa-lavoro (work-life balance)."
+            },
+            {
+                question: "Cosa si intende per 'mobbing'?",
+                options: [
+                    "Semplice antipatia tra colleghi",
+                    "Comportamenti ostili, reiterati nel tempo, con intento persecutorio verso un lavoratore, causando emarginazione/demansionamento",
+                    "Normale competizione",
+                    "Stress generico"
+                ],
+                correct: 1,
+                explanation: "Mobbing: comportamenti ostili, vessatori, reiterati nel tempo (almeno 6 mesi) e con intento persecutorio verso un lavoratore, che causano emarginazione, demansionamento, danno psicofisico. Può essere orizzontale (colleghi) o verticale (superiori)."
+            },
+            {
+                question: "Qual è la differenza tra rischio e pericolo?",
+                options: [
+                    "Sono sinonimi",
+                    "Pericolo: proprietà intrinseca di causare danno; Rischio: probabilità che il danno si verifichi",
+                    "Pericolo: probabilità; Rischio: gravità",
+                    "Non c'è differenza"
+                ],
+                correct: 1,
+                explanation: "Pericolo: proprietà intrinseca di un fattore (sostanza, attrezzo, metodo) di poter causare danno. Rischio: probabilità di raggiungimento del livello di danno nelle condizioni di impiego/esposizione."
+            },
+            {
+                question: "Qual è la formula generale per il calcolo del rischio?",
+                options: [
+                    "Rischio = Pericolo + Esposizione",
+                    "Rischio = Probabilità × Magnitudo (Gravità del danno)",
+                    "Rischio = Solo Probabilità",
+                    "Rischio = Solo Gravità"
+                ],
+                correct: 1,
+                explanation: "Rischio = Probabilità (frequenza/probabilità che si verifichi l'evento dannoso) × Magnitudo (gravità/entità del danno atteso). Classificazione es.: R = P × M (1-4 scala)."
+            },
+            {
+                question: "Quali sono le misure di prevenzione primaria?",
+                options: [
+                    "Cure mediche",
+                    "Eliminazione/riduzione del pericolo alla fonte (progettazione sicura, sostituzione sostanze, automazione)",
+                    "Solo DPI",
+                    "Controlli sanitari"
+                ],
+                correct: 1,
+                explanation: "Prevenzione primaria: eliminare/ridurre pericolo alla fonte (progettazione intrinsecamente sicura, sostituzione sostanze pericolose, automazione, misure tecniche/organizzative). È la priorità assoluta."
+            },
+            {
+                question: "Quali sono le misure di prevenzione secondaria?",
+                options: [
+                    "Eliminazione del pericolo",
+                    "Riduzione probabilità/magnitudo danno quando non eliminabile (protezioni collettive: ventilazione, barriere, procedure, formazione)",
+                    "Solo DPI",
+                    "Cure mediche"
+                ],
+                correct: 1,
+                explanation: "Prevenzione secondaria: quando non si può eliminare il pericolo, si riducono probabilità/gravità del danno con protezioni collettive (aspirazione, barriere, segregazione), procedure sicure, formazione."
+            },
+            {
+                question: "Quali sono le misure di prevenzione terziaria?",
+                options: [
+                    "Eliminazione pericolo",
+                    "Protezioni individuali (DPI) come ultima risorsa, sorveglianza sanitaria, gestione emergenze",
+                    "Solo formazione",
+                    "Solo cure mediche"
+                ],
+                correct: 1,
+                explanation: "Prevenzione terziaria: misure di ultima istanza quando non sufficienti le precedenti: DPI (ultima risorsa), sorveglianza sanitaria, piani di emergenza, primo soccorso."
+            },
+            {
+                question: "Cosa si intende per 'misure di protezione collettiva'?",
+                options: [
+                    "DPI per tutti",
+                    "Misure tecniche/organizzative che proteggono più lavoratori contemporaneamente senza azione individuale (es: ventilazione, segregazione, barriere)",
+                    "Solo formazione di gruppo",
+                    "Caschi per tutti"
+                ],
+                correct: 1,
+                explanation: "Protezioni collettive: interventi tecnici/organizzativi che proteggono più lavoratori simultaneamente senza richiedere azione individuale. Es: ventilazione locale, barriere fisiche, segregazione zone pericolose, insonorizzazioni."
+            },
+            {
+                question: "Qual è il principio della gerarchia delle misure di prevenzione e protezione?",
+                options: [
+                    "Prima DPI, poi altro",
+                    "1) Eliminazione rischio; 2) Riduzione rischio alla fonte; 3) Protezione collettiva; 4) Protezione individuale (DPI); 5) Formazione/informazione",
+                    "Qualsiasi ordine",
+                    "Solo DPI"
+                ],
+                correct: 1,
+                explanation: "Gerarchia art. 15 D.Lgs. 81/2008: 1) Eliminazione rischi; 2) Valutazione rischi non eliminabili; 3) Riduzione alla fonte; 4) Sostituzione; 5) Misure tecniche/organizzative/protezione collettiva prioritarie su DPI; 6) Formazione."
+            },
+
+            // DOMANDE 111-120
+            {
+                question: "Cosa si intende per 'near miss' (mancato infortunio)?",
+                options: [
+                    "Un infortunio lieve",
+                    "Evento inatteso che avrebbe potuto causare infortunio ma non lo ha causato per circostanze fortuite",
+                    "Una malattia professionale",
+                    "Un guasto"
+                ],
+                correct: 1,
+                explanation: "Near miss (quasi-infortunio): evento inatteso correlato al lavoro che non ha causato infortunio/malattia/danno, ma avrebbe potuto farlo. È un indicatore proattivo prezioso per prevenire futuri infortuni."
+            },
+            {
+                question: "Perché è importante segnalare e analizzare i near miss?",
+                options: [
+                    "Non serve a nulla",
+                    "Perché evidenziano criticità/debolezze del sistema di sicurezza prima che si verifichi un infortunio reale (prevenzione proattiva)",
+                    "Solo per statistica",
+                    "Per punire i responsabili"
+                ],
+                correct: 1,
+                explanation: "I near miss sono indicatori proattivi: evidenziano lacune nel sistema di sicurezza prima che causino danni reali. Il rapporto near miss/infortuni è circa 300:29:1 (piramide di Bird). Vanno segnalati e analizzati per azioni correttive."
+            },
+            {
+                question: "Qual è il 'triangolo/piramide di Bird' (o Heinrich)?",
+                options: [
+                    "Una forma geometrica",
+                    "Modello statistico: per 1 infortunio grave ci sono circa 10 infortuni lievi, 30 danni materiali, 600 near miss",
+                    "Un DPI",
+                    "Un tipo di scala"
+                ],
+                correct: 1,
+                explanation: "Piramide di Bird: rapporto statistico tra eventi. Base: 1 infortunio grave → 10 infortuni lievi → 30 con danni materiali → 600 near miss. Analizzare i near miss previene gli infortuni gravi."
+            },
+            {
+                question: "Cosa si intende per 'cultura della sicurezza'?",
+                options: [
+                    "Solo conoscenza normativa",
+                    "Insieme di valori, atteggiamenti, percezioni, competenze e comportamenti condivisi in azienda che determinano impegno e stile della gestione sicurezza",
+                    "Solo formazione obbligatoria",
+                    "Paura delle sanzioni"
+                ],
+                correct: 1,
+                explanation: "Cultura della sicurezza: insieme di valori, atteggiamenti, percezioni, competenze, comportamenti individuali/collettivi che determinano impegno e stile della gestione salute-sicurezza. Include: leadership, comunicazione, apprendimento dagli errori, coinvolgimento."
+            },
+            {
+                question: "Quali sono i pilastri di una cultura della sicurezza matura?",
+                options: [
+                    "Solo rispetto regole",
+                    "Cultura informata, cultura giusta, cultura flessibile, cultura dell'apprendimento, cultura segnalante (reporting)",
+                    "Solo formazione",
+                    "Solo controllo"
+                ],
+                correct: 1,
+                explanation: "Cultura sicurezza matura (Reason): 1) Cultura informata (conoscenza rischi); 2) Cultura segnalante (reporting errori/near miss senza timore); 3) Cultura giusta (no blame, accountability); 4) Cultura flessibile (adattamento); 5) Cultura apprendimento."
+            },
+            {
+                question: "Cosa si intende per 'errore umano' in ambito sicurezza?",
+                options: [
+                    "Solo negligenza",
+                    "Azione non intenzionale (slip/lapse) o pianificata erroneamente (mistake) che devia dallo standard atteso e può causare eventi indesiderati",
+                    "Solo disattenzione",
+                    "Sempre intenzionale"
+                ],
+                correct: 1,
+                explanation: "Errore umano: azione che devia involontariamente dallo standard. Tipi: slip (svista esecutiva), lapse (dimenticanza), mistake (errore pianificazione). Distinto da violazione (intenzionale). Va prevenuto con progettazione sistemi 'human-centered'."
+            },
+            {
+                question: "Cosa si intende per 'violazione' in ambito sicurezza?",
+                options: [
+                    "Errore involontario",
+                    "Deviazione intenzionale da regole/procedure operative, norme di sicurezza, standard",
+                    "Dimenticanza",
+                    "Svista"
+                ],
+                correct: 1,
+                explanation: "Violazione: deviazione intenzionale/deliberata da regole, procedure, standard di sicurezza. Tipi: routine (abitudine), situazionali (pressione tempo/risorse), ottimizzanti (bravata). Diversa dall'errore (non intenzionale)."
+            },
+            {
+                question: "Qual è il modello 'Swiss Cheese' di James Reason?",
+                options: [
+                    "Un tipo di formaggio",
+                    "Modello incidente: l'infortunio si verifica quando i 'buchi' (debolezze) di difese multiple si allineano permettendo al pericolo di passare",
+                    "Un DPI",
+                    "Una procedura"
+                ],
+                correct: 1,
+                explanation: "Modello Swiss Cheese (Reason): ogni barriera di difesa ha 'buchi' (debolezze). L'incidente si verifica quando i buchi di più barriere (tecniche, umane, organizzative, procedure) si allineano permettendo al pericolo di attraversarle."
+            },
+            {
+                question: "Cosa si intende per 'fattori organizzativi latenti' secondo Reason?",
+                options: [
+                    "Solo guasti tecnici",
+                    "Condizioni organizzative latenti (es: carenze formazione, pressione produttiva, comunicazione inadeguata) che facilitano errori attivi e incidenti",
+                    "Solo errori umani",
+                    "Situazioni evidenti"
+                ],
+                correct: 1,
+                explanation: "Fattori latenti: condizioni organizzative/manageriali nascoste (carenze formazione, risorse, comunicazione, manutenzione, pressione produttiva, cultura sicurezza debole) che favoriscono errori attivi e incidenti. Vanno identificati e corretti proattivamente."
+            },
+            {
+                question: "Qual è la differenza tra 'hazard' e 'risk' in ambito internazionale?",
+                options: [
+                    "Sono sinonimi",
+                    "Hazard (pericolo): fonte potenziale di danno; Risk (rischio): combinazione di probabilità e gravità del danno",
+                    "Hazard = rischio; Risk = pericolo",
+                    "Nessuna differenza"
+                ],
+                correct: 1,
+                explanation: "Terminologia ISO: Hazard (pericolo) = fonte/situazione con potenziale di causare danno; Risk (rischio) = combinazione di probabilità di accadimento e gravità delle conseguenze. Coerente con terminologia italiana D.Lgs. 81/2008."
+            },
+
+            // DOMANDE 121-128
+            {
+                question: "Cosa si intende per 'risk assessment' (valutazione del rischio)?",
+                options: [
+                    "Solo identificazione pericoli",
+                    "Processo globale di identificazione pericoli, analisi rischi, valutazione rischi per determinare se sono accettabili o richiedono misure",
+                    "Solo calcolo probabilità",
+                    "Solo stima gravità"
+                ],
+                correct: 1,
+                explanation: "Risk assessment: processo sistematico di: 1) Identificazione pericoli (hazard identification); 2) Analisi rischi (risk analysis: probabilità × gravità); 3) Valutazione rischi (risk evaluation: confronto con criteri accettabilità). Base del DVR."
+            },
+            {
+                question: "Cosa si intende per 'risk management' (gestione del rischio)?",
+                options: [
+                    "Solo valutazione",
+                    "Processo complessivo di risk assessment + trattamento rischi (misure prevenzione/protezione) + monitoraggio efficacia",
+                    "Solo implementazione misure",
+                    "Solo controllo"
+                ],
+                correct: 1,
+                explanation: "Risk management: processo globale di: 1) Risk assessment (valutazione); 2) Risk treatment (trattamento: eliminazione, riduzione, trasferimento, accettazione); 3) Monitoraggio e riesame continuo efficacia misure."
+            },
+            {
+                question: "Quali sono le opzioni di trattamento del rischio?",
+                options: [
+                    "Solo eliminazione",
+                    "Eliminazione (evitare), riduzione (mitigare), trasferimento (es: assicurazione), accettazione (se rischio residuo tollerabile)",
+                    "Solo DPI",
+                    "Solo formazione"
+                ],
+                correct: 1,
+                explanation: "Opzioni trattamento rischio: 1) Eliminazione (evitare attività rischiosa); 2) Riduzione (misure prevenzione/protezione); 3) Trasferimento (es: subappalto, assicurazione); 4) Accettazione (se rischio residuo entro criteri accettabilità). Priorità: eliminazione."
+            },
+            {
+                question: "Cosa si intende per 'rischio residuo'?",
+                options: [
+                    "Nessun rischio",
+                    "Rischio che rimane dopo l'adozione delle misure di prevenzione e protezione",
+                    "Rischio iniziale",
+                    "Rischio trasferito"
+                ],
+                correct: 1,
+                explanation: "Rischio residuo: livello di rischio che persiste dopo l'implementazione di tutte le misure di prevenzione/protezione ragionevolmente praticabili. Deve essere valutato e, se non accettabile, richiedere ulteriori misure (es: DPI)."
+            },
+            {
+                question: "Qual è il principio ALARP (As Low As Reasonably Practicable)?",
+                options: [
+                    "Eliminare tutti i rischi",
+                    "Ridurre il rischio al livello più basso ragionevolmente praticabile, bilanciando costi/benefici (rischio tollerabile)",
+                    "Accettare qualsiasi rischio",
+                    "Solo calcolo costi"
+                ],
+                correct: 1,
+                explanation: "Principio ALARP: ridurre il rischio al livello più basso ragionevolmente praticabile, considerando rapporto costo/beneficio. Tre zone: intollerabile (inaccettabile), ALARP (tollerabile se costi riduzione sproporzionati), accettabile (trascurabile)."
+            },
+            {
+                question: "Cosa si intende per 'analisi degli infortuni' (incident investigation)?",
+                options: [
+                    "Solo raccolta dati statistici",
+                    "Processo sistematico per identificare cause radice (tecniche, umane, organizzative) di infortuni/near miss e definire azioni correttive/preventive",
+                    "Solo compilare il registro",
+                    "Cercare un colpevole"
+                ],
+                correct: 1,
+                explanation: "Incident investigation: indagine sistematica su infortuni/near miss per identificare cause immediate/radice (root causes: tecniche, umane, organizzative) e definire azioni correttive/preventive per prevenire ricorrenze. Metodi: 5 Why, Fishbone, STEP."
+            },
+            {
+                question: "Qual è il metodo dei '5 Perché' (5 Why)?",
+                options: [
+                    "Chiedere 5 volte il costo",
+                    "Tecnica investigativa: chiedere 'perché?' iterativamente (≥5 volte) per risalire dalle cause immediate alle cause radice organizzative",
+                    "Un questionario",
+                    "Un DPI"
+                ],
+                correct: 1,
+                explanation: "5 Why: metodo Toyota per root cause analysis. Partendo dall'evento, si chiede iterativamente 'perché è accaduto?' (≥5 volte) per risalire da cause immediate (atto insicuro) a cause radice organizzative (carenza formazione, manutenzione, procedure, cultura)."
+            },
+            {
+                question: "Cosa si intende per 'audit di sicurezza'?",
+                options: [
+                    "Solo ispezione visiva",
+                    "Esame sistematico e indipendente per verificare conformità normativa e efficacia del sistema di gestione sicurezza (SGSL)",
+                    "Controllo contabile",
+                    "Compilare checklist"
+                ],
+                correct: 1,
+                explanation: "Audit sicurezza: esame sistematico, documentato e indipendente per verificare: conformità a requisiti legali/normativi, efficacia implementazione SGSL, adeguatezza misure prevenzione/protezione. Può essere interno (1ª parte) o esterno (2ª/3ª parte)."
             }
         ];
 
         // ========================================
-        // FINE DATABASE 128 DOMANDE
-        // ========================================
-        // ========================================
-        // VARIABILI GLOBALI
+        // STATE MANAGEMENT
         // ========================================
         
-        let allQuestions = []; // Paniere completo 128 domande
-        let currentTest = []; // 15 domande estratte per test corrente
+        let currentTest = [];
         let currentQuestionIndex = 0;
-        let userAnswers = []; // Array di risposte utente
-        let startTime = null;
-        let timerInterval = null;
-        let timeRemaining = 20 * 60; // 20 minuti in secondi
-        
+        let userAnswers = [];
+        let timer;
+        let timeLeft = 40;
+
         // ========================================
-        // FUNZIONI UTILITY
+        // UTILITY FUNCTIONS
         // ========================================
         
         function shuffleArray(array) {
-            const shuffled = [...array];
-            for (let i = shuffled.length - 1; i > 0; i--) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
             }
-            return shuffled;
+            return newArray;
         }
-        
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = seconds % 60;
-            return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+        function getRandomQuestions(bank, count) {
+            const shuffled = shuffleArray(bank);
+            return shuffled.slice(0, count).map(q => ({
+                ...q,
+                shuffledOptions: shuffleArray([...q.options])
+            }));
         }
-        
+
         // ========================================
-        // GESTIONE TIMER
+        // TEST FLOW FUNCTIONS
         // ========================================
         
+        function startTest() {
+            currentTest = getRandomQuestions(questionBank, 30);
+            currentQuestionIndex = 0;
+            userAnswers = [];
+            
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('testScreen').classList.remove('hidden');
+            
+            loadQuestion();
+            startTimer();
+        }
+
+        function loadQuestion() {
+            const question = currentTest[currentQuestionIndex];
+            const questionCard = document.getElementById('questionCard');
+            
+            // Update header
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('progressBar').style.width = `${((currentQuestionIndex + 1) / 30) * 100}%`;
+            
+            // Update question text
+            document.getElementById('questionText').textContent = question.question;
+            
+            // Render options
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+            
+            question.shuffledOptions.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.className = 'option-btn w-full text-left p-4 rounded-xl font-medium transition-all';
+                button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+                button.onclick = () => selectAnswer(option, button);
+                optionsContainer.appendChild(button);
+            });
+            
+            // Reset timer
+            timeLeft = 40;
+            updateTimerDisplay();
+        }
+
+        function selectAnswer(selectedOption, button) {
+            const question = currentTest[currentQuestionIndex];
+            const correctAnswer = question.options[question.correct];
+            const isCorrect = selectedOption === correctAnswer;
+            
+            // Disable all buttons
+            const buttons = document.querySelectorAll('.option-btn');
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                const btnText = btn.textContent.substring(3);
+                if (btnText === correctAnswer) {
+                    btn.classList.add('correct');
+                } else if (btn === button && !isCorrect) {
+                    btn.classList.add('incorrect');
+                }
+            });
+            
+            // Store answer
+            userAnswers.push({
+                question: question.question,
+                selectedAnswer: selectedOption,
+                correctAnswer: correctAnswer,
+                isCorrect: isCorrect,
+                explanation: question.explanation
+            });
+            
+            // Stop timer
+            clearInterval(timer);
+            
+            // Auto-advance after 2 seconds
+            setTimeout(() => {
+                if (currentQuestionIndex < 29) {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                    startTimer();
+                } else {
+                    showSummary();
+                }
+            }, 2000);
+        }
+
         function startTimer() {
-            startTime = Date.now();
-            timerInterval = setInterval(() => {
-                timeRemaining--;
+            const timerElement = document.getElementById('timer');
+            
+            timer = setInterval(() => {
+                timeLeft--;
                 updateTimerDisplay();
                 
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    showResults();
+                if (timeLeft <= 10) {
+                    timerElement.classList.add('warning');
+                }
+                if (timeLeft <= 5) {
+                    timerElement.classList.remove('warning');
+                    timerElement.classList.add('danger');
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    // Auto-select wrong answer (timeout)
+                    userAnswers.push({
+                        question: currentTest[currentQuestionIndex].question,
+                        selectedAnswer: 'TEMPO SCADUTO',
+                        correctAnswer: currentTest[currentQuestionIndex].options[currentTest[currentQuestionIndex].correct],
+                        isCorrect: false,
+                        explanation: currentTest[currentQuestionIndex].explanation
+                    });
+                    
+                    if (currentQuestionIndex < 29) {
+                        currentQuestionIndex++;
+                        loadQuestion();
+                        startTimer();
+                    } else {
+                        showSummary();
+                    }
                 }
             }, 1000);
         }
-        
+
         function updateTimerDisplay() {
-            const timerEl = document.getElementById('timer');
-            timerEl.textContent = formatTime(timeRemaining);
-            
-            // Cambio colore timer
-            if (timeRemaining <= 60) {
-                timerEl.className = 'text-3xl font-bold text-red-500 animate-pulse';
-            } else if (timeRemaining <= 300) {
-                timerEl.className = 'text-3xl font-bold text-yellow-500';
-            } else {
-                timerEl.className = 'text-3xl font-bold text-green-500';
-            }
+            const timerElement = document.getElementById('timer');
+            timerElement.textContent = `${timeLeft}s`;
+            timerElement.classList.remove('warning', 'danger');
         }
-        
-        function stopTimer() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-            }
-        }
-        
-        // ========================================
-        // ESTRAZIONE E PREPARAZIONE DOMANDE
-        // ========================================
-        
-        function extractRandomQuestions() {
-            // Estrai 15 domande casuali dal paniere
-            const shuffled = shuffleArray(allQuestions);
-            currentTest = shuffled.slice(0, 15);
+
+        function showSummary() {
+            clearInterval(timer);
+            document.getElementById('testScreen').classList.add('hidden');
+            document.getElementById('summaryScreen').classList.remove('hidden');
             
-            // Per ogni domanda, mescola le opzioni
-            currentTest = currentTest.map(q => ({
-                ...q,
-                options: shuffleArray(q.options)
-            }));
+            const correctCount = userAnswers.filter(a => a.isCorrect).length;
+            const incorrectCount = 30 - correctCount;
+            const percentage = Math.round((correctCount / 30) * 100);
+            const passed = correctCount >= 21;
             
-            // Reset risposte utente
-            userAnswers = new Array(15).fill(null);
-            currentQuestionIndex = 0;
-        }
-        
-        function reshuffleOptions() {
-            // Rimescola solo le opzioni (per "Ripeti Test")
-            currentTest = currentTest.map(q => ({
-                ...q,
-                options: shuffleArray(q.options)
-            }));
-            
-            userAnswers = new Array(15).fill(null);
-            currentQuestionIndex = 0;
-        }
-        
-        // ========================================
-        // RENDERING DOMANDE
-        // ========================================
-        
-        function renderQuestion() {
-            const question = currentTest[currentQuestionIndex];
-            const container = document.getElementById('questionContainer');
-            
-            // Progress bar
-            const progress = ((currentQuestionIndex + 1) / 15) * 100;
-            document.getElementById('progressBar').style.width = `${progress}%`;
-            document.getElementById('progressText').textContent = 
-                `Domanda ${currentQuestionIndex + 1} di 15`;
-            
-            // Rendering domanda
-            container.innerHTML = `
-                <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
-                    <h2 class="text-2xl font-bold mb-6 text-gray-800">
-                        ${currentQuestionIndex + 1}. ${question.question}
-                    </h2>
-                    <div class="space-y-4">
-                        ${question.options.map((option, index) => `
-                            <button 
-                                onclick="selectAnswer(${index})"
-                                class="w-full text-left p-4 rounded-xl border-2 border-gray-200 
-                                       hover:border-blue-500 hover:bg-blue-50 transition-all duration-200
-                                       transform hover:scale-[1.02] active:scale-[0.98]
-                                       ${userAnswers[currentQuestionIndex] === index ? 'border-blue-500 bg-blue-50' : ''}"
-                            >
-                                <span class="font-semibold text-blue-600">${String.fromCharCode(65 + index)}.</span>
-                                <span class="ml-3 text-gray-700">${option}</span>
-                            </button>
-                        `).join('')}
-                    </div>
-                </div>
+            // Result header
+            const resultHeader = document.getElementById('resultHeader');
+            resultHeader.innerHTML = `
+                <div class="text-6xl mb-4">${passed ? '🎉' : '😞'}</div>
+                <h2 class="text-3xl font-bold mb-2 ${passed ? 'text-green-600' : 'text-red-600'}">
+                    ${passed ? 'TEST SUPERATO!' : 'TEST NON SUPERATO'}
+                </h2>
+                <p class="text-gray-600">${passed ? 'Congratulazioni! Hai superato il test.' : 'Hai bisogno di almeno 21 risposte corrette (70%).'}</p>
             `;
             
-            // Minimap
-            renderMinimap();
-        }
-        
-        function renderMinimap() {
-            const minimap = document.getElementById('minimap');
-            minimap.innerHTML = currentTest.map((_, index) => `
-                <div class="relative flex items-center justify-center">
-                    <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold
-                                ${index === currentQuestionIndex ? 'bg-blue-600 text-white scale-125 shadow-lg' : 
-                                  userAnswers[index] !== null ? 'bg-green-500 text-white' : 
-                                  'bg-gray-300 text-gray-600'}
-                                transition-all duration-300 cursor-pointer hover:scale-110"
-                         onclick="jumpToQuestion(${index})">
-                        ${index + 1}
+            // Statistics
+            document.getElementById('totalCorrect').textContent = correctCount;
+            document.getElementById('totalIncorrect').textContent = incorrectCount;
+            document.getElementById('percentage').textContent = `${percentage}%`;
+            
+            // Detailed summary
+            const summaryList = document.getElementById('summaryList');
+            summaryList.innerHTML = userAnswers.map((answer, index) => `
+                <div class="summary-row p-4 border border-gray-200 rounded-xl">
+                    <div class="flex items-start justify-between mb-2">
+                        <h4 class="font-bold text-gray-800 flex-1">${index + 1}. ${answer.question}</h4>
+                        <span class="badge ${answer.isCorrect ? 'badge-success' : 'badge-error'} ml-4">
+                            ${answer.isCorrect ? '✓ Corretta' : '✗ Errata'}
+                        </span>
                     </div>
+                    ${!answer.isCorrect ? `
+                        <p class="text-sm text-red-600 mb-1">
+                            <strong>Tua risposta:</strong> ${answer.selectedAnswer}
+                        </p>
+                    ` : ''}
+                    <p class="text-sm text-green-600 mb-2">
+                        <strong>Risposta corretta:</strong> ${answer.correctAnswer}
+                    </p>
+                    <p class="text-sm text-gray-600 bg-blue-50 p-3 rounded-lg">
+                        <strong>💡 Spiegazione:</strong> ${answer.explanation}
+                    </p>
                 </div>
             `).join('');
         }
-        
-        // ========================================
-        // GESTIONE RISPOSTE
-        // ========================================
-        
-        function selectAnswer(optionIndex) {
-            const question = currentTest[currentQuestionIndex];
+
+        function retryTest() {
+            // Retry with same questions
+            currentQuestionIndex = 0;
+            userAnswers = [];
             
-            // Salva risposta utente
-            userAnswers[currentQuestionIndex] = optionIndex;
+            document.getElementById('summaryScreen').classList.add('hidden');
+            document.getElementById('testScreen').classList.remove('hidden');
             
-            // Se ultima domanda → mostra risultati
-            if (currentQuestionIndex === 14) {
-                stopTimer();
-                showResults();
-                return;
-            }
-            
-            // Altrimenti avanza automaticamente
-            currentQuestionIndex++;
-            renderQuestion();
-        }
-        
-        function jumpToQuestion(index) {
-            currentQuestionIndex = index;
-            renderQuestion();
-        }
-        
-        // ========================================
-        // CALCOLO RISULTATI
-        // ========================================
-        
-        function calculateResults() {
-            let correct = 0;
-            
-            currentTest.forEach((question, index) => {
-                if (userAnswers[index] === null) return;
-                
-                const userOption = question.options[userAnswers[index]];
-                if (userOption === question.correct) {
-                    correct++;
-                }
-            });
-            
-            const totalAnswered = userAnswers.filter(a => a !== null).length;
-            const percentage = totalAnswered > 0 ? (correct / totalAnswered) * 100 : 0;
-            const passed = percentage >= 80;
-            
-            return { correct, totalAnswered, percentage, passed };
-        }
-        
-        // ========================================
-        // SCHERMATA RISULTATI
-        // ========================================
-        
-        function showResults() {
-            stopTimer();
-            
-            const results = calculateResults();
-            const timeElapsed = 20 * 60 - timeRemaining;
-            
-            document.getElementById('quizScreen').classList.add('hidden');
-            document.getElementById('resultsScreen').classList.remove('hidden');
-            
-            // Header risultati
-            const resultsHeader = document.getElementById('resultsHeader');
-            resultsHeader.className = `text-center p-8 rounded-2xl mb-8 ${results.passed ? 'bg-green-100' : 'bg-red-100'}`;
-            resultsHeader.innerHTML = `
-                <div class="text-6xl mb-4">${results.passed ? '🎉' : '😔'}</div>
-                <h2 class="text-3xl font-bold ${results.passed ? 'text-green-800' : 'text-red-800'} mb-2">
-                    ${results.passed ? 'TEST SUPERATO!' : 'TEST NON SUPERATO'}
-                </h2>
-                <p class="text-lg ${results.passed ? 'text-green-700' : 'text-red-700'}">
-                    ${results.passed ? 'Complimenti! Hai raggiunto l\'80% richiesto.' : 'Serve almeno l\'80% per superare il test.'}
-                </p>
-            `;
-            
-            // Statistiche
-            document.getElementById('resultsStats').innerHTML = `
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
-                        <div class="text-4xl font-bold text-blue-600">${results.correct}/${results.totalAnswered}</div>
-                        <div class="text-gray-600 mt-2">Risposte Corrette</div>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
-                        <div class="text-4xl font-bold ${results.passed ? 'text-green-600' : 'text-red-600'}">
-                            ${results.percentage.toFixed(1)}%
-                        </div>
-                        <div class="text-gray-600 mt-2">Percentuale</div>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
-                        <div class="text-4xl font-bold text-purple-600">${formatTime(timeElapsed)}</div>
-                        <div class="text-gray-600 mt-2">Tempo Impiegato</div>
-                    </div>
-                </div>
-            `;
-            
-            // Review domande
-            renderReview();
-        }
-        
-        function renderReview() {
-            const reviewContainer = document.getElementById('reviewContainer');
-            
-            reviewContainer.innerHTML = currentTest.map((question, index) => {
-                const userAnswer = userAnswers[index];
-                const isCorrect = userAnswer !== null && 
-                                 question.options[userAnswer] === question.correct;
-                const correctIndex = question.options.indexOf(question.correct);
-                
-                return `
-                    <div class="bg-white rounded-xl shadow-lg p-6 mb-6 border-l-4 
-                                ${isCorrect ? 'border-green-500' : userAnswer !== null ? 'border-red-500' : 'border-gray-300'}">
-                        <div class="flex items-start mb-4">
-                            <span class="text-2xl mr-3">${isCorrect ? '✅' : userAnswer !== null ? '❌' : '⚪'}</span>
-                            <h3 class="text-lg font-bold text-gray-800 flex-1">
-                                ${index + 1}. ${question.question}
-                            </h3>
-                        </div>
-                        
-                        <div class="space-y-2 ml-11">
-                            ${question.options.map((option, optIndex) => {
-                                const isUserAnswer = userAnswer === optIndex;
-                                const isCorrectAnswer = optIndex === correctIndex;
-                                
-                                let classes = 'p-3 rounded-lg ';
-                                if (isCorrectAnswer) {
-                                    classes += 'bg-green-100 border-2 border-green-500 font-semibold';
-                                } else if (isUserAnswer && !isCorrect) {
-                                    classes += 'bg-red-100 border-2 border-red-500';
-                                } else {
-                                    classes += 'bg-gray-50';
-                                }
-                                
-                                return `
-                                    <div class="${classes}">
-                                        <span class="font-bold">${String.fromCharCode(65 + optIndex)}.</span>
-                                        <span class="ml-2">${option}</span>
-                                        ${isCorrectAnswer ? ' <span class="text-green-700 font-bold">← Risposta corretta</span>' : ''}
-                                        ${isUserAnswer && !isCorrect ? ' <span class="text-red-700 font-bold">← Tua risposta</span>' : ''}
-                                    </div>
-                                `;
-                            }).join('')}
-                        </div>
-                        
-                        ${!isCorrect && userAnswer !== null ? `
-                            <div class="mt-4 ml-11 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                                <p class="text-sm font-semibold text-blue-800">💡 Spiegazione:</p>
-                                <p class="text-sm text-blue-700 mt-1">${question.explanation || 'Rivedi la teoria su questo argomento.'}</p>
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            }).join('');
-        }
-        
-        // ========================================
-        // NAVIGAZIONE SCHERMATE
-        // ========================================
-        
-        function showScreen(screenId) {
-            ['homeScreen', 'quizScreen', 'resultsScreen'].forEach(id => {
-                document.getElementById(id).classList.add('hidden');
-            });
-            document.getElementById(screenId).classList.remove('hidden');
-        }
-        
-        function startNewTest() {
-            extractRandomQuestions();
-            timeRemaining = 20 * 60;
-            showScreen('quizScreen');
-            renderQuestion();
+            loadQuestion();
             startTimer();
         }
-        
-        function repeatTest() {
-            reshuffleOptions();
-            timeRemaining = 20 * 60;
-            showScreen('quizScreen');
-            renderQuestion();
-            startTimer();
+
+        function generateNewTest() {
+            // Reset to start screen
+            document.getElementById('summaryScreen').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
         }
-        
-        // ========================================
-        // INIZIALIZZAZIONE
-        // ========================================
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            allQuestions = questionBank; // Carica paniere 128 domande
-            showScreen('homeScreen');
-        });
     </script>
-</head>
-<body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen">
-
-    <!-- ========================================
-         SCHERMATA HOME
-         ======================================== -->
-    <div id="homeScreen" class="min-h-screen flex items-center justify-center p-4">
-        <div class="max-w-4xl w-full">
-            <!-- Card principale -->
-            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
-                <!-- Header con gradiente -->
-                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-white text-center">
-                    <div class="text-6xl mb-4">🎓</div>
-                    <h1 class="text-4xl font-bold mb-2">Quiz Simulazione SSL</h1>
-                    <p class="text-xl opacity-90">Test di Verifica Conoscenze</p>
-                </div>
-                
-                <!-- Contenuto -->
-                <div class="p-8">
-                    <!-- Informazioni Formatore -->
-                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 mb-8 border-2 border-blue-200">
-                        <div class="flex items-center justify-center mb-3">
-                            <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
-                                ST
-                            </div>
-                        </div>
-                        <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">
-                            Dott. Salvatore Trono
-                        </h2>
-                        <p class="text-center text-blue-700 font-semibold text-lg">
-                            Formatore - Esperto in SSL
-                        </p>
-                    </div>
-                    
-                    <!-- Caratteristiche Quiz -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-                        <div class="bg-blue-50 p-4 rounded-xl text-center border-2 border-blue-200">
-                            <div class="text-3xl mb-2">📝</div>
-                            <div class="font-bold text-gray-800">15 Domande</div>
-                            <div class="text-sm text-gray-600">Estratte casualmente</div>
-                        </div>
-                        <div class="bg-purple-50 p-4 rounded-xl text-center border-2 border-purple-200">
-                            <div class="text-3xl mb-2">⏱️</div>
-                            <div class="font-bold text-gray-800">20 Minuti</div>
-                            <div class="text-sm text-gray-600">Tempo disponibile</div>
-                        </div>
-                        <div class="bg-green-50 p-4 rounded-xl text-center border-2 border-green-200">
-                            <div class="text-3xl mb-2">🎯</div>
-                            <div class="font-bold text-gray-800">80% Superamento</div>
-                            <div class="text-sm text-gray-600">Soglia minima</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Disclaimer -->
-                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-5 rounded-lg mb-8">
-                        <div class="flex items-start">
-                            <div class="text-2xl mr-3">⚠️</div>
-                            <div>
-                                <h3 class="font-bold text-yellow-800 mb-2">Disclaimer</h3>
-                                <p class="text-sm text-yellow-700 leading-relaxed">
-                                    Questo quiz è uno strumento didattico progettato per verificare le conoscenze acquisite durante il corso di formazione. 
-                                    I risultati hanno valore puramente indicativo e non sostituiscono valutazioni formali. 
-                                    Si consiglia di consultare sempre la normativa vigente e i materiali ufficiali del corso.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Istruzioni -->
-                    <div class="bg-gray-50 rounded-xl p-6 mb-8 border border-gray-200">
-                        <h3 class="font-bold text-gray-800 mb-3 text-lg">📋 Istruzioni:</h3>
-                        <ul class="space-y-2 text-gray-700">
-                            <li class="flex items-start">
-                                <span class="text-blue-600 mr-2">•</span>
-                                <span>Ogni domanda ha <strong>4 opzioni</strong>, di cui <strong>solo 1 corretta</strong></span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-600 mr-2">•</span>
-                                <span>Cliccando su una risposta, il quiz <strong>avanza automaticamente</strong> alla domanda successiva</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-600 mr-2">•</span>
-                                <span>Puoi <strong>navigare liberamente</strong> tra le domande usando la mappa in alto</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-600 mr-2">•</span>
-                                <span>Il timer si ferma automaticamente al completamento o alla scadenza</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="text-blue-600 mr-2">•</span>
-                                <span>Al termine, visualizzerai un <strong>riepilogo dettagliato</strong> con le correzioni</span>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Pulsante Avvio -->
-                    <button 
-                        onclick="startNewTest()"
-                        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-5 rounded-xl 
-                               font-bold text-xl hover:from-blue-700 hover:to-indigo-700 
-                               transform hover:scale-[1.02] active:scale-[0.98] 
-                               transition-all duration-200 shadow-lg hover:shadow-xl">
-                        🚀 Inizia Quiz
-                    </button>
-                    
-                    <!-- Credits -->
-                    <div class="mt-8 pt-6 border-t-2 border-gray-200 text-center">
-                        <p class="text-gray-600 text-sm mb-2">
-                            <strong>© Dott. Salvatore Trono</strong>
-                        </p>
-                        <p class="text-gray-500 text-xs">
-                            Riproduzione vietata senza esplicita autorizzazione scritta dell'autore. 
-                            Tutti i contenuti sono protetti da copyright e destinati esclusivamente a uso didattico nell'ambito dei corsi SSL autorizzati.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ========================================
-         SCHERMATA QUIZ
-         ======================================== -->
-    <div id="quizScreen" class="hidden min-h-screen p-4 py-8">
-        <div class="max-w-6xl mx-auto">
-            <!-- Header Quiz -->
-            <div class="bg-white rounded-2xl shadow-xl p-6 mb-6">
-                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                    <!-- Timer -->
-                    <div class="flex items-center gap-3">
-                        <div class="text-4xl">⏱️</div>
-                        <div>
-                            <div class="text-sm text-gray-600">Tempo Rimanente</div>
-                            <div id="timer" class="text-3xl font-bold text-green-500">20:00</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Progress -->
-                    <div class="flex-1 max-w-md">
-                        <div class="text-sm text-gray-600 mb-2 text-center" id="progressText">
-                            Domanda 1 di 15
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                            <div id="progressBar" 
-                                 class="bg-gradient-to-r from-blue-500 to-indigo-500 h-full transition-all duration-500 rounded-full"
-                                 style="width: 6.67%">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Info -->
-                    <div class="text-center">
-                        <div class="text-sm text-gray-600">Obiettivo</div>
-                        <div class="text-xl font-bold text-green-600">≥ 80%</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Minimap Domande -->
-            <div class="bg-white rounded-2xl shadow-xl p-6 mb-6">
-                <h3 class="text-sm font-semibold text-gray-600 mb-4 text-center">MAPPA DOMANDE</h3>
-                <div id="minimap" class="grid grid-cols-5 md:grid-cols-10 lg:grid-cols-15 gap-3">
-                    <!-- Generato dinamicamente -->
-                </div>
-                <div class="flex items-center justify-center gap-6 mt-4 text-xs text-gray-600">
-                    <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 rounded-full bg-blue-600"></div>
-                        <span>Corrente</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 rounded-full bg-green-500"></div>
-                        <span>Risposta data</span>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 rounded-full bg-gray-300"></div>
-                        <span>Da rispondere</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Container Domanda -->
-            <div id="questionContainer">
-                <!-- Generato dinamicamente -->
-            </div>
-        </div>
-    </div>
-
-    <!-- ========================================
-         SCHERMATA RISULTATI
-         ======================================== -->
-    <div id="resultsScreen" class="hidden min-h-screen p-4 py-8">
-        <div class="max-w-6xl mx-auto">
-            <!-- Header Risultati -->
-            <div id="resultsHeader" class="text-center p-8 rounded-2xl mb-8">
-                <!-- Generato dinamicamente -->
-            </div>
-            
-            <!-- Statistiche -->
-            <div id="resultsStats">
-                <!-- Generato dinamicamente -->
-            </div>
-            
-            <!-- Pulsanti Azioni -->
-            <div class="flex flex-col md:flex-row gap-4 mb-8">
-                <button 
-                    onclick="repeatTest()"
-                    class="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 rounded-xl 
-                           font-bold text-lg hover:from-blue-700 hover:to-blue-800
-                           transform hover:scale-[1.02] active:scale-[0.98] 
-                           transition-all duration-200 shadow-lg hover:shadow-xl
-                           flex items-center justify-center gap-2">
-                    <span class="text-2xl">🔄</span>
-                    <span>Ripeti Test</span>
-                    <span class="text-sm opacity-80">(stesse domande)</span>
-                </button>
-                
-                <button 
-                    onclick="startNewTest()"
-                    class="flex-1 bg-gradient-to-r from-green-600 to-green-700 text-white py-4 rounded-xl 
-                           font-bold text-lg hover:from-green-700 hover:to-green-800
-                           transform hover:scale-[1.02] active:scale-[0.98] 
-                           transition-all duration-200 shadow-lg hover:shadow-xl
-                           flex items-center justify-center gap-2">
-                    <span class="text-2xl">✨</span>
-                    <span>Genera Nuovo Test</span>
-                    <span class="text-sm opacity-80">(nuove domande)</span>
-                </button>
-                
-                <button 
-                    onclick="showScreen('homeScreen')"
-                    class="bg-gray-600 text-white py-4 px-6 rounded-xl 
-                           font-bold text-lg hover:bg-gray-700
-                           transform hover:scale-[1.02] active:scale-[0.98] 
-                           transition-all duration-200 shadow-lg hover:shadow-xl
-                           flex items-center justify-center gap-2">
-                    <span class="text-2xl">🏠</span>
-                    <span>Home</span>
-                </button>
-            </div>
-            
-            <!-- Review Dettagliato -->
-            <div class="bg-white rounded-2xl shadow-xl p-6 mb-6">
-                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3">
-                    <span class="text-3xl">📊</span>
-                    Riepilogo Dettagliato
-                </h2>
-                <div id="reviewContainer">
-                    <!-- Generato dinamicamente -->
-                </div>
-            </div>
-            
-            <!-- Footer Credits -->
-            <div class="bg-white rounded-xl shadow-lg p-6 text-center">
-                <p class="text-gray-600 text-sm mb-2">
-                    <strong>© Dott. Salvatore Trono - Formatore Esperto SSL</strong>
-                </p>
-                <p class="text-gray-500 text-xs">
-                    Riproduzione vietata senza autorizzazione scritta
-                </p>
-            </div>
-        </div>
-    </div>
-
 </body>
 </html>
-
