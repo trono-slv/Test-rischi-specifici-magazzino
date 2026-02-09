@@ -280,8 +280,131 @@
         }
     </style>
 </head>
-<body class="p-4">
+<body class="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
 
+    <!-- ===== WELCOME SCREEN ===== -->
+    <div id="welcomeScreen" class="min-h-screen flex items-center justify-center p-4">
+        <div class="max-w-4xl w-full">
+            
+            <!-- HEADER TITOLO -->
+            <div class="text-center mb-8 animate-fade-in">
+                <div class="inline-block bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-2xl shadow-2xl mb-6">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-2">
+                        📦 QUIZ RISCHI SPECIFICI IN MAGAZZINO
+                    </h1>
+                    <p class="text-lg md:text-xl text-blue-100">
+                        Test di verifica conoscenze - 128 domande
+                    </p>
+                </div>
+                
+                <p class="text-xl font-semibold" style="color: var(--secondary);">
+                    Autore: <span class="text-gray-800">Dott. Salvatore Trono</span><br>
+                    <span class="text-base text-gray-600">Esperto SSL - Formatore qualificato</span>
+                </p>
+            </div>
+
+            <!-- CARD PRINCIPALE -->
+            <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+                
+                <!-- LINK TEORIA -->
+                <div class="mb-8">
+                    <a href="https://trono-slv.github.io/Valutazione-dei-rischi-in-magazzino/" 
+                       target="_blank"
+                       class="block w-full p-6 rounded-2xl bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 hover:border-green-500 transition-all duration-300 hover:shadow-xl group">
+                        <div class="flex items-center gap-4">
+                            <div class="text-5xl">📚</div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-green-700 group-hover:text-green-600 transition-colors">
+                                    Studia la Teoria
+                                </h3>
+                                <p class="text-green-600 mt-1">
+                                    Consulta il materiale didattico prima del quiz →
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- ISTRUZIONI -->
+                <div class="bg-blue-50 rounded-2xl p-6 mb-8">
+                    <h3 class="font-bold text-2xl mb-4 flex items-center gap-2" style="color: var(--primary);">
+                        <span class="text-3xl">📋</span> ISTRUZIONI
+                    </h3>
+                    <ul class="space-y-3 text-gray-700 leading-relaxed">
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-600 font-bold">✓</span>
+                            <span><strong>128 domande</strong> sui rischi specifici per addetti magazzino (D.Lgs. 81/2008 Titolo I-X)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-600 font-bold">✓</span>
+                            <span><strong>Tempo limite:</strong> 64 minuti (30 secondi/domanda)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-600 font-bold">✓</span>
+                            <span><strong>Superamento:</strong> 80% di risposte corrette (calcolato sulle risposte fornite)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-600 font-bold">✓</span>
+                            <span><strong>Navigazione:</strong> Puoi tornare indietro e modificare le risposte prima di terminare</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-blue-600 font-bold">✓</span>
+                            <span><strong>Minimap:</strong> Usa la griglia sotto per saltare a domande specifiche</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-orange-600 font-bold">⚠</span>
+                            <span><strong>Attenzione:</strong> Il test si chiuderà automaticamente allo scadere del tempo</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- DISCLAIMER LEGALE -->
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 rounded-xl p-6 mb-8">
+                    <h3 class="font-bold text-lg mb-3 flex items-center gap-2 text-yellow-800">
+                        <span class="text-2xl">⚖️</span> DISCLAIMER LEGALE
+                    </h3>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        Questo test è uno <strong>strumento didattico</strong> per l'autovalutazione delle conoscenze sui rischi specifici per magazzinieri. 
+                        <strong>NON sostituisce</strong> la formazione obbligatoria prevista dagli Accordi Stato-Regioni (2011, agg. 2025) né l'addestramento pratico richiesto dall'Art. 37 D.Lgs. 81/2008.<br><br>
+                        L'autore declina ogni responsabilità per l'uso improprio dei contenuti. Le risposte sono state redatte in conformità alla normativa vigente 
+                        (D.Lgs. 81/2008, Titolo I-X, norme tecniche ISO, linee guida INAIL, giurisprudenza Cassazione).
+                    </p>
+                </div>
+
+                <!-- CREDITI -->
+                <div class="bg-gray-100 rounded-2xl p-6 mb-8">
+                    <h3 class="font-bold text-lg mb-3 flex items-center gap-2" style="color: var(--secondary);">
+                        <span class="text-2xl">ℹ️</span> CREDITI
+                    </h3>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        <strong>Autore contenuti:</strong> Dott. Salvatore Trono - Esperto in Sicurezza sul Lavoro, Formatore qualificato<br>
+                        <strong>Riferimenti normativi:</strong> D.Lgs. 81/2008 (Testo Unico Sicurezza), Accordi Stato-Regioni 2011-2025, 
+                        ISO 11228, ISO 45001, Linee Guida INAIL, Giurisprudenza Cassazione<br>
+                        <strong>Piattaforma:</strong> Quiz interattivo sviluppato con HTML5, Tailwind CSS, Vanilla JavaScript<br>
+                        <strong>Licenza:</strong> Materiale didattico ad uso formativo - © 2025 Salvatore Trono
+                    </p>
+                </div>
+
+                <!-- PULSANTE INIZIA -->
+                <div class="text-center">
+                    <button onclick="startTest()" 
+                            class="btn-primary text-2xl px-16 py-6 rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300">
+                        🚀 INIZIA IL QUIZ
+                    </button>
+                    <p class="text-gray-500 mt-4 text-sm">
+                        Buon divertimento e... in bocca al lupo! 🍀
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== QUIZ SCREEN ===== -->
+    <div id="quizScreen" class="hidden min-h-screen p-4 md:p-8">
+        <!-- ... resto del codice quiz ... -->
+
+    
     <!-- CONTAINER PRINCIPALE -->
     <div class="container-warehouse max-w-4xl mx-auto rounded-2xl">
         
