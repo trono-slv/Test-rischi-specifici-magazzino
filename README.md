@@ -1,5 +1,6 @@
 # 🎓 Quiz Valutazione Rischi in Magazzino
-
+## 🔗 Link
+[Avvia Quiz](https://trono-slv.github.io/Test-rischi-specifici-magazzino/)
 Test interattivo di verifica competenze SSL (Sicurezza sui Luoghi di Lavoro) per magazzinieri e addetti logistica.
 
 ## 📚 Caratteristiche
@@ -15,6 +16,3 @@ Formatore • Esperto in Sicurezza sui Luoghi di Lavoro
 
 ## ⚠️ Disclaimer
 Materiale didattico - non sostituisce formazione obbligatoria.
-
-## 🔗 Link
-[Avvia Quiz](https://[username].github.io/nome-quiz-magazzino)
